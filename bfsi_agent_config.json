@@ -1,0 +1,275 @@
+{
+    "agent_name": "Rackspace BFSI Prospect Scanner",
+    "version": "1.0.0",
+    "data_sources": {
+        "rss_feeds": [
+            {
+                "name": "American Banker",
+                "url": "https://www.americanbanker.com/feed",
+                "enabled": true,
+                "category": "banking"
+            },
+            {
+                "name": "Finextra",
+                "url": "https://www.finextra.com/rss/headlines.aspx",
+                "enabled": true,
+                "category": "fintech"
+            },
+            {
+                "name": "Banking Dive",
+                "url": "https://www.bankingdive.com/feeds/news/",
+                "enabled": true,
+                "category": "banking"
+            },
+            {
+                "name": "PYMNTS",
+                "url": "https://www.pymnts.com/feed/",
+                "enabled": true,
+                "category": "payments"
+            },
+            {
+                "name": "BAI Banking Strategies",
+                "url": "https://www.bai.org/banking-strategies/feed/",
+                "enabled": true,
+                "category": "banking_association"
+            },
+            {
+                "name": "The Financial Brand",
+                "url": "https://thefinancialbrand.com/feed/",
+                "enabled": false,
+                "category": "digital_banking",
+                "_disabled_reason": "HTTP 403 Forbidden"
+            },
+            {
+                "name": "The Banker",
+                "url": "https://www.thebanker.com/rss",
+                "enabled": false,
+                "category": "global_banking",
+                "_disabled_reason": "HTTP 404 Not Found"
+            },
+            {
+                "name": "Insurance Journal",
+                "url": "https://www.insurancejournal.com/feed/",
+                "enabled": true,
+                "category": "insurance"
+            },
+            {
+                "name": "Digital Insurance",
+                "url": "https://www.dig-in.com/feed/",
+                "enabled": true,
+                "category": "insurtech"
+            },
+            {
+                "name": "Carrier Management",
+                "url": "https://www.carriermanagement.com/feed/",
+                "enabled": true,
+                "category": "insurance_executive"
+            },
+            {
+                "name": "InsurTech News",
+                "url": "https://insurtechnews.com/feed/",
+                "enabled": false,
+                "category": "insurtech",
+                "_disabled_reason": "HTTP 404 Not Found"
+            },
+            {
+                "name": "Risk.net",
+                "url": "https://www.risk.net/rss",
+                "enabled": false,
+                "category": "compliance",
+                "_disabled_reason": "HTTP 404 Not Found"
+            },
+            {
+                "name": "Financial IT",
+                "url": "https://financialit.net/feed",
+                "enabled": false,
+                "category": "infrastructure",
+                "_disabled_reason": "HTTP 404 Not Found"
+            },
+            {
+                "name": "Payments Dive",
+                "url": "https://www.paymentsdive.com/feeds/news/",
+                "enabled": true,
+                "category": "payments"
+            },
+            {
+                "name": "Bank Innovation",
+                "url": "https://bankinnovation.net/feed/",
+                "enabled": false,
+                "category": "innovation",
+                "_disabled_reason": "DNS failure - domain no longer exists"
+            }
+        ],
+        "lookback_days": 7
+    },
+    "qualification_criteria": {
+        "cloud_migration": {
+            "weight": 25,
+            "keywords": [
+                "cloud migration",
+                "core banking modernization",
+                "legacy transformation",
+                "AWS migration",
+                "Azure migration",
+                "Google Cloud",
+                "digital transformation",
+                "IT modernization",
+                "data center",
+                "infrastructure upgrade",
+                "cloud strategy",
+                "hybrid cloud",
+                "mainframe migration",
+                "cloud-native"
+            ]
+        },
+        "compliance_pressure": {
+            "weight": 20,
+            "keywords": [
+                "PCI DSS",
+                "SOX compliance",
+                "GDPR",
+                "SOC 2",
+                "regulatory audit",
+                "FFIEC",
+                "GLBA",
+                "CCPA",
+                "OCC examination",
+                "compliance automation",
+                "RegTech",
+                "data privacy",
+                "security breach",
+                "cyber incident"
+            ]
+        },
+        "ai_infrastructure": {
+            "weight": 20,
+            "keywords": [
+                "AI infrastructure",
+                "fraud detection",
+                "risk modeling",
+                "ML platform",
+                "machine learning",
+                "artificial intelligence",
+                "underwriting automation",
+                "claims automation",
+                "GenAI",
+                "generative AI",
+                "large language model",
+                "LLM deployment",
+                "MLOps",
+                "AI operations"
+            ]
+        },
+        "managed_services_gap": {
+            "weight": 20,
+            "keywords": [
+                "seeking partner",
+                "RFP",
+                "vendor selection",
+                "managed services",
+                "IT outsourcing",
+                "operational support",
+                "24/7 support",
+                "SLA",
+                "technology partner"
+            ],
+            "negative_signals": [
+                "Accenture partnership",
+                "Deloitte partnership",
+                "IBM partnership",
+                "Infosys partnership",
+                "TCS partnership",
+                "existing MSP",
+                "renewed contract"
+            ]
+        },
+        "timing_urgency": {
+            "weight": 15,
+            "keywords": [
+                "announced",
+                "planning",
+                "by 2026",
+                "by 2027",
+                "this year",
+                "Q1",
+                "Q2",
+                "Q3",
+                "Q4",
+                "timeline",
+                "deadline",
+                "urgent",
+                "accelerating",
+                "fast-tracking"
+            ]
+        }
+    },
+    "qualification_threshold": 65,
+    "rackspace_value_propositions": [
+        "Managed private cloud for regulated workloads",
+        "Post-migration optimization and operations",
+        "PCI-compliant infrastructure",
+        "SOX-compliant managed services",
+        "AI/ML infrastructure management",
+        "24/7 operational support with financial services expertise",
+        "Core banking workload optimization",
+        "Real-time payment infrastructure"
+    ],
+    "ai_agent_use_cases": [
+        "Fraud detection and prevention agent",
+        "Transaction anomaly monitoring",
+        "KYC automation agent",
+        "Claims processing automation",
+        "Credit risk assessment agent",
+        "Regulatory compliance monitoring",
+        "Customer service automation",
+        "Document processing agent"
+    ],
+    "output": {
+        "prospects_json": "bfsi_prospects_data.json",
+        "html_file": "dist_prospects/bfsi.html",
+        "log_file": "bfsi_agent_activity.log"
+    },
+    "categories": {
+        "banking": {
+            "keywords": [
+                "bank",
+                "banking",
+                "credit union",
+                "financial institution",
+                "core banking"
+            ],
+            "priority_boost": 10
+        },
+        "insurance": {
+            "keywords": [
+                "insurance",
+                "insurer",
+                "underwriting",
+                "claims",
+                "P&C",
+                "life insurance"
+            ],
+            "priority_boost": 5
+        },
+        "fintech": {
+            "keywords": [
+                "fintech",
+                "neobank",
+                "digital bank",
+                "payments company",
+                "crypto"
+            ],
+            "priority_boost": 0
+        },
+        "asset_management": {
+            "keywords": [
+                "asset management",
+                "investment",
+                "wealth management",
+                "hedge fund",
+                "private equity"
+            ],
+            "priority_boost": 5
+        }
+    }
+}

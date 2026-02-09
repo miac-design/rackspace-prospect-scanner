@@ -1,0 +1,225 @@
+{
+    "agent_name": "Rackspace Healthcare Prospect Scanner",
+    "version": "1.0.0",
+    "data_sources": {
+        "rss_feeds": [
+            {
+                "name": "Fierce Healthcare",
+                "url": "https://www.fiercehealthcare.com/rss/xml",
+                "enabled": true
+            },
+            {
+                "name": "Healthcare IT News",
+                "url": "https://www.healthcareitnews.com/rss/xml",
+                "enabled": true
+            },
+            {
+                "name": "Becker's Health IT",
+                "url": "https://www.beckershospitalreview.com/healthcare-information-technology.rss",
+                "enabled": false,
+                "_disabled_reason": "HTTP 403 Forbidden"
+            },
+            {
+                "name": "Modern Healthcare",
+                "url": "https://www.modernhealthcare.com/rss",
+                "enabled": false,
+                "_disabled_reason": "HTTP 404 Not Found"
+            },
+            {
+                "name": "MedCity News",
+                "url": "https://medcitynews.com/feed/",
+                "enabled": true
+            },
+            {
+                "name": "Healthcare Dive",
+                "url": "https://www.healthcaredive.com/feeds/news/",
+                "enabled": true
+            },
+            {
+                "name": "HIMSS News",
+                "url": "https://www.himss.org/rss/news.xml",
+                "enabled": false,
+                "_disabled_reason": "HTTP 403 Forbidden"
+            },
+            {
+                "name": "Health IT Security",
+                "url": "https://healthitsecurity.com/feed/",
+                "enabled": false,
+                "category": "compliance",
+                "_disabled_reason": "HTTP 403 Forbidden"
+            },
+            {
+                "name": "KLAS Research",
+                "url": "https://klasresearch.com/rss/feed",
+                "enabled": false,
+                "category": "vendor_signals",
+                "_disabled_reason": "HTTP 404 Not Found"
+            },
+            {
+                "name": "CHIME",
+                "url": "https://chimecentral.org/feed/",
+                "enabled": false,
+                "category": "cio_intelligence",
+                "_disabled_reason": "HTTP 403 Forbidden"
+            },
+            {
+                "name": "HIT Consultant",
+                "url": "https://hitconsultant.net/feed/",
+                "enabled": true,
+                "category": "ai_innovation"
+            },
+            {
+                "name": "Bank Automation News",
+                "url": "https://bankautomationnews.com/feed/",
+                "enabled": false,
+                "category": "bfsi",
+                "_disabled_reason": "HTTP 403 Forbidden"
+            }
+        ],
+        "lookback_days": 7
+    },
+    "qualification_criteria": {
+        "cloud_migration": {
+            "weight": 25,
+            "keywords": [
+                "cloud migration",
+                "migrating to cloud",
+                "AWS migration",
+                "Azure migration",
+                "Google Cloud",
+                "digital transformation",
+                "IT modernization",
+                "data center",
+                "infrastructure upgrade",
+                "cloud strategy",
+                "hybrid cloud"
+            ]
+        },
+        "managed_services_gap": {
+            "weight": 25,
+            "keywords": [
+                "seeking partner",
+                "RFP",
+                "vendor selection",
+                "managed services",
+                "IT outsourcing",
+                "operational support",
+                "24/7 support",
+                "SLA"
+            ],
+            "negative_signals": [
+                "Accenture partnership",
+                "Deloitte partnership",
+                "IBM partnership",
+                "existing MSP",
+                "renewed contract"
+            ]
+        },
+        "ai_infrastructure": {
+            "weight": 20,
+            "keywords": [
+                "AI infrastructure",
+                "ML platform",
+                "machine learning",
+                "artificial intelligence",
+                "scaling AI",
+                "operationalizing AI",
+                "AI operations",
+                "MLOps",
+                "generative AI",
+                "large language model",
+                "LLM deployment"
+            ]
+        },
+        "compliance_sensitivity": {
+            "weight": 15,
+            "keywords": [
+                "HIPAA",
+                "PHI",
+                "patient data",
+                "healthcare compliance",
+                "security",
+                "data privacy",
+                "regulatory",
+                "audit",
+                "SOC 2",
+                "HITRUST"
+            ]
+        },
+        "timing_urgency": {
+            "weight": 15,
+            "keywords": [
+                "announced",
+                "planning",
+                "by 2026",
+                "by 2027",
+                "this year",
+                "Q1",
+                "Q2",
+                "Q3",
+                "Q4",
+                "timeline",
+                "deadline",
+                "urgent",
+                "accelerating",
+                "fast-tracking"
+            ]
+        }
+    },
+    "qualification_threshold": 65,
+    "rackspace_value_propositions": [
+        "Managed private cloud for regulated workloads",
+        "Post-migration optimization and operations",
+        "HIPAA-compliant infrastructure",
+        "AI/ML infrastructure management",
+        "24/7 operational support with healthcare expertise",
+        "Epic and EHR workload optimization"
+    ],
+    "ai_agent_use_cases": [
+        "Patient flow optimization agent",
+        "Clinical documentation automation",
+        "Prior authorization agent",
+        "Care coordination agent",
+        "Revenue cycle optimization agent",
+        "Bed management agent",
+        "Surgical scheduling optimization",
+        "Supply chain prediction agent"
+    ],
+    "output": {
+        "prospects_json": "prospects_data.json",
+        "html_file": "Rackspace_Healthcare_Prospects.html",
+        "log_file": "agent_activity.log"
+    },
+    "categories": {
+        "health_system": {
+            "keywords": [
+                "hospital",
+                "health system",
+                "medical center",
+                "healthcare system",
+                "clinic network"
+            ],
+            "priority_boost": 10
+        },
+        "medtech": {
+            "keywords": [
+                "medical device",
+                "healthtech",
+                "medtech",
+                "diagnostic",
+                "imaging"
+            ],
+            "priority_boost": 0
+        },
+        "payer": {
+            "keywords": [
+                "insurance",
+                "payer",
+                "health plan",
+                "medicare",
+                "medicaid"
+            ],
+            "priority_boost": 5
+        }
+    }
+}

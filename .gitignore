@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Runtime data files
+prospect_manifest.json
+scan_history.json
+feed_health.json
+prospects_data.json
+bfsi_prospects_data.json
+agent_activity.log
+
+# Sub-projects (separate repos)
+Accessible Tourism Directory/
+Austin AI Hub Video Assets/
+CleanSlate/
+EDDI/
+HAVEN/
+themiac-website/
+TrustStay/
+volunteer-onboarding/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

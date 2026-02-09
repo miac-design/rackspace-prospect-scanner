@@ -1,0 +1,72 @@
+name: Prospect Scanner Pipeline
+
+on:
+  schedule:
+    # Run daily at 8am CST (14:00 UTC)
+    - cron: '0 14 * * *'
+  workflow_dispatch:  # Allow manual trigger
+  push:
+    paths:
+      - 'reasoning/**'
+      - 'outputs/**'
+      - 'scanners/**'
+      - 'run_scan.py'
+      - 'prospect_agent.py'
+      - 'agent_config.json'
+      - 'bfsi_agent_config.json'
+      - 'tests/**'
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pytest
+
+      - name: Run test suite
+        run: python -m pytest tests/ -v --tb=short
+
+  scan:
+    name: Run Prospect Scan
+    needs: test  # Only scan if tests pass
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pytest
+
+      - name: Validate configs
+        run: python config_validator.py
+
+      - name: Run scan
+        run: python run_scan.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "Prospect Scanner Bot"
+          git config user.email "bot@rackspaceprospects.vercel.app"
+          git add -A
+          git diff --staged --quiet || git commit -m "🤖 Auto-scan: $(date '+%Y-%m-%d %H:%M')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Vercel
+        run: npx -y vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }} ./dist_prospects
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
