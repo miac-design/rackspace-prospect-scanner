@@ -387,6 +387,75 @@
             color: var(--plum);
         }
 
+        /* ===== MANAGER FEEDBACK: Visual Enhancements ===== */
+        .reach-out-box {
+            background: linear-gradient(135deg, rgba(107, 91, 122, 0.06), rgba(168, 164, 196, 0.04));
+            border-left: 3px solid var(--plum);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 16px;
+            margin-top: 12px;
+            grid-column: 1 / -1;
+        }
+
+        .reach-out-box .label {
+            color: var(--plum);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .signal-type-badge {
+            font-size: 0.55rem;
+            background: var(--plum);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .review-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .review-badge.pending {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .review-badge.approved {
+            background: #22c55e;
+            color: white;
+        }
+
+        .website-link {
+            color: var(--plum);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .website-link:hover {
+            color: var(--lavender);
+        }
+
+        .score-audit {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--text-medium);
+            background: rgba(107, 91, 122, 0.05);
+            padding: 6px 10px;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+
         /* ===== PHASE 1: USE CASE TAGS & FILTER BAR ===== */
         .filter-bar {
             display: flex;
@@ -1863,6 +1932,135 @@
                 tooltip.style.top = (e.clientY - 10) + 'px';
             });
             badge.addEventListener('mouseleave', hideTooltip);
+        });
+    </script>
+
+    <!-- MANAGER FEEDBACK ENHANCEMENTS: Dynamic card enrichment -->
+    <script>
+        // Prospect enhancement data (Madhavi feedback: website links, reach-out reasons, review status)
+        const enhancements = {
+            'WellSpan Health': {
+                website: 'https://www.wellspan.org',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Active AWS migration creates immediate need for managed private cloud operations and HIPAA-compliant AI workload management.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 25/25 · AI: 15/20 · Compliance: 20/20 · Services: 15/20 · Timing: 17/15 → Total: 92'
+            },
+            'Jefferson Health + Lehigh Valley': {
+                website: 'https://www.jeffersonhealth.org',
+                signalType: 'Expansion / M&A',
+                reachOutReason: 'Post-merger IT consolidation creates dual-data-center hybrid cloud unification opportunity with compliance complexity.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 18/25 · AI: 10/20 · Compliance: 20/20 · Services: 16/20 · Timing: 15/15 → Total: 79'
+            },
+            'Community Health Systems': {
+                website: 'https://www.chs.net',
+                signalType: 'Compliance Pressure',
+                reachOutReason: 'Major cybersecurity incident and ongoing HIPAA remediation demands secure managed infrastructure and 24/7 monitoring.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 15/25 · AI: 10/20 · Compliance: 20/20 · Services: 20/20 · Timing: 10/15 → Total: 75'
+            },
+            'Novant Health': {
+                website: 'https://www.novanthealth.org',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Major AI investment in clinical analytics and patient throughput optimization requires GPU infrastructure and MLOps.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 12/25 · AI: 20/20 · Compliance: 15/20 · Services: 10/20 · Timing: 15/15 → Total: 72'
+            },
+            'UPMC Enterprises': {
+                website: 'https://enterprises.upmc.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Venture arm investing in health tech AI startups — potential for enterprise-scale AI infrastructure partnership.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 15/25 · AI: 20/20 · Compliance: 10/20 · Services: 10/20 · Timing: 13/15 → Total: 68'
+            },
+            'Manipal Hospitals': {
+                website: 'https://www.manipalhospitals.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Rapid expansion across India with hybrid cloud needs for clinical data standardization across 30+ facilities.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 20/25 · AI: 15/20 · Compliance: 12/20 · Services: 15/20 · Timing: 8/15 → Total: 70'
+            },
+            'Philips Healthcare': {
+                website: 'https://www.philips.com/healthcare',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Major imaging AI and clinical informatics platform — partner opportunity for managed AI infrastructure at scale.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 18/25 · AI: 20/20 · Compliance: 10/20 · Services: 12/20 · Timing: 8/15 → Total: 68'
+            },
+            'GE HealthCare': {
+                website: 'https://www.gehealthcare.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Post-spinoff AI-first strategy requires dedicated infrastructure for medical imaging AI and precision care platforms.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 15/25 · AI: 20/20 · Compliance: 10/20 · Services: 15/20 · Timing: 10/15 → Total: 70'
+            },
+            'InterSystems': {
+                website: 'https://www.intersystems.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'HealthShare platform cloud modernization creates managed services opportunity for interoperability infrastructure.',
+                reviewStatus: 'pending',
+                reviewer: 'Healthcare Product Team',
+                scoreAudit: 'Cloud: 20/25 · AI: 12/20 · Compliance: 15/20 · Services: 10/20 · Timing: 8/15 → Total: 65'
+            }
+        };
+
+        // Inject enhancements into existing cards
+        document.querySelectorAll('.prospect-card').forEach(card => {
+            const nameEl = card.querySelector('.company-name');
+            if (!nameEl) return;
+            const name = nameEl.textContent.trim();
+            const data = enhancements[name];
+            if (!data) return;
+
+            // 1. Add review badge to company-type line
+            const typeEl = card.querySelector('.company-type');
+            if (typeEl) {
+                typeEl.innerHTML += ` <span class="review-badge ${data.reviewStatus}">⏳ Needs Review — ${data.reviewer}</span>`;
+            }
+
+            // 2. Add "Reason to Reach Out" box in info-grid
+            const infoGrid = card.querySelector('.info-grid');
+            if (infoGrid) {
+                const reachOutBox = document.createElement('div');
+                reachOutBox.className = 'reach-out-box';
+                reachOutBox.innerHTML = `
+                    <div class="label">💡 Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
+                    <div class="info-text"><strong>${data.reachOutReason}</strong></div>
+                `;
+                infoGrid.appendChild(reachOutBox);
+            }
+
+            // 3. Add website link + score breakdown to intelligence section
+            const intelSection = card.querySelector('.intelligence-section');
+            if (intelSection) {
+                // Website link
+                const websiteItem = document.createElement('div');
+                websiteItem.className = 'intel-item';
+                websiteItem.innerHTML = `
+                    <div class="intel-label">Company Website</div>
+                    <div class="intel-value"><a href="${data.website}" target="_blank" class="website-link">🔗 ${data.website.replace('https://', '')}</a></div>
+                `;
+                intelSection.insertBefore(websiteItem, intelSection.firstChild);
+
+                // Score breakdown
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'intel-item';
+                scoreItem.style.gridColumn = '1 / -1';
+                scoreItem.innerHTML = `
+                    <div class="intel-label">Score Breakdown</div>
+                    <div class="score-audit">${data.scoreAudit}</div>
+                `;
+                intelSection.appendChild(scoreItem);
+            }
         });
     </script>
 </body>

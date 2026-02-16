@@ -824,6 +824,75 @@
         .validation-notice strong {
             color: #6b5030;
         }
+
+        /* ===== MANAGER FEEDBACK: Visual Enhancements ===== */
+        .reach-out-box {
+            background: linear-gradient(135deg, rgba(45, 90, 135, 0.06), rgba(74, 144, 184, 0.04));
+            border-left: 3px solid var(--blue-primary);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 16px;
+            margin-top: 12px;
+            grid-column: 1 / -1;
+        }
+
+        .reach-out-box .label {
+            color: var(--blue-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .signal-type-badge {
+            font-size: 0.55rem;
+            background: var(--blue-primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .review-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .review-badge.pending {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .review-badge.approved {
+            background: #22c55e;
+            color: white;
+        }
+
+        .website-link {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .website-link:hover {
+            color: var(--blue-light);
+        }
+
+        .score-audit {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--text-medium);
+            background: rgba(45, 90, 135, 0.05);
+            padding: 6px 10px;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -883,7 +952,8 @@
             <div class="info-banner-title" style="color: var(--success);">Pipeline Status</div>
             <div class="info-banner-content">
                 <p id="scan-timestamp">🕐 <strong>Last scanned:</strong> February 09, 2026 at 10:35 AM CST</p>
-                <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below threshold</p>
+                <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below
+                    threshold</p>
             </div>
         </div>
 
@@ -1745,6 +1815,127 @@
                 tooltip.style.top = (e.clientY - 10) + 'px';
             });
             badge.addEventListener('mouseleave', hideTooltip);
+        });
+    </script>
+    <!-- MANAGER FEEDBACK ENHANCEMENTS: Dynamic card enrichment -->
+    <script>
+        const enhancements = {
+            'Capital One': {
+                website: 'https://www.capitalone.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Cloud-first bank building proprietary ML platforms — partner opportunity for managed AI infrastructure and GPU compute.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 25/25 · AI: 20/20 · Compliance: 18/20 · Services: 12/20 · Timing: 10/15 → Total: 85'
+            },
+            'JPMorgan Chase': {
+                website: 'https://www.jpmorganchase.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Massive AI investment ($2B+) in fraud detection and trading — needs dedicated GPU infrastructure and MLOps at scale.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 20/25 · AI: 20/20 · Compliance: 15/20 · Services: 14/20 · Timing: 12/15 → Total: 81'
+            },
+            'USAA': {
+                website: 'https://www.usaa.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Legacy mainframe modernization with strict federal compliance needs — hybrid cloud with FFIEC controls.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 22/25 · AI: 15/20 · Compliance: 20/20 · Services: 15/20 · Timing: 8/15 → Total: 80'
+            },
+            'State Farm': {
+                website: 'https://www.statefarm.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Telematics and claims AI automation requires edge-to-cloud infrastructure with strict data sovereignty.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 15/25 · AI: 20/20 · Compliance: 15/20 · Services: 12/20 · Timing: 10/15 → Total: 72'
+            },
+            'Fidelity Investments': {
+                website: 'https://www.fidelity.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Digital wealth management AI and personalized advisory platforms need secure, high-throughput compute infrastructure.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 18/25 · AI: 18/20 · Compliance: 12/20 · Services: 10/20 · Timing: 10/15 → Total: 68'
+            },
+            'Progressive Insurance': {
+                website: 'https://www.progressive.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Snapshot telematics and AI-powered pricing models need real-time ML inference infrastructure at scale.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 15/25 · AI: 20/20 · Compliance: 10/20 · Services: 12/20 · Timing: 8/15 → Total: 65'
+            },
+            'Citizens Bank': {
+                website: 'https://www.citizensbank.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Mid-tier bank cloud migration with managed services gap — needs hybrid cloud for core banking modernization.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 22/25 · AI: 10/20 · Compliance: 15/20 · Services: 18/20 · Timing: 10/15 → Total: 75'
+            },
+            'Temenos': {
+                website: 'https://www.temenos.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Core banking SaaS platform expanding cloud footprint — partner opportunity for managed infrastructure.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 20/25 · AI: 12/20 · Compliance: 15/20 · Services: 10/20 · Timing: 8/15 → Total: 65'
+            },
+            'Guidewire': {
+                website: 'https://www.guidewire.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'Insurance platform cloud migration creates opportunity for managed hosting and compliance infrastructure.',
+                reviewStatus: 'pending',
+                reviewer: 'BFSI Product Team',
+                scoreAudit: 'Cloud: 20/25 · AI: 10/20 · Compliance: 15/20 · Services: 12/20 · Timing: 8/15 → Total: 65'
+            }
+        };
+
+        document.querySelectorAll('.prospect-card').forEach(card => {
+            const nameEl = card.querySelector('.company-name');
+            if (!nameEl) return;
+            const name = nameEl.textContent.trim();
+            const data = enhancements[name];
+            if (!data) return;
+
+            const typeEl = card.querySelector('.company-type');
+            if (typeEl) {
+                typeEl.innerHTML += ` <span class="review-badge ${data.reviewStatus}">⏳ Needs Review — ${data.reviewer}</span>`;
+            }
+
+            const infoGrid = card.querySelector('.info-grid');
+            if (infoGrid) {
+                const reachOutBox = document.createElement('div');
+                reachOutBox.className = 'reach-out-box';
+                reachOutBox.innerHTML = `
+                    <div class="label">💡 Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
+                    <div class="info-text"><strong>${data.reachOutReason}</strong></div>
+                `;
+                infoGrid.appendChild(reachOutBox);
+            }
+
+            const intelSection = card.querySelector('.intelligence-section');
+            if (intelSection) {
+                const websiteItem = document.createElement('div');
+                websiteItem.className = 'intel-item';
+                websiteItem.innerHTML = `
+                    <div class="intel-label">Company Website</div>
+                    <div class="intel-value"><a href="${data.website}" target="_blank" class="website-link">🔗 ${data.website.replace('https://', '')}</a></div>
+                `;
+                intelSection.insertBefore(websiteItem, intelSection.firstChild);
+
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'intel-item';
+                scoreItem.style.gridColumn = '1 / -1';
+                scoreItem.innerHTML = `
+                    <div class="intel-label">Score Breakdown</div>
+                    <div class="score-audit">${data.scoreAudit}</div>
+                `;
+                intelSection.appendChild(scoreItem);
+            }
         });
     </script>
 </body>
