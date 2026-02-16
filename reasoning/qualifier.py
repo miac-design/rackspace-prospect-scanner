@@ -215,6 +215,8 @@ class ProspectQualifier:
             r'((?:Mount|St\.?|Saint)\s+[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*)',
             # Well-known company patterns (e.g., "GE HealthCare", "Philips")
             r'(GE\s+HealthCare|Philips|Siemens\s+Healthineers|Epic|Cerner|Oracle\s+Health)',
+            # BFSI organization patterns (banks, insurers, financial institutions)
+            r'([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*\s+(?:Bank|Insurance|Financial|Capital|Securities|Bancorp|Credit Union)s?)',
             # Generic "Company announces" pattern
             r'([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*)\s+(?:announces|launches|partners|expands|selects)',
         ]
@@ -264,7 +266,7 @@ class ProspectQualifier:
                 r'^(report|study|survey|analysis|update|breaking)\s', # generic headers
                 r'^(google|apple|meta|microsoft|amazon)\s',  # big tech (not prospects)
                 r'^(according|practice|stage|virtual|digital|why)\s',  # more garbage
-                r'^(appeared|first|last|next|every|overall)\s',  # RSS fragments
+                r'^(appeared|next|every|overall)\s',  # RSS fragments
             ]
             for gp in garbage_patterns:
                 if re.match(gp, potential_org, re.IGNORECASE):
