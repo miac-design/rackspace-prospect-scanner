@@ -1,6 +1,73 @@
 {
     "agent_name": "Rackspace Healthcare Prospect Scanner",
-    "version": "1.0.0",
+    "version": "1.1.0",
+    "signal_types": {
+        "cloud_initiative": {
+            "description": "Company actively migrating or planning cloud infrastructure changes",
+            "reach_out_reason": "Potential need for managed private cloud operations during/after migration",
+            "trigger_keywords": [
+                "cloud migration",
+                "data center",
+                "infrastructure upgrade",
+                "hybrid cloud",
+                "cloud strategy"
+            ]
+        },
+        "ai_adoption": {
+            "description": "Organization investing in AI/ML capabilities for clinical or operational use",
+            "reach_out_reason": "May need GPU infrastructure, MLOps platform, or AI workload management",
+            "trigger_keywords": [
+                "artificial intelligence",
+                "machine learning",
+                "AI infrastructure",
+                "generative AI",
+                "LLM"
+            ]
+        },
+        "compliance_pressure": {
+            "description": "Facing regulatory requirements or compliance deadlines",
+            "reach_out_reason": "Need HIPAA-compliant hosting, audit-ready infrastructure, or security upgrades",
+            "trigger_keywords": [
+                "HIPAA",
+                "compliance",
+                "regulatory",
+                "security",
+                "HITRUST",
+                "audit"
+            ]
+        },
+        "leadership_change": {
+            "description": "New CIO/CTO/CISO appointment or IT leadership restructuring",
+            "reach_out_reason": "New leaders often review vendor relationships and technology strategy in first 90 days",
+            "trigger_keywords": [
+                "appointed",
+                "new CIO",
+                "new CTO",
+                "named",
+                "hired",
+                "leadership"
+            ]
+        },
+        "expansion_funding": {
+            "description": "Organization receiving funding, expanding facilities, or M&A activity",
+            "reach_out_reason": "Growth events create infrastructure scaling needs and IT integration challenges",
+            "trigger_keywords": [
+                "funding",
+                "expansion",
+                "merger",
+                "acquisition",
+                "raised",
+                "investment",
+                "new facility"
+            ]
+        }
+    },
+    "expert_reviewers": {
+        "health_system": "Healthcare Product Team",
+        "medtech": "Healthcare Product Team",
+        "payer": "Healthcare Product Team",
+        "default": "Healthcare Product Team"
+    },
     "data_sources": {
         "rss_feeds": [
             {
@@ -67,13 +134,6 @@
                 "url": "https://hitconsultant.net/feed/",
                 "enabled": true,
                 "category": "ai_innovation"
-            },
-            {
-                "name": "Bank Automation News",
-                "url": "https://bankautomationnews.com/feed/",
-                "enabled": false,
-                "category": "bfsi",
-                "_disabled_reason": "HTTP 403 Forbidden"
             }
         ],
         "lookback_days": 7

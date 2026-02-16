@@ -161,13 +161,33 @@ def run_scan(config_path: str, dry_run: bool = False):
         prospect = qualifier.qualify(article)
         if prospect:
             qualified.append(prospect)
-            print(f"   ✅ {prospect['organization']} (Score: {prospect['qualification_score']})")
+            signal_type = prospect.get('signal_type', 'general')
+            print(f"   ✅ {prospect['organization']} (Score: {prospect['qualification_score']}, Signal: {signal_type})")
     
     print(f"\n🎯 Qualified prospects: {len(qualified)}/{articles_after_lookback}")
     
     if dry_run:
         print(f"\n📊 DRY RUN complete — {len(qualified)} would be processed. No files modified.")
+        for p in qualified:
+            print(f"   • {p['organization']} | Score: {p['qualification_score']} | Signal: {p.get('signal_type', '?')}")
+            print(f"     Reach Out: {p.get('reach_out_reason', 'N/A')}")
+            print(f"     Audit: {p.get('score_audit', 'N/A')}")
+            print(f"     Review: {p.get('review_status', '?')} → {p.get('recommended_reviewer', '?')}")
         return qualified
+    
+    # Step 2c: Website enrichment (non-blocking, optional)
+    try:
+        from scanners.website_scanner import WebsiteScanner
+        ws = WebsiteScanner(timeout=8)
+        print(f"\n🌐 Enriching prospects with website data...")
+        for i, prospect in enumerate(qualified):
+            enriched = ws.enrich_prospect(prospect)
+            note = enriched.get('website_data', {}).get('enrichment_note', '')
+            if note and 'no_domain_found' not in enriched.get('website_data', {}).get('status', ''):
+                print(f"   🌐 {prospect['organization']}: {note}")
+        print(f"   Website enrichment complete")
+    except Exception as e:
+        print(f"   ⚠️  Website enrichment skipped: {e}")
     
     # Step 2b: Idempotency — filter out already-seen prospects
     manifest = IdempotencyManifest()
@@ -235,9 +255,10 @@ if __name__ == '__main__':
     bfsi_prospects = run_scan('bfsi_agent_config.json', dry_run=args.dry_run)
     
     if not args.dry_run:
-        # Copy Healthcare source to dist
+        # Copy Healthcare source to dist (both index and healthcare page)
         shutil.copy('Rackspace_Healthcare_Prospects.html', 'dist_prospects/index.html')
-        print("\n✅ Copied Healthcare HTML → dist_prospects/index.html")
+        shutil.copy('Rackspace_Healthcare_Prospects.html', 'dist_prospects/healthcare.html')
+        print("\n✅ Copied Healthcare HTML → dist_prospects/index.html + healthcare.html")
     
     print(f"\n{'='*60}")
     print(f"  SCAN COMPLETE{'  [DRY RUN]' if args.dry_run else ''}")

@@ -1,6 +1,75 @@
 {
     "agent_name": "Rackspace BFSI Prospect Scanner",
-    "version": "1.0.0",
+    "version": "1.1.0",
+    "signal_types": {
+        "cloud_initiative": {
+            "description": "Bank or insurer modernizing core systems or migrating to cloud",
+            "reach_out_reason": "Need managed private cloud for regulated financial workloads during/after migration",
+            "trigger_keywords": [
+                "cloud migration",
+                "core banking modernization",
+                "mainframe migration",
+                "data center",
+                "hybrid cloud"
+            ]
+        },
+        "ai_adoption": {
+            "description": "Financial institution deploying AI for fraud, risk, or customer experience",
+            "reach_out_reason": "May need GPU infrastructure, real-time inference platform, or AI ops management",
+            "trigger_keywords": [
+                "fraud detection",
+                "risk modeling",
+                "AI infrastructure",
+                "machine learning",
+                "generative AI",
+                "underwriting automation"
+            ]
+        },
+        "compliance_pressure": {
+            "description": "Regulatory pressure, audit findings, or compliance deadline approaching",
+            "reach_out_reason": "Need PCI/SOX-compliant hosting, audit-ready infrastructure, or compliance automation",
+            "trigger_keywords": [
+                "PCI DSS",
+                "SOX compliance",
+                "FFIEC",
+                "regulatory audit",
+                "OCC examination",
+                "GLBA"
+            ]
+        },
+        "leadership_change": {
+            "description": "New CIO/CTO/CISO appointment at financial institution",
+            "reach_out_reason": "New technology leaders typically review infrastructure vendors in first 90 days",
+            "trigger_keywords": [
+                "appointed",
+                "new CIO",
+                "new CTO",
+                "named",
+                "hired",
+                "leadership"
+            ]
+        },
+        "expansion_funding": {
+            "description": "Bank acquisition, insurtech funding round, or market expansion",
+            "reach_out_reason": "Growth creates IT integration challenges, scaling needs, and new compliance requirements",
+            "trigger_keywords": [
+                "funding",
+                "acquisition",
+                "merger",
+                "raised",
+                "investment",
+                "expansion",
+                "IPO"
+            ]
+        }
+    },
+    "expert_reviewers": {
+        "banking": "BFSI Product Team",
+        "insurance": "BFSI Product Team",
+        "fintech": "BFSI Product Team",
+        "asset_management": "BFSI Product Team",
+        "default": "BFSI Product Team"
+    },
     "data_sources": {
         "rss_feeds": [
             {

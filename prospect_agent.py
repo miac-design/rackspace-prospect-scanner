@@ -5,6 +5,9 @@ Rackspace Healthcare Prospect Scanner Agent
 An AI agent that scans healthcare news, qualifies prospects against 
 Rackspace's strategic criteria, and updates the prospect list.
 
+NOTE: This is the LOCAL DEVELOPMENT entry point. For production automation,
+use run_scan.py which is invoked by GitHub Actions (.github/workflows/prospect_scanner.yml).
+
 Usage:
     python prospect_agent.py [--dry-run] [--verbose]
 """
@@ -118,9 +121,16 @@ class ProspectAgent:
         return qualified_prospects
     
     def _deploy_to_vercel(self, verbose: bool = False):
-        """Deploy updated HTML to Vercel."""
+        """Deploy updated HTML to Vercel (requires npx on PATH)."""
         import subprocess
         import shutil
+        
+        # Check if npx is available before attempting deploy
+        if not shutil.which('npx'):
+            logger.info("   ℹ️  npx not found — skipping local deploy (GitHub Actions handles production deploys)")
+            if verbose:
+                print("   ℹ️  Skipping deploy (npx not on PATH — production deploys via GitHub Actions)")
+            return
         
         try:
             html_path = Path(self.config['output']['html_file'])
@@ -131,6 +141,7 @@ class ProspectAgent:
             # BFSI config already writes directly to dist_prospects/bfsi.html
             if 'bfsi' not in str(html_path).lower():
                 shutil.copy(html_path, dist_path / 'index.html')
+                shutil.copy(html_path, dist_path / 'healthcare.html')
             
             # Run Vercel deploy
             result = subprocess.run(

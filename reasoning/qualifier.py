@@ -23,6 +23,8 @@ class ProspectQualifier:
         self.value_props = config['rackspace_value_propositions']
         self.ai_use_cases = config['ai_agent_use_cases']
         self.categories = config['categories']
+        self.signal_types = config.get('signal_types', {})
+        self.expert_reviewers = config.get('expert_reviewers', {})
         
     def qualify(self, article: dict) -> Optional[Dict]:
         """
@@ -77,20 +79,87 @@ class ProspectQualifier:
         priority = self._determine_priority(total_score)
         signal = self._extract_signal(article['title'], article['summary'])
         
+        # Step 7: Detect signal type + reason to reach out (Madhavi feedback #1)
+        signal_type, reach_out_reason = self._detect_signal_type(full_text_lower)
+        
+        # Step 8: Generate score audit trail (Madhavi feedback #3)
+        score_audit = self._generate_score_audit(scores, total_score)
+        
+        # Step 9: Assign expert review status (Madhavi feedback #4)
+        review_status, recommended_reviewer = self._assign_review_status(category)
+        
         return {
             'organization': organization,
             'signal': signal,
+            'signal_type': signal_type,
+            'reach_out_reason': reach_out_reason,
             'source_url': article['url'],
             'source_date': article.get('published_date'),
             'source_name': article.get('source', 'Unknown'),
             'qualification_score': min(total_score, 100),  # Cap at 100
             'score_breakdown': scores,
+            'score_audit': score_audit,
             'rackspace_wedge': rackspace_wedge,
             'ai_agent_use_case': ai_use_case,
             'category': self._format_category(category),
             'priority': priority,
+            'review_status': review_status,
+            'recommended_reviewer': recommended_reviewer,
             'verified': False  # To be verified by user
         }
+    
+    def _detect_signal_type(self, text: str) -> tuple:
+        """
+        Detect the primary signal type from article text.
+        Returns (signal_type_name, reach_out_reason) based on config signal_types.
+        """
+        if not self.signal_types:
+            return ('general', 'Potential managed services opportunity detected')
+        
+        best_type = None
+        best_count = 0
+        
+        for sig_name, sig_def in self.signal_types.items():
+            trigger_keywords = sig_def.get('trigger_keywords', [])
+            matches = sum(1 for kw in trigger_keywords if kw.lower() in text)
+            if matches > best_count:
+                best_count = matches
+                best_type = sig_name
+        
+        if best_type and best_count > 0:
+            reason = self.signal_types[best_type].get(
+                'reach_out_reason', 'Potential managed services opportunity'
+            )
+            return (best_type, reason)
+        
+        return ('general', 'Industry activity detected — worth monitoring for sales opportunity')
+    
+    def _generate_score_audit(self, scores: dict, total: int) -> str:
+        """
+        Generate a human-readable scoring audit trail.
+        Shows each criterion, matches found, and contribution to total.
+        """
+        parts = []
+        for criterion, score in scores.items():
+            weight = self.criteria.get(criterion, {}).get('weight', 0)
+            if score > 0:
+                parts.append(f"{criterion.replace('_', ' ').title()}: {score}/{weight}")
+            else:
+                parts.append(f"{criterion.replace('_', ' ').title()}: 0/{weight}")
+        
+        audit = ' | '.join(parts)
+        return f"{audit} → Total: {total}"
+    
+    def _assign_review_status(self, category: str) -> tuple:
+        """
+        Assign expert review status and recommended reviewer based on category.
+        Returns (review_status, recommended_reviewer).
+        """
+        reviewer = self.expert_reviewers.get(
+            category, 
+            self.expert_reviewers.get('default', 'Product Team')
+        )
+        return ('pending_expert_review', reviewer)
     
     def _is_domain_relevant(self, text: str) -> bool:
         """
@@ -160,8 +229,20 @@ class ProspectQualifier:
                 # Clean up common issues
                 org = re.sub(r'\s+', ' ', org)
                 # Filter out common false positives
-                false_positives = ['The', 'This', 'That', 'How', 'What', 'Why', 'New', 'More']
-                if len(org) > 5 and org not in false_positives:
+                false_positives = [
+                    'The', 'This', 'That', 'How', 'What', 'Why', 'New', 'More',
+                    'According', 'Breaking', 'Report', 'Study', 'Update',
+                    'Stage', 'Practice', 'Virtual', 'Digital',
+                ]
+                # Quality gates:
+                # 1. Must be > 5 chars
+                # 2. Must not be a single common word
+                # 3. Must be < 60 chars (reject sentence fragments)
+                # 4. Must contain at least 2 words for non-known-company patterns
+                if (len(org) > 5 
+                    and org not in false_positives
+                    and len(org) <= 60
+                    and (' ' in org or pattern == patterns[3])):
                     return org
         
         return None
@@ -182,13 +263,16 @@ class ProspectQualifier:
                 r'^(the|a|an|how|what|why|new|more|top|best)\s',  # common words
                 r'^(report|study|survey|analysis|update|breaking)\s', # generic headers
                 r'^(google|apple|meta|microsoft|amazon)\s',  # big tech (not prospects)
+                r'^(according|practice|stage|virtual|digital|why)\s',  # more garbage
+                r'^(appeared|first|last|next|every|overall)\s',  # RSS fragments
             ]
             for gp in garbage_patterns:
                 if re.match(gp, potential_org, re.IGNORECASE):
                     return None
             
-            # Must be at least 6 chars and contain at least one space (2+ words)
-            if len(potential_org) >= 6 and ' ' in potential_org:
+            # Must be at least 6 chars, contain at least one space (2+ words),
+            # and be under 50 chars to avoid sentence fragments
+            if len(potential_org) >= 6 and ' ' in potential_org and len(potential_org) <= 50:
                 return f"{potential_org} (Industry Signal)"
         
         return None

@@ -145,6 +145,7 @@ class HTMLUpdater:
         """
         Generate a single prospect card HTML that matches the existing page design.
         Uses the same CSS classes as the hand-crafted original cards.
+        Enhanced with: signal type, reach-out reason, score audit, review status.
         """
         # Determine priority styling
         priority = prospect.get('priority', 'Standard')
@@ -171,11 +172,54 @@ class HTMLUpdater:
         source_url = prospect.get('source_url', '#')
         source_name = prospect.get('source_name', 'News')
         
+        # New fields from manager feedback
+        signal_type = prospect.get('signal_type', 'general').replace('_', ' ').title()
+        reach_out_reason = prospect.get('reach_out_reason', '')
+        score_audit = prospect.get('score_audit', '')
+        review_status = prospect.get('review_status', 'pending_expert_review')
+        recommended_reviewer = prospect.get('recommended_reviewer', 'Product Team')
+        website_note = prospect.get('website_data', {}).get('enrichment_note', '') if isinstance(prospect.get('website_data'), dict) else ''
+        
+        # Review status badge
+        if review_status == 'expert_approved':
+            review_badge = '<span style="background: #22c55e; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem;">✓ Expert Approved</span>'
+        elif review_status == 'expert_rejected':
+            review_badge = '<span style="background: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem;">✗ Rejected</span>'
+        else:
+            review_badge = f'<span style="background: #f59e0b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem;">⏳ Needs Review — {recommended_reviewer}</span>'
+        
         # Color variables depend on healthcare vs BFSI
         if self.is_bfsi:
             primary_color = 'var(--blue-primary)'
         else:
             primary_color = 'var(--plum)'
+        
+        # Build reach-out reason box (only if available)
+        reach_out_html = ''
+        if reach_out_reason:
+            reach_out_html = f'''
+                    <div class="info-box" style="border-left: 3px solid {primary_color}; background: rgba(139, 92, 246, 0.05);">
+                        <div class="label">💡 Reason to Reach Out <span style="font-size: 0.6rem; background: {primary_color}; color: white; padding: 1px 6px; border-radius: 3px; margin-left: 6px;">{signal_type}</span></div>
+                        <div class="info-text"><strong>{reach_out_reason}</strong></div>
+                    </div>'''
+        
+        # Build score audit section (collapsible)
+        score_audit_html = ''
+        if score_audit:
+            score_audit_html = f'''
+                        <div class="intel-item">
+                            <div class="intel-label">Score Breakdown</div>
+                            <div class="intel-value" style="font-size: 0.75rem; font-family: monospace;">{score_audit}</div>
+                        </div>'''
+        
+        # Build website enrichment note
+        website_html = ''
+        if website_note:
+            website_html = f'''
+                        <div class="intel-item">
+                            <div class="intel-label">Website Intel</div>
+                            <div class="intel-value">{website_note}</div>
+                        </div>'''
         
         card_html = f'''
                 <!-- NEW PROSPECT: {prospect['organization']} (Auto-added {datetime.now().strftime('%Y-%m-%d')}) -->
@@ -183,7 +227,7 @@ class HTMLUpdater:
                     <div class="card-header">
                         <div>
                             <div class="company-name">{prospect['organization']} <span style="font-size: 0.65rem; background: {primary_color}; color: white; padding: 2px 6px; border-radius: 4px; margin-left: 8px; vertical-align: middle;">NEW</span></div>
-                            <div class="company-type">{prospect.get('category', 'Healthcare')} • {priority} Priority</div>
+                            <div class="company-type">{prospect.get('category', 'Healthcare')} • {priority} Priority {review_badge}</div>
                             {use_case_tags}
                         </div>
                         <div class="score-badge"><span class="score-number">{score}</span><span class="score-label">score</span></div>
@@ -201,7 +245,7 @@ class HTMLUpdater:
                             <div class="info-text">
                                 <strong>{ai_use_case}</strong>
                             </div>
-                        </div>
+                        </div>{reach_out_html}
                     </div>
 
                     <div class="offer-recommendation">
@@ -219,7 +263,7 @@ class HTMLUpdater:
                             <div class="signal-pills">
                                 {signal_pills}
                             </div>
-                        </div>
+                        </div>{score_audit_html}{website_html}
                         <div class="intel-item">
                             <div class="intel-label">Source</div>
                             <div class="intel-value">
@@ -227,8 +271,8 @@ class HTMLUpdater:
                             </div>
                         </div>
                         <div class="intel-item">
-                            <div class="intel-label">Status</div>
-                            <div class="intel-value">⏳ Pending Verification</div>
+                            <div class="intel-label">Review Status</div>
+                            <div class="intel-value">{review_badge}</div>
                         </div>
                         <div class="intel-item">
                             <div class="intel-label">Added to List</div>

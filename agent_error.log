@@ -1,0 +1,147 @@
+2026-01-26 09:00:00,513 - ProspectAgent - INFO - 🚀 Starting Healthcare Prospect Scanner Agent
+2026-01-26 09:00:00,513 - ProspectAgent - INFO -    Looking back 7 days
+2026-01-26 09:00:00,513 - NewsScanner - INFO -    Scanning: Fierce Healthcare
+2026-01-26 09:00:00,679 - NewsScanner - INFO -      Found 25 recent articles
+2026-01-26 09:00:00,679 - NewsScanner - INFO -    Scanning: Healthcare IT News
+2026-01-26 09:00:01,738 - NewsScanner - INFO -      Found 4 recent articles
+2026-01-26 09:00:01,738 - NewsScanner - INFO -    Scanning: Becker's Health IT
+2026-01-26 09:00:01,877 - NewsScanner - INFO -      Found 0 recent articles
+2026-01-26 09:00:01,878 - NewsScanner - INFO -    Scanning: Modern Healthcare
+2026-01-26 09:00:02,690 - NewsScanner - INFO -      Found 0 recent articles
+2026-01-26 09:00:02,690 - NewsScanner - INFO -    Scanning: MedCity News
+2026-01-26 09:00:02,886 - NewsScanner - INFO -      Found 30 recent articles
+2026-01-26 09:00:02,886 - NewsScanner - INFO -    Scanning: Healthcare Dive
+2026-01-26 09:00:03,072 - NewsScanner - INFO -      Found 10 recent articles
+2026-01-26 09:00:03,072 - NewsScanner - INFO -    Scanning: HIMSS News
+2026-01-26 09:00:03,195 - NewsScanner - INFO -      Found 0 recent articles
+2026-01-26 09:00:03,195 - NewsScanner - INFO -    Scanning: Health IT Security
+2026-01-26 09:00:03,442 - NewsScanner - INFO -      Found 0 recent articles
+2026-01-26 09:00:03,442 - NewsScanner - INFO -    Scanning: KLAS Research
+2026-01-26 09:00:06,930 - NewsScanner - INFO -      Found 0 recent articles
+2026-01-26 09:00:06,930 - NewsScanner - INFO -    Scanning: CHIME
+2026-01-26 09:00:07,821 - NewsScanner - INFO -      Found 0 recent articles
+2026-01-26 09:00:07,821 - NewsScanner - INFO -    Scanning: HIT Consultant
+2026-01-26 09:00:08,034 - NewsScanner - INFO -      Found 15 recent articles
+2026-01-26 09:00:08,034 - NewsScanner - INFO -    Total unique articles: 84
+2026-01-26 09:00:08,034 - ProspectAgent - INFO -    Found 84 articles
+2026-01-26 09:00:08,080 - ProspectAgent - INFO -    Qualified 2 prospects
+2026-01-26 09:00:08,082 - ProspectAgent - INFO -    Saved 2 total prospects to prospects_data.json
+2026-01-26 09:00:08,085 - HTMLUpdater - INFO -    Added 2 prospects to HTML
+2026-01-26 09:00:08,085 - ProspectAgent - INFO -    HTML file updated
+2026-01-26 09:00:08,085 - LinkValidator - INFO - Found 0 source links to validate
+2026-01-26 09:00:08,086 - LinkValidator - INFO - Validation complete: 0 valid, 0 broken
+2026-01-26 09:00:08,086 - ProspectAgent - INFO -    All links valid!
+2026-01-26 09:00:08,105 - ProspectAgent - ERROR -    ❌ Deploy error: [Errno 2] No such file or directory: 'npx'
+2026-02-02 09:00:00,582 - ProspectAgent - INFO - 🚀 Starting Healthcare Prospect Scanner Agent
+2026-02-02 09:00:00,583 - ProspectAgent - INFO -    Looking back 7 days
+2026-02-02 09:00:00,730 - NewsScanner - INFO -      Found 25 recent articles
+2026-02-02 09:00:00,730 - NewsScanner - INFO -    ✓ Fierce Healthcare: 25 articles
+2026-02-02 09:00:00,861 - NewsScanner - INFO -      Found 30 recent articles
+2026-02-02 09:00:00,861 - NewsScanner - INFO -    ✓ MedCity News: 30 articles
+2026-02-02 09:00:00,862 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:00,862 - NewsScanner - INFO -    ✓ Becker's Health IT: 0 articles
+2026-02-02 09:00:00,922 - NewsScanner - INFO -      Found 10 recent articles
+2026-02-02 09:00:00,923 - NewsScanner - INFO -    ✓ Healthcare Dive: 10 articles
+2026-02-02 09:00:01,010 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:01,010 - NewsScanner - INFO -    ✓ HIMSS News: 0 articles
+2026-02-02 09:00:01,095 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:01,096 - NewsScanner - INFO -    ✓ Health IT Security: 0 articles
+2026-02-02 09:00:01,384 - NewsScanner - INFO -      Found 15 recent articles
+2026-02-02 09:00:01,384 - NewsScanner - INFO -    ✓ HIT Consultant: 15 articles
+2026-02-02 09:00:02,194 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:02,196 - NewsScanner - INFO -      Found 3 recent articles
+2026-02-02 09:00:02,196 - NewsScanner - INFO -    ✓ KLAS Research: 0 articles
+2026-02-02 09:00:02,204 - NewsScanner - INFO -    ✓ Healthcare IT News: 3 articles
+2026-02-02 09:00:02,203 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:02,204 - NewsScanner - INFO -    ✓ Modern Healthcare: 0 articles
+2026-02-02 09:00:02,207 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:02,210 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:02,210 - NewsScanner - INFO -    ✓ CHIME: 0 articles
+2026-02-02 09:00:02,211 - NewsScanner - INFO -    ✓ American Banker: 0 articles
+2026-02-02 09:00:02,613 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-02 09:00:02,613 - NewsScanner - INFO -    ✓ Bank Automation News: 0 articles
+2026-02-02 09:00:02,637 - NewsScanner - INFO -      Found 10 recent articles
+2026-02-02 09:00:02,638 - NewsScanner - INFO -    ✓ Banking Dive: 10 articles
+2026-02-02 09:00:02,687 - NewsScanner - INFO -      Found 38 recent articles
+2026-02-02 09:00:02,687 - NewsScanner - INFO -    ✓ Finextra: 38 articles
+2026-02-02 09:00:03,062 - NewsScanner - INFO -      Found 30 recent articles
+2026-02-02 09:00:03,062 - NewsScanner - INFO -    ✓ Insurance Journal: 30 articles
+2026-02-02 09:00:03,169 - NewsScanner - INFO -      Found 10 recent articles
+2026-02-02 09:00:03,169 - NewsScanner - INFO -    ✓ Pymnts: 10 articles
+2026-02-02 09:00:03,169 - NewsScanner - INFO -    Total unique articles: 171
+2026-02-02 09:00:03,169 - ProspectAgent - INFO -    Found 171 articles
+2026-02-02 09:00:03,291 - ProspectAgent - INFO -    Qualified 5 prospects
+2026-02-02 09:00:03,292 - ProspectAgent - INFO -    Saved 8 total prospects to prospects_data.json
+2026-02-02 09:00:03,294 - HTMLUpdater - INFO -    Updated timestamp to: February 02, 2026 at 9:00 AM CST
+2026-02-02 09:00:03,294 - HTMLUpdater - INFO -    Added 5 prospects to HTML
+2026-02-02 09:00:03,294 - ProspectAgent - INFO -    HTML file updated
+2026-02-02 09:00:03,295 - LinkValidator - INFO - Found 0 source links to validate
+2026-02-02 09:00:03,295 - LinkValidator - INFO - Validation complete: 0 valid, 0 broken
+2026-02-02 09:00:03,295 - ProspectAgent - INFO -    All links valid!
+2026-02-02 09:00:03,332 - ProspectAgent - ERROR -    ❌ Deploy error: [Errno 2] No such file or directory: 'npx'
+2026-02-09 09:00:06,429 - ProspectAgent - INFO - 🚀 Starting Healthcare Prospect Scanner Agent
+2026-02-09 09:00:06,430 - ProspectAgent - INFO -    Looking back 7 days
+2026-02-09 09:00:06,628 - NewsScanner - INFO -      Found 25 recent articles
+2026-02-09 09:00:06,628 - NewsScanner - INFO -    ✓ Fierce Healthcare: 25 articles
+2026-02-09 09:00:06,629 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:06,629 - NewsScanner - INFO -    ✓ Becker's Health IT: 0 articles
+2026-02-09 09:00:06,655 - NewsScanner - INFO -      Found 30 recent articles
+2026-02-09 09:00:06,656 - NewsScanner - INFO -    ✓ MedCity News: 30 articles
+2026-02-09 09:00:06,833 - NewsScanner - INFO -      Found 10 recent articles
+2026-02-09 09:00:06,833 - NewsScanner - INFO -    ✓ Healthcare Dive: 10 articles
+2026-02-09 09:00:06,883 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:06,883 - NewsScanner - INFO -    ✓ Health IT Security: 0 articles
+2026-02-09 09:00:07,162 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:07,162 - NewsScanner - INFO -    ✓ Modern Healthcare: 0 articles
+2026-02-09 09:00:07,308 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:07,308 - NewsScanner - INFO -    ✓ HIMSS News: 0 articles
+2026-02-09 09:00:07,311 - NewsScanner - INFO -      Found 2 recent articles
+2026-02-09 09:00:07,311 - NewsScanner - INFO -    ✓ Healthcare IT News: 2 articles
+2026-02-09 09:00:07,346 - NewsScanner - INFO -      Found 15 recent articles
+2026-02-09 09:00:07,347 - NewsScanner - INFO -    ✓ HIT Consultant: 15 articles
+2026-02-09 09:00:07,597 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:07,598 - NewsScanner - INFO -    ✓ American Banker: 0 articles
+2026-02-09 09:00:07,623 - NewsScanner - INFO -      Found 30 recent articles
+2026-02-09 09:00:07,623 - NewsScanner - INFO -    ✓ Insurance Journal: 30 articles
+2026-02-09 09:00:07,656 - NewsScanner - INFO -      Found 17 recent articles
+2026-02-09 09:00:07,657 - NewsScanner - INFO -    ✓ Bank Automation News: 17 articles
+2026-02-09 09:00:07,824 - NewsScanner - INFO -      Found 10 recent articles
+2026-02-09 09:00:07,824 - NewsScanner - INFO -    ✓ Banking Dive: 10 articles
+2026-02-09 09:00:07,883 - NewsScanner - INFO -      Found 40 recent articles
+2026-02-09 09:00:07,884 - NewsScanner - INFO -    ✓ Finextra: 40 articles
+2026-02-09 09:00:08,043 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:08,044 - NewsScanner - INFO -    ✓ CHIME: 0 articles
+2026-02-09 09:00:08,664 - NewsScanner - INFO -      Found 10 recent articles
+2026-02-09 09:00:08,738 - NewsScanner - INFO -    ✓ Pymnts: 10 articles
+2026-02-09 09:00:08,961 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-09 09:00:08,961 - NewsScanner - INFO -    ✓ KLAS Research: 0 articles
+2026-02-09 09:00:08,961 - NewsScanner - INFO -    Total unique articles: 189
+2026-02-09 09:00:08,961 - ProspectAgent - INFO -    Found 189 articles
+2026-02-09 09:00:09,118 - ProspectAgent - INFO -    Qualified 3 prospects
+2026-02-09 09:00:09,119 - ProspectAgent - INFO -    Saved 11 total prospects to prospects_data.json
+2026-02-09 09:00:09,121 - HTMLUpdater - INFO -    Updated timestamp to: February 09, 2026 at 9:00 AM CST
+2026-02-09 09:00:09,122 - HTMLUpdater - INFO -    Added 3 prospects to HTML
+2026-02-09 09:00:09,122 - ProspectAgent - INFO -    HTML file updated
+2026-02-09 09:00:09,122 - LinkValidator - INFO - Found 0 source links to validate
+2026-02-09 09:00:09,122 - LinkValidator - INFO - Validation complete: 0 valid, 0 broken
+2026-02-09 09:00:09,122 - ProspectAgent - INFO -    All links valid!
+2026-02-09 09:00:09,161 - ProspectAgent - ERROR -    ❌ Deploy error: [Errno 2] No such file or directory: 'npx'
+2026-02-16 09:00:05,668 - ProspectAgent - INFO - 🚀 Starting Healthcare Prospect Scanner Agent
+2026-02-16 09:00:05,668 - ProspectAgent - INFO -    Looking back 7 days
+2026-02-16 09:00:05,812 - NewsScanner - INFO -      Found 25 recent articles
+2026-02-16 09:00:05,812 - NewsScanner - INFO -    ✓ Fierce Healthcare: 25 articles
+2026-02-16 09:00:05,845 - NewsScanner - INFO -      Found 15 recent articles
+2026-02-16 09:00:05,845 - NewsScanner - INFO -    ✓ HIT Consultant: 15 articles
+2026-02-16 09:00:05,873 - NewsScanner - INFO -      Found 0 recent articles
+2026-02-16 09:00:05,873 - NewsScanner - INFO -    ✓ Healthcare Dive: 0 articles
+2026-02-16 09:00:06,102 - NewsScanner - INFO -      Found 30 recent articles
+2026-02-16 09:00:06,102 - NewsScanner - INFO -    ✓ MedCity News: 30 articles
+2026-02-16 09:00:06,821 - NewsScanner - INFO -      Found 2 recent articles
+2026-02-16 09:00:06,822 - NewsScanner - INFO -    ✓ Healthcare IT News: 2 articles
+2026-02-16 09:00:06,822 - NewsScanner - INFO -    Total unique articles: 72
+2026-02-16 09:00:06,822 - ProspectAgent - INFO -    Found 72 articles
+2026-02-16 09:00:06,872 - ProspectAgent - INFO -    Qualified 0 prospects
+2026-02-16 09:00:06,873 - ProspectAgent - INFO -    Saved 0 total prospects to prospects_data.json
+2026-02-16 09:00:06,874 - HTMLUpdater - INFO -    Updated scan banner: February 16, 2026 at 9:00 AM CST | 0 prospects
+2026-02-16 09:00:06,875 - HTMLUpdater - INFO -    Recorded scan result: 0 prospects
+2026-02-16 09:00:06,888 - ProspectAgent - ERROR -    ❌ Deploy error: [Errno 2] No such file or directory: 'npx'
