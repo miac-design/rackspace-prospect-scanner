@@ -15,7 +15,8 @@ on:
       - 'agent_config.json'
       - 'bfsi_agent_config.json'
       - 'tests/**'
-
+permissions:
+  contents: write
 jobs:
   test:
     name: Run Tests
