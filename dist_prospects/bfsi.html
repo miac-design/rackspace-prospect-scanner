@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BFSI Prospects | Rackspace Private Cloud</title>
+    <title>MiRa — BFSI | Prospect Intelligence</title>
     <link rel="icon" type="image/png" href="rackspace-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -37,12 +37,17 @@
         }
 
         nav {
-            background: var(--white);
-            padding: 16px 30px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 14px 30px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -224,11 +229,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
             color: white;
             padding: 8px 14px;
             border-radius: 10px;
             min-width: 55px;
+        }
+
+        .score-badge.score-high {
+            background: linear-gradient(135deg, #3d8b5f, #2a7a4a);
+        }
+
+        .score-badge.score-mid {
+            background: linear-gradient(135deg, #c49a3a, #a8873a);
+        }
+
+        .score-badge.score-low {
+            background: linear-gradient(135deg, var(--rackspace-red), #a32520);
         }
 
         .score-number {
@@ -506,8 +522,8 @@
 
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding-top: 40px;
+            margin-top: 40px;
+            padding-top: 24px;
             border-top: 1px solid var(--border);
             font-size: 0.8rem;
             color: var(--text-light);
@@ -515,6 +531,48 @@
 
         footer a {
             color: var(--rackspace-red);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--rackspace-red);
+            border-color: var(--rackspace-red);
+        }
+
+        .back-to-top:hover svg {
+            stroke: white;
+        }
+
+        .back-to-top svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-medium);
+            fill: none;
+            stroke-width: 2;
         }
 
         @media (max-width: 768px) {
@@ -919,7 +977,7 @@
     </nav>
     <div class="container">
         <header>
-            <h1>Rackspace BFSI Prospects</h1>
+            <h1>Mi<span style="color:var(--rackspace-red);">R</span>a — BFSI</h1>
             <p class="subtitle">Private Cloud · Managed Services · AI Operations</p>
             <div class="value-prop">
                 <strong>Why Rackspace for BFSI?</strong> PCI-DSS & SOX-compliant private cloud, 24/7 managed operations
@@ -1044,7 +1102,12 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Capital+One+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find
+                            <a href="https://www.google.com/search?q=Capital+One+CIO+LinkedIn" target="_blank"><svg
+                                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find
                                 CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1166,7 +1229,12 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=USAA+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CIO on
+                            <a href="https://www.google.com/search?q=USAA+CIO+LinkedIn" target="_blank"><svg width="12"
+                                    height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find CIO on
                                 LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1236,7 +1304,12 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=State+Farm+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find
+                            <a href="https://www.google.com/search?q=State+Farm+CIO+LinkedIn" target="_blank"><svg
+                                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find
                                 CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1296,7 +1369,12 @@
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
                             <a href="https://www.google.com/search?q=Fidelity+Investments+CIO+LinkedIn"
-                                target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CIO on LinkedIn</a>
+                                target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
                     </div>
@@ -1354,7 +1432,12 @@
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
                             <a href="https://www.google.com/search?q=Progressive+Insurance+CIO+LinkedIn"
-                                target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CIO on LinkedIn</a>
+                                target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
                     </div>
@@ -1412,7 +1495,12 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Citizens+Bank+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find
+                            <a href="https://www.google.com/search?q=Citizens+Bank+CIO+LinkedIn" target="_blank"><svg
+                                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find
                                 CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1483,7 +1571,12 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Temenos+CRO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CRO
+                            <a href="https://www.google.com/search?q=Temenos+CRO+LinkedIn" target="_blank"><svg
+                                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find CRO
                                 on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1543,7 +1636,12 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Guidewire+CEO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CEO
+                            <a href="https://www.google.com/search?q=Guidewire+CEO+LinkedIn" target="_blank"><svg
+                                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="m21 21-4.3-4.3" />
+                                </svg> Find CEO
                                 on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1969,6 +2067,27 @@
                 `;
                 intelSection.appendChild(scoreItem);
             }
+        });
+    </script>
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <script>
+        // Back to top
+        window.addEventListener('scroll', () => {
+            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+        });
+
+        // Color-code score badges
+        document.querySelectorAll('.score-badge').forEach(badge => {
+            const num = parseInt(badge.querySelector('.score-number')?.textContent);
+            if (num >= 80) badge.classList.add('score-high');
+            else if (num >= 60) badge.classList.add('score-mid');
+            else badge.classList.add('score-low');
         });
     </script>
 </body>

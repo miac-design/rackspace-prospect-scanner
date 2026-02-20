@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthcare Prospects | Rackspace Private Cloud</title>
+    <title>MiRa — Healthcare | Prospect Intelligence</title>
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c4302b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Arial' font-weight='bold' font-size='20' fill='white'%3ER%3C/text%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -42,13 +42,13 @@
         .container {
             max-width: 960px;
             margin: 0 auto;
-            padding: 60px 30px;
+            padding: 40px 30px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 40px;
+            margin-bottom: 30px;
+            padding-bottom: 24px;
             border-bottom: 1px solid var(--border);
         }
 
@@ -219,11 +219,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(135deg, var(--rackspace-red), #a32520);
             color: white;
             padding: 8px 14px;
             border-radius: 10px;
             min-width: 55px;
+        }
+
+        .score-badge.score-high {
+            background: linear-gradient(135deg, #3d8b5f, #2a7a4a);
+        }
+
+        .score-badge.score-mid {
+            background: linear-gradient(135deg, #c49a3a, #a8873a);
+        }
+
+        .score-badge.score-low {
+            background: linear-gradient(135deg, var(--rackspace-red), #a32520);
         }
 
         .score-number {
@@ -538,12 +549,17 @@
         }
 
         nav {
-            background: var(--white);
-            padding: 16px 30px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 14px 30px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -568,11 +584,53 @@
 
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding-top: 40px;
+            margin-top: 40px;
+            padding-top: 24px;
             border-top: 1px solid var(--border);
             font-size: 0.8rem;
             color: var(--text-light);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--rackspace-red);
+            border-color: var(--rackspace-red);
+        }
+
+        .back-to-top:hover svg {
+            stroke: white;
+        }
+
+        .back-to-top svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-medium);
+            fill: none;
+            stroke-width: 2;
         }
 
         @media (max-width: 768px) {
@@ -842,7 +900,7 @@
     </nav>
     <div class="container">
         <header>
-            <h1>Rackspace Healthcare Prospects</h1>
+            <h1>Mi<span style="color:var(--rackspace-red);">R</span>a — Healthcare</h1>
             <p class="subtitle">Private Cloud · Managed Services · AI Operations</p>
 
             <div class="meta">
@@ -983,7 +1041,8 @@
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                            </svg> Speed</h4>
+                            </svg> Speed
+                        </h4>
                         <p style="font-size: 0.75rem; color: var(--text-medium);">Scans all feeds in under 3 seconds
                             using parallel processing</p>
                     </div>
@@ -1136,7 +1195,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=David+Coleman+WellSpan+Health+CIO+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> David Coleman (SVP, CIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> David Coleman (SVP, CIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1208,7 +1272,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Luis+Taveras+Jefferson+Health+CIO+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Luis Taveras (SVP, CIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Luis Taveras (SVP, CIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1280,7 +1349,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Patrice+Bordron+Community+Health+Systems+CIO+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Patrice Bordron (SVP, CDIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Patrice Bordron (SVP, CDIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1361,7 +1435,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Onyeka+Nchege+Novant+Health+CDIO+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Onyeka Nchege (EVP, CDIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Onyeka Nchege (EVP, CDIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1432,7 +1511,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Chris+Carmody+UPMC+CTO+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Chris Carmody (SVP, CTO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Chris Carmody (SVP, CTO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1502,7 +1586,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Nandkishor+Dhomne+Manipal+Hospitals+CIO+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Nandkishor Dhomne (Group CIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Nandkishor Dhomne (Group CIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1592,7 +1681,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Dale+Wiggins+Philips+Healthcare+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Dale Wiggins (VP, GM HealthSuite)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Dale Wiggins (VP, GM HealthSuite)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1662,7 +1756,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Taha+Kass-Hout+GE+HealthCare+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Taha Kass-Hout (Chief Science & Tech Officer)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Taha Kass-Hout (Chief Science & Tech Officer)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1732,7 +1831,12 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Don+Woodlock+InterSystems+Healthcare+LinkedIn"
-                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Don Woodlock (Head of Healthcare)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg> Don Woodlock (Head of Healthcare)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1916,6 +2020,27 @@
     </script>
 
 
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <script>
+        // Back to top
+        window.addEventListener('scroll', () => {
+            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+        });
+
+        // Color-code score badges
+        document.querySelectorAll('.score-badge').forEach(badge => {
+            const num = parseInt(badge.querySelector('.score-number')?.textContent);
+            if (num >= 80) badge.classList.add('score-high');
+            else if (num >= 60) badge.classList.add('score-mid');
+            else badge.classList.add('score-low');
+        });
+    </script>
 </body>
 
 </html>

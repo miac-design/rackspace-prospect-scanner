@@ -13,11 +13,12 @@
             --red-dark: #a32520;
             --cream: #faf8f6;
             --white: #ffffff;
-            --text-dark: #3d3d3d;
+            --text-dark: #2d2d2d;
             --text-medium: #6b6b6b;
             --text-light: #9a9a9a;
             --border: #e8e4e4;
-            --success: #7a9d7a;
+            --success: #3d8b5f;
+            --success-bg: rgba(61, 139, 95, 0.08);
             --warning: #c4a87a;
             --plum: #6b5b7a;
             --lavender: #a8a4c4;
@@ -38,13 +39,19 @@
             line-height: 1.7;
         }
 
+        /* ===== STICKY NAV ===== */
         nav {
-            background: var(--white);
-            padding: 16px 30px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 14px 30px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -59,7 +66,6 @@
 
         .logo img {
             height: 28px;
-            vertical-align: middle;
         }
 
         .logo .brand-name {
@@ -71,7 +77,7 @@
         }
 
         .logo .brand-sub {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 400;
             color: var(--text-light);
             letter-spacing: 0.5px;
@@ -83,6 +89,7 @@
             color: var(--text-medium);
             font-size: 0.9rem;
             font-weight: 500;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover,
@@ -93,22 +100,22 @@
         .container {
             max-width: 960px;
             margin: 0 auto;
-            padding: 60px 30px;
+            padding: 48px 30px 30px;
         }
 
         /* ===== HERO ===== */
         .hero {
             text-align: center;
-            margin-bottom: 60px;
-            padding-bottom: 50px;
+            margin-bottom: 40px;
+            padding-bottom: 36px;
             border-bottom: 1px solid var(--border);
         }
 
         .hero h1 {
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             letter-spacing: -0.5px;
         }
 
@@ -117,104 +124,162 @@
         }
 
         .hero .subtitle {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-medium);
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.8;
+            max-width: 580px;
+            margin: 0 auto 20px;
+            line-height: 1.7;
         }
 
-        .hero-badges {
+        .hero-meta {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 6px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
         }
 
         .hero-badge svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             stroke-width: 2;
             fill: none;
             stroke: currentColor;
         }
 
         .hero-badge.automated {
-            background: rgba(122, 157, 122, 0.15);
+            background: var(--success-bg);
             color: var(--success);
         }
 
         .hero-badge.ai {
-            background: rgba(196, 48, 43, 0.08);
+            background: rgba(196, 48, 43, 0.06);
             color: var(--rackspace-red);
         }
 
         .hero-badge.sectors {
-            background: rgba(45, 90, 135, 0.1);
+            background: rgba(45, 90, 135, 0.08);
             color: var(--blue-primary);
         }
 
-        /* ===== SECTOR CARDS ===== */
+        /* Live pulse */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(61, 139, 95, 0.4);
+            }
+
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 0 6px rgba(61, 139, 95, 0);
+            }
+        }
+
+        /* ===== SECTION TITLES ===== */
         .section-title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--text-light);
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
         .section-heading {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 600;
             text-align: center;
             color: var(--text-dark);
-            margin-bottom: 40px;
+            margin-bottom: 28px;
         }
 
+        /* ===== SECTOR CARDS ===== */
         .sector-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 60px;
+            gap: 20px;
+            margin-bottom: 44px;
         }
 
         .sector-card {
             background: var(--white);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 36px;
+            border-radius: 16px;
+            padding: 32px;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
+        .sector-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sector-card.healthcare::before {
+            background: linear-gradient(90deg, var(--plum), var(--lavender));
+        }
+
+        .sector-card.bfsi::before {
+            background: linear-gradient(90deg, var(--blue-primary), var(--blue-light));
+        }
+
         .sector-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .sector-card:hover::before {
+            opacity: 1;
         }
 
         .sector-card .sector-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .sector-card.healthcare .sector-icon {
@@ -226,9 +291,9 @@
         }
 
         .sector-card h2 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .sector-card.healthcare h2 {
@@ -240,15 +305,15 @@
         }
 
         .sector-card p {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-medium);
-            margin-bottom: 16px;
-            line-height: 1.6;
+            margin-bottom: 14px;
+            line-height: 1.5;
         }
 
         .sector-stats {
             display: flex;
-            gap: 20px;
+            gap: 16px;
         }
 
         .sector-stat {
@@ -256,7 +321,7 @@
         }
 
         .sector-stat .num {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
@@ -269,7 +334,7 @@
         }
 
         .sector-stat .label {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text-light);
@@ -277,15 +342,15 @@
 
         .sector-card .arrow {
             position: absolute;
-            top: 36px;
-            right: 36px;
+            top: 32px;
+            right: 32px;
             color: var(--text-light);
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: all 0.3s;
         }
 
         .sector-card .arrow svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
@@ -300,30 +365,33 @@
         .pipeline-flow {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 60px;
+            gap: 16px;
+            margin-bottom: 44px;
         }
 
         .pipeline-step {
             background: var(--white);
-            border-radius: 16px;
-            padding: 28px 20px;
+            border-radius: 14px;
+            padding: 24px 16px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             border: 1px solid var(--border);
             position: relative;
+            transition: transform 0.2s;
+        }
+
+        .pipeline-step:hover {
+            transform: translateY(-2px);
         }
 
         .pipeline-step::after {
             content: "";
             position: absolute;
-            right: -14px;
+            right: -12px;
             top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            border-right: 2px solid var(--text-light);
-            border-bottom: 2px solid var(--text-light);
+            width: 7px;
+            height: 7px;
+            border-right: 2px solid var(--border);
+            border-bottom: 2px solid var(--border);
             transform: translateY(-50%) rotate(-45deg);
         }
 
@@ -332,18 +400,18 @@
         }
 
         .step-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
+            width: 46px;
+            height: 46px;
+            border-radius: 11px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 14px;
+            margin: 0 auto 12px;
         }
 
         .step-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: white;
             fill: none;
             stroke-width: 2;
@@ -358,7 +426,7 @@
         }
 
         .step-icon.qualify {
-            background: linear-gradient(135deg, var(--success), #5a8d5a);
+            background: linear-gradient(135deg, var(--success), #2a7a4a);
         }
 
         .step-icon.deploy {
@@ -366,136 +434,152 @@
         }
 
         .pipeline-step h3 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .pipeline-step p {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-light);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* ===== AUDIENCE ===== */
-        .audience-section {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 60px;
-        }
-
         .audience-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 16px;
+            margin-bottom: 44px;
         }
 
-        .audience-item {
+        .audience-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 20px;
             text-align: center;
-            padding: 20px;
+            transition: transform 0.2s;
+            border-top: 3px solid transparent;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .audience-card:nth-child(1) {
+            border-top-color: var(--rackspace-red);
+        }
+
+        .audience-card:nth-child(2) {
+            border-top-color: var(--plum);
+        }
+
+        .audience-card:nth-child(3) {
+            border-top-color: var(--blue-primary);
         }
 
         .audience-icon {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(196, 48, 43, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
+            margin: 0 auto 10px;
+        }
+
+        .audience-card:nth-child(1) .audience-icon {
+            background: rgba(196, 48, 43, 0.08);
+        }
+
+        .audience-card:nth-child(2) .audience-icon {
+            background: rgba(107, 91, 122, 0.08);
+        }
+
+        .audience-card:nth-child(3) .audience-icon {
+            background: rgba(45, 90, 135, 0.08);
         }
 
         .audience-icon svg {
-            width: 22px;
-            height: 22px;
-            stroke: var(--rackspace-red);
+            width: 20px;
+            height: 20px;
             fill: none;
             stroke-width: 2;
         }
 
-        .audience-item h4 {
-            font-size: 0.9rem;
+        .audience-card:nth-child(1) .audience-icon svg {
+            stroke: var(--rackspace-red);
+        }
+
+        .audience-card:nth-child(2) .audience-icon svg {
+            stroke: var(--plum);
+        }
+
+        .audience-card:nth-child(3) .audience-icon svg {
+            stroke: var(--blue-primary);
+        }
+
+        .audience-card h4 {
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
-        .audience-item p {
-            font-size: 0.78rem;
+        .audience-card p {
+            font-size: 0.75rem;
             color: var(--text-medium);
             line-height: 1.5;
-        }
-
-        /* ===== DATA SOURCES ===== */
-        .data-section {
-            margin-bottom: 60px;
-        }
-
-        .source-pills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .source-pill {
-            padding: 6px 14px;
-            border-radius: 20px;
-            background: var(--white);
-            border: 1px solid var(--border);
-            font-size: 0.72rem;
-            font-weight: 500;
-            color: var(--text-medium);
-        }
-
-        .source-pill.healthcare {
-            border-color: var(--lavender);
-            color: var(--plum);
-        }
-
-        .source-pill.bfsi {
-            border-color: var(--blue-light);
-            color: var(--blue-primary);
         }
 
         /* ===== CONTACT ===== */
         .contact-section {
             background: linear-gradient(135deg, var(--rackspace-red), var(--red-dark));
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 16px;
+            padding: 36px;
             text-align: center;
             color: white;
-            margin-bottom: 40px;
         }
 
         .contact-section h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .contact-section p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0.9;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
+        }
+
+        .contact-section .footer-line {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.72rem;
+            opacity: 0.7;
+        }
+
+        .contact-section .footer-line a {
+            color: white;
+            text-decoration: underline;
         }
 
         .contact-email {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 24px;
+            padding: 10px 22px;
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             color: white;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: background 0.2s;
         }
 
@@ -504,52 +588,82 @@
         }
 
         .contact-email svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             stroke: white;
             fill: none;
             stroke-width: 2;
         }
 
-        footer {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--border);
-            font-size: 0.8rem;
-            color: var(--text-light);
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
         }
 
-        footer a {
-            color: var(--rackspace-red);
-            text-decoration: none;
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--rackspace-red);
+            border-color: var(--rackspace-red);
+        }
+
+        .back-to-top:hover svg {
+            stroke: white;
+        }
+
+        .back-to-top svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-medium);
+            fill: none;
+            stroke-width: 2;
         }
 
         /* ===== ANIMATIONS ===== */
         .fade-in {
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp 0.5s ease forwards;
             opacity: 0;
         }
 
         .fade-in:nth-child(1) {
-            animation-delay: 0.1s;
+            animation-delay: 0.05s;
         }
 
         .fade-in:nth-child(2) {
-            animation-delay: 0.2s;
+            animation-delay: 0.1s;
         }
 
         .fade-in:nth-child(3) {
-            animation-delay: 0.3s;
+            animation-delay: 0.15s;
         }
 
         .fade-in:nth-child(4) {
-            animation-delay: 0.4s;
+            animation-delay: 0.2s;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(16px);
             }
 
             to {
@@ -576,7 +690,11 @@
             }
 
             .hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 30px 20px;
             }
         }
     </style>
@@ -599,15 +717,14 @@
     </nav>
 
     <div class="container">
-
         <!-- HERO -->
         <div class="hero">
             <h1>Mi<span class="red">R</span>a — Prospect Intelligence</h1>
             <p class="subtitle">
-                An AI-powered pipeline that automatically scans industry news, qualifies sales prospects,
-                and delivers actionable intelligence for Rackspace's Private Cloud & Managed Services teams.
+                AI-powered pipeline that scans industry news, qualifies sales prospects,
+                and delivers actionable intelligence for Rackspace Private Cloud & Managed Services.
             </p>
-            <div class="hero-badges">
+            <div class="hero-meta">
                 <span class="hero-badge automated">
                     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -631,7 +748,11 @@
                         <line x1="12" y1="20" x2="12" y2="4" />
                         <line x1="6" y1="20" x2="6" y2="14" />
                     </svg>
-                    2 Sectors
+                    2 Sectors · 17 Feeds
+                </span>
+                <span class="live-indicator">
+                    <span class="pulse-dot"></span>
+                    Last scanned: Feb 20, 2026
                 </span>
             </div>
         </div>
@@ -641,7 +762,7 @@
         <div class="sector-cards">
             <a href="healthcare.html" class="sector-card healthcare fade-in">
                 <div class="sector-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
@@ -651,8 +772,8 @@
                         <path d="m12 5 7 7-7 7" />
                     </svg></span>
                 <h2>Healthcare</h2>
-                <p>Health systems, MedTech partners, and compliance-driven organizations ready for cloud migration and
-                    AI infrastructure.</p>
+                <p>Health systems, MedTech, and compliance-driven orgs ready for cloud migration & AI infrastructure.
+                </p>
                 <div class="sector-stats">
                     <div class="sector-stat">
                         <div class="num">7</div>
@@ -668,10 +789,9 @@
                     </div>
                 </div>
             </a>
-
             <a href="bfsi.html" class="sector-card bfsi fade-in">
                 <div class="sector-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2" />
                         <path d="M2 10h20" />
@@ -681,7 +801,7 @@
                         <path d="M5 12h14" />
                         <path d="m12 5 7 7-7 7" />
                     </svg></span>
-                <h2>Banking, Financial Services & Insurance</h2>
+                <h2>BFSI</h2>
                 <p>Banks, insurers, and FinTech partners with fraud detection, compliance, and core modernization needs.
                 </p>
                 <div class="sector-stats">
@@ -704,121 +824,77 @@
         <!-- HOW IT WORKS -->
         <div class="section-title">How It Works</div>
         <div class="section-heading">AI-Powered Prospect Pipeline</div>
-
         <div class="pipeline-flow">
             <div class="pipeline-step fade-in">
-                <div class="step-icon scan">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <div class="step-icon scan"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 11a9 9 0 0 1 9 9" />
                         <path d="M4 4a16 16 0 0 1 16 16" />
                         <circle cx="5" cy="19" r="1" />
-                    </svg>
-                </div>
+                    </svg></div>
                 <h3>Scan</h3>
-                <p>17 RSS feeds scanned daily across Healthcare & BFSI sectors</p>
+                <p>17 RSS feeds scanned daily across Healthcare & BFSI</p>
             </div>
             <div class="pipeline-step fade-in">
-                <div class="step-icon analyze">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <div class="step-icon analyze"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8" />
                         <path d="m21 21-4.3-4.3" />
-                    </svg>
-                </div>
+                    </svg></div>
                 <h3>Analyze</h3>
-                <p>AI identifies cloud migration, compliance, and AI infrastructure signals</p>
+                <p>AI detects cloud migration, compliance, and infra signals</p>
             </div>
             <div class="pipeline-step fade-in">
-                <div class="step-icon qualify">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <div class="step-icon qualify"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                    </svg>
-                </div>
+                    </svg></div>
                 <h3>Qualify</h3>
-                <p>Prospects scored on strategic fit, signal recency, and company size</p>
+                <p>Scored on fit, recency, company size, and signal strength</p>
             </div>
             <div class="pipeline-step fade-in">
-                <div class="step-icon deploy">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <div class="step-icon deploy"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 3v18h18" />
                         <path d="m19 9-5 5-4-4-3 3" />
-                    </svg>
-                </div>
+                    </svg></div>
                 <h3>Dashboard</h3>
-                <p>Auto-deployed to this site with prospect cards and outreach intel</p>
+                <p>Auto-deployed with prospect cards and outreach intel</p>
             </div>
         </div>
 
         <!-- WHO IS THIS FOR -->
         <div class="section-title">Who Is This For</div>
-        <div class="audience-section">
-            <div class="audience-grid">
-                <div class="audience-item">
-                    <div class="audience-icon">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <circle cx="12" cy="12" r="6" />
-                            <circle cx="12" cy="12" r="2" />
-                        </svg>
-                    </div>
-                    <h4>Sales Teams</h4>
-                    <p>Find pre-qualified prospects with AI-suggested outreach angles and Rackspace wedge opportunities
-                    </p>
-                </div>
-                <div class="audience-item">
-                    <div class="audience-icon">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                    </div>
-                    <h4>Account Executives</h4>
-                    <p>Get key contacts, current vendors, and compliance signals to personalize first-touch
-                        conversations</p>
-                </div>
-                <div class="audience-item">
-                    <div class="audience-icon">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                            <polyline points="16 7 22 7 22 13" />
-                        </svg>
-                    </div>
-                    <h4>Sales Leadership</h4>
-                    <p>Track industry-wide migration and AI adoption trends across Healthcare and BFSI verticals</p>
-                </div>
+        <div class="audience-grid">
+            <div class="audience-card fade-in">
+                <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="6" />
+                        <circle cx="12" cy="12" r="2" />
+                    </svg></div>
+                <h4>Sales Teams</h4>
+                <p>Pre-qualified prospects with AI-suggested outreach angles and Rackspace wedge opportunities</p>
+            </div>
+            <div class="audience-card fade-in">
+                <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg></div>
+                <h4>Account Executives</h4>
+                <p>Key contacts, current vendors, and compliance signals for personalized first-touch conversations</p>
+            </div>
+            <div class="audience-card fade-in">
+                <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                        <polyline points="16 7 22 7 22 13" />
+                    </svg></div>
+                <h4>Sales Leadership</h4>
+                <p>Industry-wide migration and AI adoption trends across Healthcare and BFSI verticals</p>
             </div>
         </div>
 
-        <!-- DATA SOURCES -->
-        <div class="section-title">Data Sources</div>
-        <div class="section-heading">17 Industry Feeds</div>
-        <div class="data-section">
-            <div class="source-pills">
-                <span class="source-pill healthcare">Fierce Healthcare</span>
-                <span class="source-pill healthcare">Healthcare IT News</span>
-                <span class="source-pill healthcare">Becker's Health IT</span>
-                <span class="source-pill healthcare">Modern Healthcare</span>
-                <span class="source-pill healthcare">MedCity News</span>
-                <span class="source-pill healthcare">Healthcare Dive</span>
-                <span class="source-pill healthcare">HIMSS News</span>
-                <span class="source-pill healthcare">KLAS Research</span>
-                <span class="source-pill bfsi">American Banker</span>
-                <span class="source-pill bfsi">Finextra</span>
-                <span class="source-pill bfsi">Banking Dive</span>
-                <span class="source-pill bfsi">PYMNTS</span>
-                <span class="source-pill bfsi">BAI</span>
-                <span class="source-pill bfsi">The Financial Brand</span>
-                <span class="source-pill bfsi">Insurance Journal</span>
-                <span class="source-pill bfsi">Digital Insurance</span>
-                <span class="source-pill bfsi">InsurTech News</span>
-            </div>
-        </div>
-
-        <!-- CONTACT -->
+        <!-- CONTACT + FOOTER (merged) -->
         <div class="contact-section">
             <h3>Questions or Feedback?</h3>
-            <p>For questions about this tool, prospect data, or feature requests — reach out to:</p>
+            <p>For questions about this tool, prospect data, or feature requests:</p>
             <a href="mailto:mahboubeh.cheraghian@rackspace.com" class="contact-email">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                     <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -826,14 +902,25 @@
                 </svg>
                 Mia C. — mahboubeh.cheraghian@rackspace.com
             </a>
+            <div class="footer-line">
+                Built by <strong>Mia C.</strong> · Researcher III · Rackspace Technology · <a
+                    href="https://github.com/miac-design/rackspace-prospect-scanner" target="_blank">View Source</a>
+            </div>
         </div>
-
-        <footer>
-            <p>Built by <strong>Mia C.</strong> | Researcher III | Rackspace Technology</p>
-            <p style="margin-top: 4px;">Powered by AI · Auto-updated daily · <a
-                    href="https://github.com/miac-design/rackspace-prospect-scanner" target="_blank">View Source</a></p>
-        </footer>
     </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </button>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
+        });
+    </script>
 </body>
 
 </html>
