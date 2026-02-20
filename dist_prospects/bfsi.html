@@ -1863,41 +1863,54 @@
             const sourceText = card?.textContent || '';
             const sourceDateMatch = sourceText.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+),?\s*(\d{4})?/);
 
-            // Unified 5-dimension scoring (matches home page methodology)
-            const fitMax = 25, recencyMax = 25, aiMax = 20, sizeMax = 15, compMax = 15;
+            // Rackspace-specific 5-dimension scoring (matches home page methodology)
+            const infraMax = 30, fitMax = 25, timingMax = 20, dealMax = 15, competeMax = 10;
 
-            // Strategic Fit (max 25): signals + alignment
-            const signalScore = Math.min(signals * 4, 12);
-            const compEnhancement = Math.min(compliance * 3, 9);
-            const aiBonus = hasAI * 4;
-            const strategicFit = Math.min(signalScore + compEnhancement + aiBonus, fitMax);
+            // 1. Infrastructure Signal (max 30): evidence of active cloud/infra need
+            const cardText = card?.textContent?.toLowerCase() || '';
+            let infraSignal = 15; // default
+            if (cardText.includes('migration') || cardText.includes('migrating')) infraSignal = 28;
+            else if (cardText.includes('cloud-native') || cardText.includes('moderniz')) infraSignal = 26;
+            else if (cardText.includes('scaling') || cardText.includes('infrastructure')) infraSignal = 22;
+            else if (cardText.includes('digital') || cardText.includes('transform')) infraSignal = 18;
+            if (signals >= 3) infraSignal = Math.min(infraSignal + 2, infraMax);
 
-            // Signal Recency (max 25)
-            let signalRecency = 15;
+            // 2. Rackspace Fit (max 25): does their need match managed cloud, AI ops, compliance?
+            let rackspaceFit = 12; // default
+            if (cardText.includes('managed') && (cardText.includes('ai') || cardText.includes('ml'))) rackspaceFit = 23;
+            else if (cardText.includes('managed') || cardText.includes('compliance')) rackspaceFit = 20;
+            else if (cardText.includes('private cloud') || cardText.includes('hybrid')) rackspaceFit = 22;
+            else if (hasAI) rackspaceFit = 18;
+            else if (signals >= 2) rackspaceFit = 15;
+
+            // 3. Timing & Urgency (max 20): how recent is the signal?
+            let timing = 12; // default
             if (sourceDateMatch) {
                 const today = new Date('2026-02-20');
                 const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
                 const sourceDate = new Date(2026, months[sourceDateMatch[1]] || 0, parseInt(sourceDateMatch[2]) || 1);
                 const daysDiff = Math.floor((today - sourceDate) / (1000 * 60 * 60 * 24));
-                if (daysDiff <= 14) signalRecency = 25;
-                else if (daysDiff <= 30) signalRecency = 22;
-                else if (daysDiff <= 60) signalRecency = 18;
-                else signalRecency = 12;
+                if (daysDiff <= 14) timing = 20;
+                else if (daysDiff <= 30) timing = 16;
+                else if (daysDiff <= 60) timing = 12;
+                else timing = 6;
             }
 
-            // AI Opportunity (max 20)
-            const aiOpportunity = hasAI ? 18 : (signals > 1 ? 12 : 8);
+            // 4. Deal Potential (max 15): enterprise scale
+            let dealPotential = 8; // default
+            if (companyType.includes('Global') || companyType.includes('Digital Bank')) dealPotential = 15;
+            else if (companyType.includes('National') || companyType.includes('Insurance')) dealPotential = 13;
+            else if (companyType.includes('Asset') || companyType.includes('Regional')) dealPotential = 12;
+            else if (companyType.includes('SaaS') || companyType.includes('Platform')) dealPotential = 10;
 
-            // Company Size (max 15)
-            let companySize = 10;
-            if (companyType.includes('Global') || companyType.includes('Digital Bank')) companySize = 15;
-            else if (companyType.includes('Insurance') || companyType.includes('Asset')) companySize = 13;
-            else if (companyType.includes('Regional') || companyType.includes('SaaS')) companySize = 12;
+            // 5. Competitive Position (max 10): Can Rackspace win?
+            let competitive = 7; // default
+            if (cardText.includes('aws') || cardText.includes('azure')) competitive = 5;
+            if (cardText.includes('managed services') || cardText.includes('partner')) competitive = 8;
+            if (cardText.includes('gap') || cardText.includes('need')) competitive = Math.min(competitive + 1, competeMax);
+            if (compliance >= 2) competitive = Math.min(competitive + 1, competeMax);
 
-            // Compliance (max 15)
-            const complianceScore = Math.min(compliance * 4, compMax);
-
-            const calculatedScore = strategicFit + signalRecency + aiOpportunity + companySize + complianceScore;
+            const calculatedScore = infraSignal + rackspaceFit + timing + dealPotential + competitive;
 
             // UPDATE THE DISPLAYED SCORE
             const scoreNumberEl = badge.querySelector('.score-number');
@@ -1909,24 +1922,24 @@
                     <div class="tooltip-desc">Lead score for ${companyName}</div>
                     <div class="score-breakdown">
                         <div class="score-row">
-                            <span class="label">Strategic Fit (25%)</span>
-                            <span class="value">${strategicFit}/${fitMax} pts</span>
+                            <span class="label">Infra Signal (30%)</span>
+                            <span class="value">${infraSignal}/${infraMax} pts</span>
                         </div>
                         <div class="score-row">
-                            <span class="label">Signal Recency (25%)</span>
-                            <span class="value">${signalRecency}/${recencyMax} pts</span>
+                            <span class="label">Rackspace Fit (25%)</span>
+                            <span class="value">${rackspaceFit}/${fitMax} pts</span>
                         </div>
                         <div class="score-row">
-                            <span class="label">AI Opportunity (20%)</span>
-                            <span class="value">${aiOpportunity}/${aiMax} pts</span>
+                            <span class="label">Timing & Urgency (20%)</span>
+                            <span class="value">${timing}/${timingMax} pts</span>
                         </div>
                         <div class="score-row">
-                            <span class="label">Company Size (15%)</span>
-                            <span class="value">${companySize}/${sizeMax} pts</span>
+                            <span class="label">Deal Potential (15%)</span>
+                            <span class="value">${dealPotential}/${dealMax} pts</span>
                         </div>
                         <div class="score-row">
-                            <span class="label">Compliance (15%)</span>
-                            <span class="value">${complianceScore}/${compMax} pts</span>
+                            <span class="label">Competitive Pos. (10%)</span>
+                            <span class="value">${competitive}/${competeMax} pts</span>
                         </div>
                     </div>
                     <div class="tooltip-why">→ Higher score = higher priority for outreach</div>
@@ -1948,7 +1961,7 @@
                 reachOutReason: 'Cloud-first bank building proprietary ML platforms — partner opportunity for managed AI infrastructure and GPU compute.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 23/25 · Recency: 22/25 · AI: 18/20 · Size: 15/15 · Compliance: 10/15 → Total: 88'
+                scoreAudit: 'Infra: 28/30 · Fit: 20/25 · Timing: 12/20 · Deal: 15/15 · Compete: 6/10'
             },
             'JPMorgan Chase': {
                 website: 'https://www.jpmorganchase.com',
@@ -1956,7 +1969,7 @@
                 reachOutReason: 'Massive AI investment ($2B+) in fraud detection and trading — needs dedicated GPU infrastructure and MLOps at scale.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 22/25 · Recency: 20/25 · AI: 20/20 · Size: 15/15 · Compliance: 8/15 → Total: 85'
+                scoreAudit: 'Infra: 26/30 · Fit: 23/25 · Timing: 12/20 · Deal: 15/15 · Compete: 5/10'
             },
             'USAA': {
                 website: 'https://www.usaa.com',
@@ -1964,7 +1977,7 @@
                 reachOutReason: 'Legacy mainframe modernization with strict federal compliance needs — hybrid cloud with FFIEC controls.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 22/25 · Recency: 18/25 · AI: 14/20 · Size: 13/15 · Compliance: 15/15 → Total: 82'
+                scoreAudit: 'Infra: 26/30 · Fit: 22/25 · Timing: 12/20 · Deal: 13/15 · Compete: 8/10'
             },
             'State Farm': {
                 website: 'https://www.statefarm.com',
@@ -1972,7 +1985,7 @@
                 reachOutReason: 'Telematics and claims AI automation requires edge-to-cloud infrastructure with strict data sovereignty.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 18/25 · Recency: 20/25 · AI: 17/20 · Size: 12/15 · Compliance: 8/15 → Total: 75'
+                scoreAudit: 'Infra: 22/30 · Fit: 18/25 · Timing: 12/20 · Deal: 13/15 · Compete: 7/10'
             },
             'Fidelity Investments': {
                 website: 'https://www.fidelity.com',
@@ -1980,7 +1993,7 @@
                 reachOutReason: 'Digital wealth management AI and personalized advisory platforms need secure, high-throughput compute infrastructure.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 18/25 · Recency: 18/25 · AI: 16/20 · Size: 12/15 · Compliance: 8/15 → Total: 72'
+                scoreAudit: 'Infra: 22/30 · Fit: 18/25 · Timing: 12/20 · Deal: 12/15 · Compete: 7/10'
             },
             'Progressive Insurance': {
                 website: 'https://www.progressive.com',
@@ -1988,7 +2001,7 @@
                 reachOutReason: 'Snapshot telematics and AI-powered pricing models need real-time ML inference infrastructure at scale.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 16/25 · Recency: 18/25 · AI: 18/20 · Size: 10/15 · Compliance: 8/15 → Total: 70'
+                scoreAudit: 'Infra: 22/30 · Fit: 18/25 · Timing: 12/20 · Deal: 13/15 · Compete: 5/10'
             },
             'Citizens Bank': {
                 website: 'https://www.citizensbank.com',
@@ -1996,7 +2009,7 @@
                 reachOutReason: 'Mid-tier bank cloud migration with managed services gap — needs hybrid cloud for core banking modernization.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 20/25 · Recency: 15/25 · AI: 10/20 · Size: 13/15 · Compliance: 10/15 → Total: 68'
+                scoreAudit: 'Infra: 28/30 · Fit: 20/25 · Timing: 6/20 · Deal: 8/15 · Compete: 9/10'
             },
             'Temenos': {
                 website: 'https://www.temenos.com',
@@ -2004,7 +2017,7 @@
                 reachOutReason: 'Core banking SaaS platform expanding cloud footprint — partner opportunity for managed infrastructure.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 18/25 · Recency: 15/25 · AI: 12/20 · Size: 12/15 · Compliance: 8/15 → Total: 65'
+                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 6/20 · Deal: 10/15 · Compete: 8/10'
             },
             'Guidewire': {
                 website: 'https://www.guidewire.com',
@@ -2012,7 +2025,7 @@
                 reachOutReason: 'Insurance platform cloud migration creates opportunity for managed hosting and compliance infrastructure.',
                 reviewStatus: 'pending',
                 reviewer: 'BFSI Product Team',
-                scoreAudit: 'Fit: 18/25 · Recency: 12/25 · AI: 10/20 · Size: 12/15 · Compliance: 10/15 → Total: 62'
+                scoreAudit: 'Infra: 28/30 · Fit: 20/25 · Timing: 6/20 · Deal: 10/15 · Compete: 8/10'
             }
         };
 

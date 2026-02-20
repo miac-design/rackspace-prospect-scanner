@@ -866,136 +866,142 @@
         <div
             style="background:var(--white); border:1px solid var(--border); border-radius:16px; padding:28px 32px; margin-bottom:44px;">
             <p style="font-size:0.82rem; color:var(--text-medium); margin-bottom:18px; text-align:center;">Each prospect
-                receives a composite score (0–100) based on five weighted dimensions:</p>
+                receives a composite score (0–100) based on five Rackspace-specific dimensions. Minimum threshold:
+                50/100.</p>
             <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:12px; text-align:center;">
                 <div style="padding:16px 8px; background:rgba(196,48,43,0.04); border-radius:12px;">
-                    <div style="font-size:1.3rem; font-weight:700; color:var(--rackspace-red);">25%</div>
-                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Signal
-                        Recency</div>
-                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">How recent the cloud/AI
-                        news signal is</div>
+                    <div style="font-size:1.3rem; font-weight:700; color:var(--rackspace-red);">30%</div>
+                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Infra
+                        Signal</div>
+                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Evidence of active cloud
+                        migration or infrastructure need</div>
                 </div>
                 <div style="padding:16px 8px; background:rgba(107,91,122,0.05); border-radius:12px;">
                     <div style="font-size:1.3rem; font-weight:700; color:var(--plum);">25%</div>
-                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Strategic
+                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Rackspace
                         Fit</div>
-                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Alignment with Rackspace
-                        offerings</div>
+                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Does their specific need
+                        match
+                        managed cloud, AI ops, or compliance hosting?</div>
                 </div>
                 <div style="padding:16px 8px; background:rgba(61,139,95,0.05); border-radius:12px;">
                     <div style="font-size:1.3rem; font-weight:700; color:var(--success);">20%</div>
-                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">AI
-                        Opportunity</div>
-                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Potential for AI agent
-                        infrastructure</div>
-                </div>
-                <div style="padding:16px 8px; background:rgba(45,90,135,0.06); border-radius:12px;">
-                    <div style="font-size:1.3rem; font-weight:700; color:var(--blue-primary);">15%</div>
-                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Company Size
+                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Timing &
+                        Urgency</div>
+                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">How recent is the signal?
+                        <14 days=max score</div>
                     </div>
-                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Enterprise scale and infra
-                        complexity</div>
-                </div>
-                <div style="padding:16px 8px; background:rgba(196,168,122,0.08); border-radius:12px;">
-                    <div style="font-size:1.3rem; font-weight:700; color:var(--warning);">15%</div>
-                    <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Compliance
+                    <div style="padding:16px 8px; background:rgba(45,90,135,0.06); border-radius:12px;">
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--blue-primary);">15%</div>
+                        <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">Deal
+                            Potential</div>
+                        <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Enterprise scale and
+                            estimated
+                            contract size</div>
                     </div>
-                    <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">HIPAA/PCI/SOX regulatory
-                        complexity</div>
+                    <div style="padding:16px 8px; background:rgba(196,168,122,0.08); border-radius:12px;">
+                        <div style="font-size:1.3rem; font-weight:700; color:var(--warning);">10%</div>
+                        <div style="font-size:0.7rem; font-weight:600; color:var(--text-dark); margin-top:4px;">
+                            Competitive
+                            Position</div>
+                        <div style="font-size:0.65rem; color:var(--text-light); margin-top:2px;">Can Rackspace win vs.
+                            incumbent cloud vendors?</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- WHO IS THIS FOR -->
-        <div class="section-title">Who Is This For</div>
-        <div class="audience-grid">
-            <div class="audience-card fade-in">
-                <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <circle cx="12" cy="12" r="6" />
-                        <circle cx="12" cy="12" r="2" />
-                    </svg></div>
-                <h4>Sales Teams</h4>
-                <p>Pre-qualified prospects with AI-suggested outreach angles and Rackspace wedge opportunities</p>
+            <!-- WHO IS THIS FOR -->
+            <div class="section-title">Who Is This For</div>
+            <div class="audience-grid">
+                <div class="audience-card fade-in">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg></div>
+                    <h4>Sales Teams</h4>
+                    <p>Pre-qualified prospects with AI-suggested outreach angles and Rackspace wedge opportunities</p>
+                </div>
+                <div class="audience-card fade-in">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg></div>
+                    <h4>Account Executives</h4>
+                    <p>Key contacts, current vendors, and compliance signals for personalized first-touch conversations
+                    </p>
+                </div>
+                <div class="audience-card fade-in">
+                    <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                            <polyline points="16 7 22 7 22 13" />
+                        </svg></div>
+                    <h4>Sales Leadership</h4>
+                    <p>Industry-wide migration and AI adoption trends across Healthcare and BFSI verticals</p>
+                </div>
             </div>
-            <div class="audience-card fade-in">
-                <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg></div>
-                <h4>Account Executives</h4>
-                <p>Key contacts, current vendors, and compliance signals for personalized first-touch conversations</p>
-            </div>
-            <div class="audience-card fade-in">
-                <div class="audience-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                        <polyline points="16 7 22 7 22 13" />
-                    </svg></div>
-                <h4>Sales Leadership</h4>
-                <p>Industry-wide migration and AI adoption trends across Healthcare and BFSI verticals</p>
-            </div>
-        </div>
 
-        <!-- FEEDBACK REQUESTED (QBR) -->
-        <div
-            style="background:var(--white); border:2px dashed var(--lavender); border-radius:16px; padding:24px 32px; margin-bottom:24px; text-align:center;">
+            <!-- FEEDBACK REQUESTED (QBR) -->
             <div
-                style="font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--lavender); margin-bottom:6px;">
-                Feedback Requested</div>
-            <p style="font-size:0.92rem; font-weight:600; color:var(--text-dark); margin-bottom:8px;">Help Us Improve
-                the Recommendation Engine</p>
-            <p
-                style="font-size:0.8rem; color:var(--text-medium); max-width:520px; margin:0 auto 14px; line-height:1.6;">
-                We're looking for product team input on: signal criteria accuracy, missing Rackspace offers, scoring
-                weight adjustments, and additional data sources.</p>
-            <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-                <span
-                    style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(107,91,122,0.08); color:var(--plum); font-weight:500;">🎯
-                    Signal Criteria</span>
-                <span
-                    style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(196,48,43,0.06); color:var(--rackspace-red); font-weight:500;">📦
-                    Rackspace Offers</span>
-                <span
-                    style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(45,90,135,0.06); color:var(--blue-primary); font-weight:500;">⚖️
-                    Scoring Weights</span>
-                <span
-                    style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(61,139,95,0.06); color:var(--success); font-weight:500;">📡
-                    Data Sources</span>
+                style="background:var(--white); border:2px dashed var(--lavender); border-radius:16px; padding:24px 32px; margin-bottom:24px; text-align:center;">
+                <div
+                    style="font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--lavender); margin-bottom:6px;">
+                    Feedback Requested</div>
+                <p style="font-size:0.92rem; font-weight:600; color:var(--text-dark); margin-bottom:8px;">Help Us
+                    Improve
+                    the Recommendation Engine</p>
+                <p
+                    style="font-size:0.8rem; color:var(--text-medium); max-width:520px; margin:0 auto 14px; line-height:1.6;">
+                    We're looking for product team input on: signal criteria accuracy, missing Rackspace offers, scoring
+                    weight adjustments, and additional data sources.</p>
+                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                    <span
+                        style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(107,91,122,0.08); color:var(--plum); font-weight:500;">🎯
+                        Signal Criteria</span>
+                    <span
+                        style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(196,48,43,0.06); color:var(--rackspace-red); font-weight:500;">📦
+                        Rackspace Offers</span>
+                    <span
+                        style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(45,90,135,0.06); color:var(--blue-primary); font-weight:500;">⚖️
+                        Scoring Weights</span>
+                    <span
+                        style="font-size:0.7rem; padding:5px 12px; border-radius:20px; background:rgba(61,139,95,0.06); color:var(--success); font-weight:500;">📡
+                        Data Sources</span>
+                </div>
+            </div>
+
+            <!-- CONTACT + FOOTER (merged) -->
+            <div class="contact-section">
+                <h3>Questions or Feedback?</h3>
+                <p>For questions about this tool, prospect data, or feature requests:</p>
+                <a href="mailto:mahboubeh.cheraghian@rackspace.com" class="contact-email">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                    Mia C. — mahboubeh.cheraghian@rackspace.com
+                </a>
+                <div class="footer-line">
+                    Rackspace Technology · <a href="https://github.com/miac-design/rackspace-prospect-scanner"
+                        target="_blank">View Source</a>
+                </div>
             </div>
         </div>
 
-        <!-- CONTACT + FOOTER (merged) -->
-        <div class="contact-section">
-            <h3>Questions or Feedback?</h3>
-            <p>For questions about this tool, prospect data, or feature requests:</p>
-            <a href="mailto:mahboubeh.cheraghian@rackspace.com" class="contact-email">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="20" height="16" x="2" y="4" rx="2" />
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                </svg>
-                Mia C. — mahboubeh.cheraghian@rackspace.com
-            </a>
-            <div class="footer-line">
-                Rackspace Technology · <a href="https://github.com/miac-design/rackspace-prospect-scanner"
-                    target="_blank">View Source</a>
-            </div>
-        </div>
-    </div>
+        <!-- BACK TO TOP -->
+        <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m18 15-6-6-6 6" />
+            </svg>
+        </button>
 
-    <!-- BACK TO TOP -->
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m18 15-6-6-6 6" />
-        </svg>
-    </button>
-
-    <script>
+        <script>
         window.addEventListener('scroll', () => {
             document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
         });
-    </script>
+        </script>
 </body>
 
 </html>
