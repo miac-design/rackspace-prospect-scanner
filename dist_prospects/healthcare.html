@@ -1866,6 +1866,326 @@
         </svg>
     </button>
 
+    <style>
+        /* Enhancement CSS - matching BFSI */
+        .info-tooltip {
+            position: fixed;
+            background: linear-gradient(135deg, #1a365d, #2d3748);
+            color: white;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 260px;
+            text-align: left;
+            z-index: 10000;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-tooltip .tooltip-title {
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        .info-tooltip .tooltip-desc {
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+
+        .info-tooltip .tooltip-why {
+            color: #a0aec0;
+            font-size: 0.7rem;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .score-badge {
+            cursor: help;
+        }
+
+        .info-tooltip .score-breakdown {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .info-tooltip .score-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            font-size: 0.7rem;
+        }
+
+        .info-tooltip .score-row .label {
+            color: #a0aec0;
+        }
+
+        .info-tooltip .score-row .value {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .reach-out-box {
+            background: linear-gradient(135deg, rgba(45, 90, 135, 0.06), rgba(74, 144, 184, 0.04));
+            border-left: 3px solid var(--blue-primary);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 16px;
+            margin-top: 12px;
+            grid-column: 1 / -1;
+        }
+
+        .reach-out-box .label {
+            color: var(--blue-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .signal-type-badge {
+            font-size: 0.55rem;
+            background: var(--blue-primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .website-link {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .website-link:hover {
+            color: var(--blue-light, #4a90b8);
+        }
+
+        .score-audit {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--text-medium);
+            background: rgba(45, 90, 135, 0.05);
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+    </style>
+
+    <script>
+        // Tooltip infrastructure
+        const tooltip = document.createElement('div');
+        tooltip.className = 'info-tooltip';
+        document.body.appendChild(tooltip);
+        function showTooltip(e, content) {
+            tooltip.innerHTML = content;
+            tooltip.classList.add('visible');
+            const x = e.clientX + 15;
+            const y = e.clientY - 10;
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+            const rect = tooltip.getBoundingClientRect();
+            const maxX = window.innerWidth - rect.width - 10;
+            const maxY = window.innerHeight - rect.height - 10;
+            tooltip.style.left = Math.min(x, maxX) + 'px';
+            tooltip.style.top = Math.min(y, maxY) + 'px';
+        }
+        function hideTooltip() { tooltip.classList.remove('visible'); }
+
+        // Score badge tooltips with Rackspace-specific 5-dimension scoring
+        document.querySelectorAll('.score-badge').forEach(badge => {
+            const card = badge.closest('.prospect-card');
+            const companyName = card?.querySelector('.company-name')?.textContent || 'Company';
+            const signals = card?.querySelectorAll('.signal-pill')?.length || 0;
+            const compliance = card?.querySelectorAll('.compliance-badge')?.length || 0;
+            const hasAI = card?.querySelector('.ai-use-case') ? 1 : 0;
+            const companyType = card?.querySelector('.company-type')?.textContent || '';
+            const sourceText = card?.textContent || '';
+            const sourceDateMatch = sourceText.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+),?\s*(\d{4})?/);
+
+            const infraMax = 30, fitMax = 25, timingMax = 20, dealMax = 15, competeMax = 10;
+            const cardText = card?.textContent?.toLowerCase() || '';
+
+            let infraSignal = 15;
+            if (cardText.includes('migration') || cardText.includes('migrating')) infraSignal = 28;
+            else if (cardText.includes('cloud-native') || cardText.includes('moderniz')) infraSignal = 26;
+            else if (cardText.includes('scaling') || cardText.includes('infrastructure')) infraSignal = 22;
+            else if (cardText.includes('digital') || cardText.includes('transform')) infraSignal = 18;
+            if (signals >= 3) infraSignal = Math.min(infraSignal + 2, infraMax);
+
+            let rackspaceFit = 12;
+            if (cardText.includes('managed') && (cardText.includes('ai') || cardText.includes('ml'))) rackspaceFit = 23;
+            else if (cardText.includes('managed') || cardText.includes('compliance')) rackspaceFit = 20;
+            else if (cardText.includes('private cloud') || cardText.includes('hybrid')) rackspaceFit = 22;
+            else if (hasAI) rackspaceFit = 18;
+            else if (signals >= 2) rackspaceFit = 15;
+
+            let timing = 12;
+            if (sourceDateMatch) {
+                const today = new Date('2026-02-20');
+                const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
+                const sourceDate = new Date(2026, months[sourceDateMatch[1]] || 0, parseInt(sourceDateMatch[2]) || 1);
+                const daysDiff = Math.floor((today - sourceDate) / (1000 * 60 * 60 * 24));
+                if (daysDiff <= 14) timing = 20;
+                else if (daysDiff <= 30) timing = 16;
+                else if (daysDiff <= 60) timing = 12;
+                else timing = 6;
+            }
+
+            let dealPotential = 8;
+            if (companyType.includes('250+') || companyType.includes('Global') || companyType.includes('180+')) dealPotential = 15;
+            else if (companyType.includes('Post-Merger') || companyType.includes('70+') || companyType.includes('130+')) dealPotential = 14;
+            else if (companyType.includes('28+') || companyType.includes('MedTech') || companyType.includes('EHR')) dealPotential = 12;
+            else if (companyType.includes('Academic') || companyType.includes('Multi')) dealPotential = 13;
+
+            let competitive = 7;
+            if (cardText.includes('aws') || cardText.includes('azure')) competitive = 5;
+            if (cardText.includes('managed services') || cardText.includes('partner')) competitive = 8;
+            if (cardText.includes('gap') || cardText.includes('need')) competitive = Math.min(competitive + 1, competeMax);
+            if (compliance >= 1 || cardText.includes('hipaa')) competitive = Math.min(competitive + 1, competeMax);
+
+            const calculatedScore = infraSignal + rackspaceFit + timing + dealPotential + competitive;
+            const scoreNumberEl = badge.querySelector('.score-number');
+            if (scoreNumberEl) scoreNumberEl.textContent = calculatedScore;
+
+            badge.addEventListener('mouseenter', (e) => {
+                showTooltip(e, `
+                    <span class="tooltip-title">Score: ${calculatedScore}/100</span>
+                    <div class="tooltip-desc">Lead score for ${companyName}</div>
+                    <div class="score-breakdown">
+                        <div class="score-row"><span class="label">Infra Signal (30%)</span><span class="value">${infraSignal}/${infraMax} pts</span></div>
+                        <div class="score-row"><span class="label">Rackspace Fit (25%)</span><span class="value">${rackspaceFit}/${fitMax} pts</span></div>
+                        <div class="score-row"><span class="label">Timing & Urgency (20%)</span><span class="value">${timing}/${timingMax} pts</span></div>
+                        <div class="score-row"><span class="label">Deal Potential (15%)</span><span class="value">${dealPotential}/${dealMax} pts</span></div>
+                        <div class="score-row"><span class="label">Competitive Pos. (10%)</span><span class="value">${competitive}/${competeMax} pts</span></div>
+                    </div>
+                    <div class="tooltip-why">→ Higher score = higher priority for outreach</div>
+                `);
+            });
+            badge.addEventListener('mousemove', (e) => {
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY - 10) + 'px';
+            });
+            badge.addEventListener('mouseleave', hideTooltip);
+        });
+    </script>
+
+    <!-- HEALTHCARE ENHANCEMENTS: Dynamic card enrichment -->
+    <script>
+        const enhancements = {
+            'WellSpan Health': {
+                website: 'https://www.wellspan.org',
+                signalType: 'Cloud Migration',
+                reachOutReason: 'Migrating 250+ facilities to AWS by April 2026 — needs managed services layer for HIPAA compliance and AI optimization on hyperscaler infra.',
+                scoreAudit: 'Infra: 28/30 · Fit: 23/25 · Timing: 12/20 · Deal: 15/15 · Compete: 6/10'
+            },
+            'Jefferson Health + Lehigh Valley': {
+                website: 'https://www.jeffersonhealth.org',
+                signalType: 'Data Consolidation',
+                reachOutReason: 'Post-merger system integration across 30+ hospitals — needs unified data platform with HIPAA compliance for merged EHR systems.',
+                scoreAudit: 'Infra: 26/30 · Fit: 22/25 · Timing: 12/20 · Deal: 14/15 · Compete: 8/10'
+            },
+            'Community Health Systems': {
+                website: 'https://www.chs.net',
+                signalType: 'AI Adoption',
+                reachOutReason: '70+ hospitals deploying clinical analytics — needs managed AI ops infrastructure with strict HIPAA controls across distributed facilities.',
+                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 12/20 · Deal: 14/15 · Compete: 8/10'
+            },
+            'Novant Health': {
+                website: 'https://www.novanthealth.org',
+                signalType: 'Digital Transformation',
+                reachOutReason: 'Building digital-first patient experience across 800+ locations — needs scalable cloud infrastructure for real-time clinical data.',
+                scoreAudit: 'Infra: 22/30 · Fit: 18/25 · Timing: 12/20 · Deal: 13/15 · Compete: 7/10'
+            },
+            'UPMC Enterprises': {
+                website: 'https://enterprises.upmc.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Academic health system building proprietary AI for clinical decision support — needs GPU compute and managed MLOps at scale.',
+                scoreAudit: 'Infra: 22/30 · Fit: 23/25 · Timing: 12/20 · Deal: 13/15 · Compete: 5/10'
+            },
+            'Manipal Hospitals': {
+                website: 'https://www.manipalhospitals.com',
+                signalType: 'Cloud Migration',
+                reachOutReason: 'Expanding from 28+ hospitals across India — greenfield cloud opportunity for managed private cloud with data sovereignty requirements.',
+                scoreAudit: 'Infra: 28/30 · Fit: 22/25 · Timing: 12/20 · Deal: 12/15 · Compete: 9/10'
+            },
+            'Philips Healthcare': {
+                website: 'https://www.philips.com/healthcare',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Global MedTech deploying AI-powered imaging and patient monitoring — needs managed GPU infrastructure for inference at edge and cloud.',
+                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 12/20 · Deal: 12/15 · Compete: 5/10'
+            },
+            'GE HealthCare': {
+                website: 'https://www.gehealthcare.com',
+                signalType: 'AI Adoption',
+                reachOutReason: 'Post-spinoff from GE building independent cloud infrastructure for medical imaging AI — partner opportunity for managed AI ops.',
+                scoreAudit: 'Infra: 26/30 · Fit: 20/25 · Timing: 6/20 · Deal: 12/15 · Compete: 5/10'
+            },
+            'InterSystems': {
+                website: 'https://www.intersystems.com',
+                signalType: 'Cloud Initiative',
+                reachOutReason: 'EHR interoperability platform expanding cloud footprint — needs managed hosting infrastructure for health data exchange at scale.',
+                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 6/20 · Deal: 12/15 · Compete: 8/10'
+            }
+        };
+
+        document.querySelectorAll('.prospect-card').forEach(card => {
+            const nameEl = card.querySelector('.company-name');
+            if (!nameEl) return;
+            const name = nameEl.textContent.trim();
+            const data = enhancements[name];
+            if (!data) return;
+
+            // Add Reason to Reach Out box
+            const infoGrid = card.querySelector('.info-grid');
+            if (infoGrid) {
+                const reachOutBox = document.createElement('div');
+                reachOutBox.className = 'reach-out-box';
+                reachOutBox.innerHTML = `
+                    <div class="label">→ Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
+                    <div class="info-text"><strong>${data.reachOutReason}</strong></div>
+                `;
+                infoGrid.appendChild(reachOutBox);
+            }
+
+            // Add Website link + Score Breakdown to intelligence section
+            const intelSection = card.querySelector('.intelligence-section');
+            if (intelSection) {
+                const websiteItem = document.createElement('div');
+                websiteItem.className = 'intel-item';
+                websiteItem.innerHTML = `
+                    <div class="intel-label">Company Website</div>
+                    <div class="intel-value"><a href="${data.website}" target="_blank" class="website-link">🔗 ${data.website.replace('https://', '')}</a></div>
+                `;
+                intelSection.insertBefore(websiteItem, intelSection.firstChild);
+
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'intel-item';
+                scoreItem.style.gridColumn = '1 / -1';
+                scoreItem.innerHTML = `
+                    <div class="intel-label">Score Breakdown</div>
+                    <div class="score-audit">${data.scoreAudit}</div>
+                `;
+                intelSection.appendChild(scoreItem);
+            }
+        });
+    </script>
+
     <script>
         // Back to top
         window.addEventListener('scroll', () => {
