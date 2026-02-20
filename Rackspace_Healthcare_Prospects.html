@@ -625,12 +625,16 @@
         }
 
         .search-box::before {
-            content: "🔍";
+            content: "";
             position: absolute;
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.9rem;
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239a9a9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
         }
 
         .filter-buttons {
@@ -821,8 +825,15 @@
 
 <body>
     <nav>
-        <a href="index.html" class="logo"><img src="rackspace-logo.png" alt="Rackspace"
-                style="height: 28px; margin-right: 8px; vertical-align: middle;">Rackspace AI Intelligence</a>
+        <a href="index.html" class="logo"
+            style="font-size:1.3rem;color:#3d3d3d;display:flex;align-items:center;gap:10px;">
+            <img src="rackspace-logo.png" alt="Rackspace" style="height: 28px;">
+            <div>
+                <div style="letter-spacing:-0.5px;">Mi<span style="color:#c4302b;">R</span>a</div>
+                <div style="font-size:0.65rem;font-weight:400;color:#9a9a9a;letter-spacing:0.5px;">Prospect Intelligence
+                </div>
+            </div>
+        </a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="healthcare.html" class="active">Healthcare</a>
@@ -863,10 +874,22 @@
         <div class="tab-nav"
             style="display: flex; gap: 0; margin-bottom: 30px; border-bottom: 2px solid var(--border);">
             <button class="tab-btn active" onclick="showTab('prospects')"
-                style="padding: 14px 28px; border: none; background: none; font-size: 0.9rem; font-weight: 600; color: var(--plum); border-bottom: 3px solid var(--plum); cursor: pointer; transition: all 0.2s;">📊
+                style="padding: 14px 28px; border: none; background: none; font-size: 0.9rem; font-weight: 600; color: var(--plum); border-bottom: 3px solid var(--plum); cursor: pointer; transition: all 0.2s; display:inline-flex; align-items:center; gap:6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
                 Prospects</button>
             <button class="tab-btn" onclick="showTab('how-it-works')"
-                style="padding: 14px 28px; border: none; background: none; font-size: 0.9rem; font-weight: 500; color: var(--text-medium); border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.2s;">⚙️
+                style="padding: 14px 28px; border: none; background: none; font-size: 0.9rem; font-weight: 500; color: var(--text-medium); border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.2s; display:inline-flex; align-items:center; gap:6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
                 How It Works</button>
         </div>
 
@@ -955,7 +978,12 @@
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
                     <div
                         style="background: white; border-radius: 12px; padding: 20px; border-left: 4px solid var(--rackspace-red);">
-                        <h4 style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 6px;">⚡ Speed</h4>
+                        <h4
+                            style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 6px; display:flex; align-items:center; gap:6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg> Speed</h4>
                         <p style="font-size: 0.75rem; color: var(--text-medium);">Scans all feeds in under 3 seconds
                             using parallel processing</p>
                     </div>
@@ -990,8 +1018,21 @@
                     <button class="filter-btn" data-filter="medtech">MedTech</button>
                 </div>
                 <div class="export-buttons">
-                    <button class="export-btn" onclick="exportCSV()">📄 CSV</button>
-                    <button class="export-btn" onclick="window.print()">🖨️ Print</button>
+                    <button class="export-btn" onclick="exportCSV()"
+                        style="display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                        </svg> CSV</button>
+                    <button class="export-btn" onclick="window.print()"
+                        style="display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 6 2 18 2 18 9" />
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                            <rect width="12" height="8" x="6" y="14" />
+                        </svg> Print</button>
                 </div>
             </div>
 
@@ -1027,8 +1068,18 @@
                 style="background: linear-gradient(135deg, rgba(122,157,122,0.1), rgba(122,157,122,0.06)); border-color: var(--success); margin-bottom: 30px;">
                 <div class="info-banner-title" style="color: var(--success);">Pipeline Status</div>
                 <div class="info-banner-content">
-                    <p id="scan-timestamp">🕐 <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
-                    <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below
+                    <p id="scan-timestamp" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg> <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
+                    <p id="scan-result" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                            viewBox="0 0 24 24" fill="none" stroke="#7a9d7a" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg> <strong>No new prospects this week</strong> — all scanned articles were below
                         threshold</p>
                 </div>
             </div>
@@ -1085,7 +1136,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=David+Coleman+WellSpan+Health+CIO+LinkedIn"
-                                        target="_blank">🔍 David Coleman (SVP, CIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> David Coleman (SVP, CIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1106,7 +1157,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.wellspan.org/articles/2026/01/web---aws-partnership"
-                                        target="_blank">✓ Jan 8, 2026</a>
+                                        target="_blank">✔ Jan 8, 2026</a>
                                 </div>
                             </div>
                         </div>
@@ -1157,7 +1208,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Luis+Taveras+Jefferson+Health+CIO+LinkedIn"
-                                        target="_blank">🔍 Luis Taveras (SVP, CIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Luis Taveras (SVP, CIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1178,7 +1229,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.jeffersonhealth.org/about-us/news/2025/09/jh-bold-ai-strategy-to-reclaim-time-empower-clinicians-and-transform-healthcare"
-                                        target="_blank">✓ Sept 18, 2025</a>
+                                        target="_blank">✔ Sept 18, 2025</a>
                                 </div>
                             </div>
                         </div>
@@ -1229,7 +1280,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Patrice+Bordron+Community+Health+Systems+CIO+LinkedIn"
-                                        target="_blank">🔍 Patrice Bordron (SVP, CDIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Patrice Bordron (SVP, CDIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1250,7 +1301,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.googlecloudpresscorner.com/2024-01-31-Community-Health-Systems-Completes-Data-Migration-and-Implements-New-Generative-AI-Innovations-with-Google-Cloud"
-                                        target="_blank">✓ Jan 31, 2024</a>
+                                        target="_blank">✔ Jan 31, 2024</a>
                                 </div>
                             </div>
                         </div>
@@ -1310,7 +1361,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Onyeka+Nchege+Novant+Health+CDIO+LinkedIn"
-                                        target="_blank">🔍 Onyeka Nchege (EVP, CDIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Onyeka Nchege (EVP, CDIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1381,7 +1432,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Chris+Carmody+UPMC+CTO+LinkedIn"
-                                        target="_blank">🔍 Chris Carmody (SVP, CTO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Chris Carmody (SVP, CTO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1401,7 +1452,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://thisweekhealth.com/excited-for-our-future-chris-carmody-on-upmcs-epic-transformation/"
-                                        target="_blank">✓ Epic Wave 2026</a>
+                                        target="_blank">✔ Epic Wave 2026</a>
                                 </div>
                             </div>
                         </div>
@@ -1451,7 +1502,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Nandkishor+Dhomne+Manipal+Hospitals+CIO+LinkedIn"
-                                        target="_blank">🔍 Nandkishor Dhomne (Group CIO)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Nandkishor Dhomne (Group CIO)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1471,7 +1522,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.googlecloudpresscorner.com/2025-04-09-Manipal-Hospitals-Partners-with-Google-Cloud-to-Advance-AI-Driven-Digital-Healthcare-Across-India"
-                                        target="_blank">✓ Apr 9, 2025</a>
+                                        target="_blank">✔ Apr 9, 2025</a>
                                 </div>
                             </div>
                         </div>
@@ -1541,7 +1592,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Dale+Wiggins+Philips+Healthcare+LinkedIn"
-                                        target="_blank">🔍 Dale Wiggins (VP, GM HealthSuite)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Dale Wiggins (VP, GM HealthSuite)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1562,7 +1613,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.philips.com/a-w/about/news/archive/standard/news/press/2025/philips-expands-cloud-based-enterprise-imaging-services-to-europe-for-better-access-to-ai-enabled-workflows-and-innovation.html"
-                                        target="_blank">✓ Feb 27, 2025</a>
+                                        target="_blank">✔ Feb 27, 2025</a>
                                 </div>
                             </div>
                         </div>
@@ -1611,7 +1662,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Taha+Kass-Hout+GE+HealthCare+LinkedIn"
-                                        target="_blank">🔍 Taha Kass-Hout (Chief Science & Tech Officer)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Taha Kass-Hout (Chief Science & Tech Officer)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1632,7 +1683,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.gehealthcare.com/about/newsroom/press-releases/ge-healthcare-advances-its-cloud-strategy-by-unveiling-the-genesis-portfolio-to-improve-speed-of-digital-innovation-adoption"
-                                        target="_blank">✓ Mar 4, 2025</a>
+                                        target="_blank">✔ Mar 4, 2025</a>
                                 </div>
                             </div>
                         </div>
@@ -1681,7 +1732,7 @@
                                 <div class="intel-label">Key Contact</div>
                                 <div class="intel-value">
                                     <a href="https://www.google.com/search?q=Don+Woodlock+InterSystems+Healthcare+LinkedIn"
-                                        target="_blank">🔍 Don Woodlock (Head of Healthcare)</a>
+                                        target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Don Woodlock (Head of Healthcare)</a>
                                 </div>
                             </div>
                             <div class="intel-item">
@@ -1701,7 +1752,7 @@
                                 <div class="intel-label">Source</div>
                                 <div class="intel-value">
                                     <a href="https://www.intersystems.com/news/intersystems-and-google-cloud-integrate-intersystems-healthshare-with-google-clouds-healthcare-api/"
-                                        target="_blank">✓ Oct 2025</a>
+                                        target="_blank">✔ Oct 2025</a>
                                 </div>
                             </div>
                         </div>

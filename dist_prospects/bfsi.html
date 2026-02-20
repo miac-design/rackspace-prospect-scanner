@@ -582,12 +582,16 @@
         }
 
         .search-box::before {
-            content: "🔍";
+            content: "";
             position: absolute;
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.9rem;
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239a9a9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
         }
 
         .filter-buttons {
@@ -898,8 +902,15 @@
 
 <body>
     <nav>
-        <a href="index.html" class="logo"><img src="rackspace-logo.png" alt="Rackspace"
-                style="height: 28px; margin-right: 8px; vertical-align: middle;">Rackspace AI Intelligence</a>
+        <a href="index.html" class="logo"
+            style="font-size:1.3rem;color:#3d3d3d;display:flex;align-items:center;gap:10px;">
+            <img src="rackspace-logo.png" alt="Rackspace" style="height: 28px;">
+            <div>
+                <div style="letter-spacing:-0.5px;">Mi<span style="color:#c4302b;">R</span>a</div>
+                <div style="font-size:0.65rem;font-weight:400;color:#9a9a9a;letter-spacing:0.5px;">Prospect Intelligence
+                </div>
+            </div>
+        </a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="healthcare.html">Healthcare</a>
@@ -951,8 +962,18 @@
             style="background: linear-gradient(135deg, rgba(122,157,122,0.1), rgba(122,157,122,0.06)); border-color: var(--success); margin-bottom: 30px;">
             <div class="info-banner-title" style="color: var(--success);">Pipeline Status</div>
             <div class="info-banner-content">
-                <p id="scan-timestamp">🕐 <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
-                <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below threshold</p>
+                <p id="scan-timestamp" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg> <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
+                <p id="scan-result" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                        viewBox="0 0 24 24" fill="none" stroke="#7a9d7a" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg> <strong>No new prospects this week</strong> — all scanned articles were below threshold</p>
             </div>
         </div>
 
@@ -968,8 +989,21 @@
                 <button class="filter-btn" data-filter="fintech">FinTech</button>
             </div>
             <div class="export-buttons">
-                <button class="export-btn" onclick="exportCSV()">📄 CSV</button>
-                <button class="export-btn" onclick="window.print()">🖨️ Print</button>
+                <button class="export-btn" onclick="exportCSV()"
+                    style="display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                        <polyline points="14 2 14 8 20 8" />
+                    </svg> CSV</button>
+                <button class="export-btn" onclick="window.print()"
+                    style="display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9" />
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                        <rect width="12" height="8" x="6" y="14" />
+                    </svg> Print</button>
             </div>
         </div>
 
@@ -1010,7 +1044,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Capital+One+CIO+LinkedIn" target="_blank">🔍 Find
+                            <a href="https://www.google.com/search?q=Capital+One+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find
                                 CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1033,7 +1067,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://www.capitalone.com/about/newsroom/" target="_blank">✓ Jan 15, 2026</a>
+                            <a href="https://www.capitalone.com/about/newsroom/" target="_blank">✔ Jan 15, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1095,7 +1129,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://www.jpmorganchase.com/technology" target="_blank">✓ Jan 12, 2026</a>
+                            <a href="https://www.jpmorganchase.com/technology" target="_blank">✔ Jan 12, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1132,7 +1166,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=USAA+CIO+LinkedIn" target="_blank">🔍 Find CIO on
+                            <a href="https://www.google.com/search?q=USAA+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CIO on
                                 LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1157,7 +1191,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://communities.usaa.com/t5/About-USAA/ct-p/About_USAA" target="_blank">✓ Jan
+                            <a href="https://communities.usaa.com/t5/About-USAA/ct-p/About_USAA" target="_blank">✔ Jan
                                 11, 2026</a>
                         </div>
                     </div>
@@ -1202,7 +1236,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=State+Farm+CIO+LinkedIn" target="_blank">🔍 Find
+                            <a href="https://www.google.com/search?q=State+Farm+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find
                                 CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1224,7 +1258,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://newsroom.statefarm.com/" target="_blank">✓ Jan 10, 2026</a>
+                            <a href="https://newsroom.statefarm.com/" target="_blank">✔ Jan 10, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1262,7 +1296,7 @@
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
                             <a href="https://www.google.com/search?q=Fidelity+Investments+CIO+LinkedIn"
-                                target="_blank">🔍 Find CIO on LinkedIn</a>
+                                target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
                     </div>
@@ -1283,7 +1317,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://newsroom.fidelity.com/" target="_blank">✓ Jan 8, 2026</a>
+                            <a href="https://newsroom.fidelity.com/" target="_blank">✔ Jan 8, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1320,7 +1354,7 @@
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
                             <a href="https://www.google.com/search?q=Progressive+Insurance+CIO+LinkedIn"
-                                target="_blank">🔍 Find CIO on LinkedIn</a>
+                                target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
                     </div>
@@ -1341,7 +1375,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://investors.progressive.com/" target="_blank">✓ Jan 6, 2026</a>
+                            <a href="https://investors.progressive.com/" target="_blank">✔ Jan 6, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1378,7 +1412,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Citizens+Bank+CIO+LinkedIn" target="_blank">🔍 Find
+                            <a href="https://www.google.com/search?q=Citizens+Bank+CIO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find
                                 CIO on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1400,7 +1434,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://www.citizensbank.com/about/" target="_blank">✓ Jan 5, 2026</a>
+                            <a href="https://www.citizensbank.com/about/" target="_blank">✔ Jan 5, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1449,7 +1483,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Temenos+CRO+LinkedIn" target="_blank">🔍 Find CRO
+                            <a href="https://www.google.com/search?q=Temenos+CRO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CRO
                                 on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1472,7 +1506,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://www.temenos.com/news/" target="_blank">✓ Jan 14, 2026</a>
+                            <a href="https://www.temenos.com/news/" target="_blank">✔ Jan 14, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1509,7 +1543,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Key Contact</div>
                         <div class="intel-value contact-search">
-                            <a href="https://www.google.com/search?q=Guidewire+CEO+LinkedIn" target="_blank">🔍 Find CEO
+                            <a href="https://www.google.com/search?q=Guidewire+CEO+LinkedIn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Find CEO
                                 on LinkedIn</a>
                             <span class="unverified-badge">Unverified</span>
                         </div>
@@ -1531,7 +1565,7 @@
                     <div class="intel-item">
                         <div class="intel-label">Source</div>
                         <div class="intel-value">
-                            <a href="https://ir.guidewire.com/" target="_blank">✓ Jan 9, 2026</a>
+                            <a href="https://ir.guidewire.com/" target="_blank">✔ Jan 9, 2026</a>
                         </div>
                     </div>
                 </div>
@@ -1659,52 +1693,52 @@
             'PCI DSS': {
                 title: 'Payment Card Industry Data Security Standard',
                 desc: 'Rules for handling credit card data securely.',
-                why: '💡 They process payments = need secure, compliant cloud infrastructure.'
+                why: '→ They process payments = need secure, compliant cloud infrastructure.'
             },
             'SOX': {
                 title: 'Sarbanes-Oxley Act',
                 desc: 'Financial reporting & audit requirements for public companies.',
-                why: '💡 Public company = need audit trails, data integrity, backup systems.'
+                why: '→ Public company = need audit trails, data integrity, backup systems.'
             },
             'FFIEC': {
                 title: 'Federal Financial Institutions Examination Council',
                 desc: 'IT security standards for federally regulated banks.',
-                why: '💡 Federally regulated = need compliant hosting with security reporting.'
+                why: '→ Federally regulated = need compliant hosting with security reporting.'
             },
             'SEC': {
                 title: 'Securities & Exchange Commission',
                 desc: 'Regulates investment firms and broker-dealers.',
-                why: '💡 Investment firm = strict data retention and audit requirements.'
+                why: '→ Investment firm = strict data retention and audit requirements.'
             },
             'FINRA': {
                 title: 'Financial Industry Regulatory Authority',
                 desc: 'Compliance rules for broker-dealers.',
-                why: '💡 Trading/brokerage = need encrypted data and audit logs.'
+                why: '→ Trading/brokerage = need encrypted data and audit logs.'
             },
             'State Regs': {
                 title: 'State Insurance Regulations',
                 desc: 'Each US state has its own insurance compliance rules.',
-                why: '💡 Insurance = 50+ state rules = complex hosting requirements.'
+                why: '→ Insurance = 50+ state rules = complex hosting requirements.'
             },
             'Data Privacy': {
                 title: 'Data Privacy Laws (CCPA, etc.)',
                 desc: 'Customer data protection requirements.',
-                why: '💡 Collects customer data = need privacy-compliant infrastructure.'
+                why: '→ Collects customer data = need privacy-compliant infrastructure.'
             },
             'SOC 2': {
                 title: 'Service Organization Control 2',
                 desc: 'Security audit certification for service providers.',
-                why: '💡 SaaS vendor = must prove cloud is secure to customers.'
+                why: '→ SaaS vendor = must prove cloud is secure to customers.'
             },
             'GDPR': {
                 title: 'General Data Protection Regulation',
                 desc: 'EU privacy law for handling European customer data.',
-                why: '💡 EU customers = need EU data residency and privacy controls.'
+                why: '→ EU customers = need EU data residency and privacy controls.'
             },
             'Global Regs': {
                 title: 'Global Financial Regulations',
                 desc: 'International banking compliance across multiple jurisdictions.',
-                why: '💡 Global operations = complex multi-region compliance needs.'
+                why: '→ Global operations = complex multi-region compliance needs.'
             }
         };
 
@@ -1806,7 +1840,7 @@
                             ${companyType || 'Unknown segment'}
                         </div>
                     </div>
-                    <div class="tooltip-why">💡 Higher score = higher priority for outreach</div>
+                    <div class="tooltip-why">→ Higher score = higher priority for outreach</div>
                 `);
             });
             badge.addEventListener('mousemove', (e) => {
@@ -1910,7 +1944,7 @@
                 const reachOutBox = document.createElement('div');
                 reachOutBox.className = 'reach-out-box';
                 reachOutBox.innerHTML = `
-                    <div class="label">💡 Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
+                    <div class="label">→ Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
                     <div class="info-text"><strong>${data.reachOutReason}</strong></div>
                 `;
                 infoGrid.appendChild(reachOutBox);
