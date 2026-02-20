@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthcare Prospects | Rackspace Private Cloud</title>
-    <link rel="icon" type="image/png" href="rackspace-logo.png">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c4302b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Arial' font-weight='bold' font-size='20' fill='white'%3ER%3C/text%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -223,75 +224,6 @@
             padding: 8px 14px;
             border-radius: 10px;
             min-width: 55px;
-            cursor: help;
-        }
-
-        /* Global tooltip container - fixed position */
-        .info-tooltip {
-            position: fixed;
-            background: linear-gradient(135deg, #1a365d, #2d3748);
-            color: white;
-            padding: 14px 16px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 400;
-            line-height: 1.6;
-            max-width: 260px;
-            text-align: left;
-            z-index: 10000;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(5px);
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .info-tooltip.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .info-tooltip .tooltip-title {
-            font-weight: 700;
-            color: #fbbf24;
-            margin-bottom: 6px;
-            display: block;
-            font-size: 0.8rem;
-        }
-
-        .info-tooltip .tooltip-desc {
-            color: #e2e8f0;
-            margin-bottom: 8px;
-        }
-
-        .info-tooltip .tooltip-why {
-            color: #a0aec0;
-            font-size: 0.7rem;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .info-tooltip .score-breakdown {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .info-tooltip .score-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 4px 0;
-            font-size: 0.7rem;
-        }
-
-        .info-tooltip .score-row .label {
-            color: #a0aec0;
-        }
-
-        .info-tooltip .score-row .value {
-            color: #fbbf24;
-            font-weight: 600;
         }
 
         .score-number {
@@ -385,75 +317,6 @@
 
         .source-link:hover {
             color: var(--plum);
-        }
-
-        /* ===== MANAGER FEEDBACK: Visual Enhancements ===== */
-        .reach-out-box {
-            background: linear-gradient(135deg, rgba(107, 91, 122, 0.06), rgba(168, 164, 196, 0.04));
-            border-left: 3px solid var(--plum);
-            border-radius: 0 10px 10px 0;
-            padding: 14px 16px;
-            margin-top: 12px;
-            grid-column: 1 / -1;
-        }
-
-        .reach-out-box .label {
-            color: var(--plum);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .signal-type-badge {
-            font-size: 0.55rem;
-            background: var(--plum);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-
-        .review-badge {
-            display: inline-block;
-            font-size: 0.6rem;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 4px;
-            vertical-align: middle;
-            margin-left: 8px;
-        }
-
-        .review-badge.pending {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .review-badge.approved {
-            background: #22c55e;
-            color: white;
-        }
-
-        .website-link {
-            color: var(--plum);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .website-link:hover {
-            color: var(--lavender);
-        }
-
-        .score-audit {
-            font-family: 'Courier New', monospace;
-            font-size: 0.7rem;
-            color: var(--text-medium);
-            background: rgba(107, 91, 122, 0.05);
-            padding: 6px 10px;
-            border-radius: 6px;
-            line-height: 1.6;
         }
 
         /* ===== PHASE 1: USE CASE TAGS & FILTER BAR ===== */
@@ -924,57 +787,18 @@
         .info-banner-content strong {
             color: var(--text-dark);
         }
-
-        /* ===== NAVIGATION ===== */
-        nav {
-            background: var(--white);
-            padding: 16px 30px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--rackspace-red);
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            margin-left: 24px;
-            text-decoration: none;
-            color: var(--text-medium);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--rackspace-red);
-        }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a href="index.html" class="logo"><img src="rackspace-logo.png" alt="Rackspace"
-                style="height: 28px; margin-right: 8px; vertical-align: middle;">Rackspace AI Intelligence</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="healthcare.html" class="active">Healthcare</a>
-            <a href="bfsi.html">BFSI</a>
-        </div>
-    </nav>
     <div class="container">
         <header>
             <h1>Rackspace Healthcare Prospects</h1>
             <p class="subtitle">Private Cloud · Managed Services · AI Operations</p>
-            <div class="value-prop">
-                <strong>Why Rackspace for Healthcare?</strong> HIPAA-compliant private cloud with BAA support,
-                24/7 managed operations with healthcare IT expertise, and AI/ML infrastructure for clinical
-                decision support, medical imaging AI, and patient data analytics.
+
+            <div class="meta">
+                <div class="meta-item">Developed by Mia C. | Researcher III</div>
+                <div class="meta-item strategic-focus">Focus: Managed Private Cloud & AI Agent Infrastructure</div>
             </div>
         </header>
 
@@ -997,717 +821,862 @@
             </div>
         </div>
 
-        <!-- TOOLBAR -->
-        <div class="toolbar">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search prospects...">
-            </div>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="high">High Priority</button>
-                <button class="filter-btn" data-filter="ai">AI Opps</button>
-                <button class="filter-btn" data-filter="medtech">MedTech</button>
-            </div>
-            <div class="export-buttons">
-                <button class="export-btn" onclick="exportCSV()">📄 CSV</button>
-                <button class="export-btn" onclick="window.print()">🖨️ Print</button>
-            </div>
+        <!-- TAB NAVIGATION -->
+        <div class="tab-nav"
+            style="display: flex; gap: 0; margin-bottom: 30px; border-bottom: 2px solid var(--border);">
+            <button class="tab-btn active" onclick="showTab('prospects')"
+                style="padding: 14px 28px; border: none; background: none; font-size: 0.9rem; font-weight: 600; color: var(--plum); border-bottom: 3px solid var(--plum); cursor: pointer; transition: all 0.2s;">📊
+                Prospects</button>
+            <button class="tab-btn" onclick="showTab('how-it-works')"
+                style="padding: 14px 28px; border: none; background: none; font-size: 0.9rem; font-weight: 500; color: var(--text-medium); border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.2s;">⚙️
+                How It Works</button>
         </div>
 
-        <!-- USE CASE FILTER BAR -->
-        <div class="filter-bar">
-            <span style="font-weight: 600; color: var(--text-dark); margin-right: 8px;">Filter by Use Case:</span>
-            <label><input type="checkbox" class="use-case-filter" value="ai-analytics" checked> AI Analytics</label>
-            <label><input type="checkbox" class="use-case-filter" value="compliance" checked> Compliance</label>
-            <label><input type="checkbox" class="use-case-filter" value="hybrid-migration" checked> Hybrid
-                Migration</label>
-            <label><input type="checkbox" class="use-case-filter" value="secure-hosting" checked> Secure Hosting</label>
-        </div>
-
-        <!-- INFO BANNER -->
-        <div class="info-banner">
-            <div class="info-banner-title">About This List</div>
-            <div class="info-banner-content">
-                <p>This prospect list is <strong>auto-updated every Monday at 9:00 AM CST</strong> by an AI agent.</p>
-                <p><strong>Data Sources:</strong> Fierce Healthcare, Healthcare IT News, Becker's Health IT, Modern
-                    Healthcare, MedCity News, Healthcare Dive, HIMSS News, Health IT Security, KLAS Research, CHIME, HIT
-                    Consultant</p>
-                <p><strong>Qualification Criteria:</strong> Cloud migration signals, AI infrastructure needs, managed
-                    services gaps, HIPAA compliance complexity</p>
-            </div>
-        </div>
-
-        <!-- HEALTH SYSTEMS - TIER 1 -->
-        <section class="section tier-1">
-            <div class="section-header" onclick="toggleSection(this)">
-                <div class="tier-dot"></div>
-                <span class="section-title">Health Systems — High Priority</span>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-
-                <!-- WellSpan -->
-                <div class="prospect-card" data-use-cases="hybrid-migration,ai-analytics">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">WellSpan Health</div>
-                            <div class="company-type">250+ facilities • Pennsylvania</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag hybrid-migration">Hybrid Migration</span>
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">92</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                Migrating to AWS by April 2026. <strong>AWS Premier Partner opportunity</strong> —
-                                they'll need managed services layer for compliance and AI optimization
-                                on top of hyperscaler infra.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Patient flow optimization:</strong> Pre/post-op transport coordination
-                                across 250+ facilities. Agent to predict bed availability and route patients.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">OpenStack Flex + AI Agents for Healthcare</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=David+Coleman+WellSpan+Health+CIO+LinkedIn"
-                                    target="_blank">🔍 David Coleman (SVP, CIO)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">AWS (target)</span>
-                                <span class="vendor-badge">Epic EHR</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill cloud">Cloud Migration</span>
-                                <span class="signal-pill digital">Digital Transformation</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.wellspan.org/articles/2026/01/web---aws-partnership"
-                                    target="_blank">✓ Jan 8, 2026</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Jefferson Health -->
-                <div class="prospect-card" data-use-cases="compliance,ai-analytics">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">Jefferson Health + Lehigh Valley</div>
-                            <div class="company-type">Post-Merger • Pennsylvania/New Jersey</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag compliance">Compliance</span>
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">79</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                Merger completed Aug 2024 — <strong>IT consolidation likely still underway.</strong> Two
-                                separate EHR systems, two data centers,
-                                two compliance regimes. Need hybrid cloud unification while maintaining HIPAA
-                                across merged data silos.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Data harmonization agent:</strong> Automated patient record matching
-                                across legacy systems during merger integration.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">Private Cloud + Managed Compliance</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Luis+Taveras+Jefferson+Health+CIO+LinkedIn"
-                                    target="_blank">🔍 Luis Taveras (SVP, CIO)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Epic EHR</span>
-                                <span class="vendor-badge">Mixed Cloud</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill ma">M&A</span>
-                                <span class="signal-pill digital">Digital Transformation</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.jeffersonhealth.org/about-us/news/2025/09/jh-bold-ai-strategy-to-reclaim-time-empower-clinicians-and-transform-healthcare"
-                                    target="_blank">✓ Sept 18, 2025</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CHS -->
-                <div class="prospect-card" data-use-cases="ai-analytics,secure-hosting">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">Community Health Systems</div>
-                            <div class="company-type">Large Hospital Chain • Tennessee HQ</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                                <span class="use-case-tag secure-hosting">Secure Hosting</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">68</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                Building <strong>cloud-native data foundation on Google Cloud for GenAI rollout by
-                                    2026.</strong>
-                                Already migrated — now scaling AI infrastructure. Classic managed services + AI ops
-                                play.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>GenAI infrastructure management:</strong> Operational support for LLM workloads,
-                                model deployment, and cost optimization across multi-facility GCP.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">Private Cloud + AI Agents</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Patrice+Bordron+Community+Health+Systems+CIO+LinkedIn"
-                                    target="_blank">🔍 Patrice Bordron (SVP, CDIO)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Google Cloud</span>
-                                <span class="vendor-badge">Athenahealth</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill cloud">Cloud Migration</span>
-                                <span class="signal-pill digital">GenAI</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.googlecloudpresscorner.com/2024-01-31-Community-Health-Systems-Completes-Data-Migration-and-Implements-New-Generative-AI-Innovations-with-Google-Cloud"
-                                    target="_blank">✓ Jan 31, 2024</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HEALTH SYSTEMS - TIER 2 -->
-        <section class="section tier-2">
-            <div class="section-header" onclick="toggleSection(this)">
-                <div class="tier-dot"></div>
-                <span class="section-title">Health Systems — Medium Priority</span>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-
-                <!-- Novant -->
-                <div class="prospect-card" data-use-cases="ai-analytics,compliance">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">Novant Health</div>
-                            <div class="company-type">Regional System • North Carolina</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                                <span class="use-case-tag compliance">Compliance</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">61</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                <strong>Greenfield AI infrastructure.</strong> CDIO "future-proofing" initiative
-                                but no announced managed services partner. Open opportunity for AI infrastructure layer.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Clinical documentation agent:</strong> Automated chart summarization
-                                and coding assistance for provider efficiency.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">AI Agents + Managed Compliance</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Onyeka+Nchege+Novant+Health+CDIO+LinkedIn"
-                                    target="_blank">🔍 Onyeka Nchege (EVP, CDIO)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Epic EHR</span>
-                                <span class="vendor-badge">Multi-Cloud</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill digital">Digital Transformation</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.metisstrategy.com/interview/onyeka-nchege/" target="_blank">✓ May
-                                    2025</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UPMC -->
-                <div class="prospect-card" data-use-cases="secure-hosting,ai-analytics">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">UPMC Enterprises</div>
-                            <div class="company-type">Integrated System + Tech Arm • Pennsylvania</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag secure-hosting">Secure Hosting</span>
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">45</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                <strong>Caution: Sophisticated buyer.</strong> Has own tech arm, often builds
-                                internally.
-                                Epic rollout in new facilities is the wedge — need operational support during
-                                transition.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Epic integration agent:</strong> Automated data validation and
-                                workflow testing during new facility Epic deployments.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">Private Cloud (cautious approach)</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Chris+Carmody+UPMC+CTO+LinkedIn"
-                                    target="_blank">🔍 Chris Carmody (SVP, CTO)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Epic EHR</span>
-                                <span class="vendor-badge">In-house Tech</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill digital">Digital Transformation</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://thisweekhealth.com/excited-for-our-future-chris-carmody-on-upmcs-epic-transformation/"
-                                    target="_blank">✓ Epic Wave 2026</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Manipal -->
-                <div class="prospect-card" data-use-cases="compliance,hybrid-migration">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">Manipal Hospitals</div>
-                            <div class="company-type">Global Expansion • India HQ</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag compliance">Compliance</span>
-                                <span class="use-case-tag hybrid-migration">Hybrid Migration</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">55</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                <strong>Multi-region compliance complexity.</strong> Expanding globally means navigating
-                                HIPAA (US), GDPR (EU), and local regulations simultaneously. Multi-cloud governance
-                                opportunity.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Compliance monitoring agent:</strong> Real-time audit across
-                                multi-region deployments with different regulatory frameworks.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">OpenStack Flex + Managed Compliance</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Nandkishor+Dhomne+Manipal+Hospitals+CIO+LinkedIn"
-                                    target="_blank">🔍 Nandkishor Dhomne (Group CIO)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Google Cloud</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill cloud">Global Expansion</span>
-                                <span class="signal-pill digital">Digital Transformation</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.googlecloudpresscorner.com/2025-04-09-Manipal-Hospitals-Partners-with-Google-Cloud-to-Advance-AI-Driven-Digital-Healthcare-Across-India"
-                                    target="_blank">✓ Apr 9, 2025</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- MEDTECH PARTNERS -->
-        <section class="section tier-partners">
-            <div class="section-header" onclick="toggleSection(this)">
-                <div class="tier-dot"></div>
-                <span class="section-title">MedTech Partners — Strategic / Longer Cycle</span>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-
+        <!-- HOW IT WORKS TAB -->
+        <div id="how-it-works-tab" style="display: none; margin-bottom: 40px;">
+            <div
+                style="background: linear-gradient(135deg, rgba(107, 91, 122, 0.05), rgba(168, 164, 196, 0.08)); border-radius: 20px; padding: 40px;">
+                <h2 style="font-size: 1.4rem; color: var(--plum); margin-bottom: 12px; text-align: center;">Sales
+                    Prospect Intelligence System</h2>
                 <p
-                    style="color: var(--text-medium); font-size: 0.85rem; margin-bottom: 20px; padding: 16px; background: rgba(196, 168, 122, 0.1); border-radius: 10px;">
-                    <strong>Note:</strong> These are technology vendors, not health systems. Different buyer motion —
-                    they're selling SaaS to hospitals. Rackspace opportunity: infrastructure partner for their platform.
-                </p>
+                    style="text-align: center; color: var(--text-medium); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    An AI-powered pipeline that automatically finds, qualifies, and prioritizes sales prospects from
+                    industry news.</p>
 
-                <!-- Philips -->
-                <div class="prospect-card" data-use-cases="secure-hosting,ai-analytics">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">Philips Healthcare</div>
-                            <div class="company-type">Medical Imaging SaaS • Global</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag secure-hosting">Secure Hosting</span>
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                            </div>
+                <!-- Architecture Flow -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px;">
+                    <!-- Stage 1 -->
+                    <div
+                        style="background: white; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                        <div
+                            style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--rackspace-red), #a32520); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+                                <path d="M18 14h-8" />
+                                <path d="M15 18h-5" />
+                                <path d="M10 6h8v4h-8V6Z" />
+                            </svg>
                         </div>
-                        <div class="score-badge"><span class="score-number">72</span><span
-                                class="score-label">score</span></div>
+                        <h3 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 6px;">News Sources</h3>
+                        <p style="font-size: 0.75rem; color: var(--text-light);">17 industry feeds<br />Healthcare +
+                            BFSI</p>
                     </div>
 
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                Expanding enterprise imaging SaaS globally. Needs <strong>high-availability multi-region
-                                    infrastructure</strong> for AI-powered diagnostics. Long sales cycle but large deal
-                                potential.
-                            </div>
+                    <!-- Stage 2 -->
+                    <div
+                        style="background: white; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                        <div
+                            style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--lavender), var(--plum)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.3-4.3" />
+                                <path d="M11 8v6" />
+                                <path d="M8 11h6" />
+                            </svg>
                         </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Image routing agent:</strong> Intelligent workload distribution
-                                across global inference endpoints for radiology AI.
-                            </div>
-                        </div>
+                        <h3 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 6px;">AI Scanner</h3>
+                        <p style="font-size: 0.75rem; color: var(--text-light);">175+ articles/week<br />Parallel
+                            processing</p>
                     </div>
 
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">Private Cloud + AI Agents</div>
+                    <!-- Stage 3 -->
+                    <div
+                        style="background: white; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                        <div
+                            style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--success), #5a8d5a); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 6px;">Qualifier</h3>
+                        <p style="font-size: 0.75rem; color: var(--text-light);">Scores
+                            prospects<br />Rackspace-specific</p>
                     </div>
 
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Dale+Wiggins+Philips+Healthcare+LinkedIn"
-                                    target="_blank">🔍 Dale Wiggins (VP, GM HealthSuite)</a>
-                            </div>
+                    <!-- Stage 4 -->
+                    <div
+                        style="background: white; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                        <div
+                            style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--warning), #a8873a); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3v18h18" />
+                                <path d="m19 9-5 5-4-4-3 3" />
+                            </svg>
                         </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Multi-Cloud</span>
-                                <span class="vendor-badge">AWS</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill digital">SaaS Transformation</span>
-                                <span class="signal-pill cloud">Global Expansion</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.philips.com/a-w/about/news/archive/standard/news/press/2025/philips-expands-cloud-based-enterprise-imaging-services-to-europe-for-better-access-to-ai-enabled-workflows-and-innovation.html"
-                                    target="_blank">✓ Feb 27, 2025</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GE -->
-                <div class="prospect-card" data-use-cases="ai-analytics,secure-hosting">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">GE HealthCare</div>
-                            <div class="company-type">Medical Devices → SaaS Pivot • Global</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag ai-analytics">AI Analytics</span>
-                                <span class="use-case-tag secure-hosting">Secure Hosting</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">75</span><span
-                                class="score-label">score</span></div>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                "Genesis Cloud Suite" — pivoting from hardware to <strong>software-defined medical
-                                    devices</strong>.
-                                Needs managed cloud partner for their SaaS transformation.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Device telemetry agent:</strong> Predictive maintenance for
-                                connected medical devices based on usage patterns.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">AI Agents + Private Cloud</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Taha+Kass-Hout+GE+HealthCare+LinkedIn"
-                                    target="_blank">🔍 Taha Kass-Hout (Chief Science & Tech Officer)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Multi-Cloud</span>
-                                <span class="vendor-badge">AWS</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill digital">SaaS Pivot</span>
-                                <span class="signal-pill cloud">Cloud Strategy</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.gehealthcare.com/about/newsroom/press-releases/ge-healthcare-advances-its-cloud-strategy-by-unveiling-the-genesis-portfolio-to-improve-speed-of-digital-innovation-adoption"
-                                    target="_blank">✓ Mar 4, 2025</a>
-                            </div>
-                        </div>
+                        <h3 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 6px;">Dashboard</h3>
+                        <p style="font-size: 0.75rem; color: var(--text-light);">Auto-updates<br />Every Monday 9 AM</p>
                     </div>
                 </div>
 
-                <!-- InterSystems -->
-                <div class="prospect-card" data-use-cases="secure-hosting,compliance">
-                    <div class="card-header">
-                        <div>
-                            <div class="company-name">InterSystems</div>
-                            <div class="company-type">Health Data Platform • Massachusetts</div>
-                            <div class="use-case-tags">
-                                <span class="use-case-tag secure-hosting">Secure Hosting</span>
-                                <span class="use-case-tag compliance">Compliance</span>
-                            </div>
-                        </div>
-                        <div class="score-badge"><span class="score-number">58</span><span
-                                class="score-label">score</span></div>
+                <!-- Key Benefits -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                    <div
+                        style="background: white; border-radius: 12px; padding: 20px; border-left: 4px solid var(--rackspace-red);">
+                        <h4 style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 6px;">⚡ Speed</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-medium);">Scans all feeds in under 3 seconds
+                            using parallel processing</p>
                     </div>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="label">Rackspace Wedge</div>
-                            <div class="info-text">
-                                IRIS platform integrating deeper into public clouds. <strong>Ecosystem partner
-                                    opportunity</strong> —
-                                hospitals using InterSystems need hybrid cloud management.
-                            </div>
-                        </div>
-                        <div class="info-box ai-use-case">
-                            <div class="label">AI Opportunity (Suggested)</div>
-                            <div class="info-text">
-                                <strong>Data pipeline agent:</strong> Automated FHIR data transformation
-                                and quality monitoring across hybrid deployments.
-                            </div>
-                        </div>
+                    <div
+                        style="background: white; border-radius: 12px; padding: 20px; border-left: 4px solid var(--success);">
+                        <h4 style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 6px;">🎯 Accuracy</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-medium);">AI qualification with cloud,
+                            compliance, and AI infrastructure signals</p>
                     </div>
-
-                    <div class="offer-recommendation">
-                        <div class="label">Recommended Rackspace Offer</div>
-                        <div class="offer-text">Private Cloud + Managed Compliance</div>
-                    </div>
-
-                    <div class="intelligence-section">
-                        <div class="intel-item">
-                            <div class="intel-label">Key Contact</div>
-                            <div class="intel-value">
-                                <a href="https://www.google.com/search?q=Don+Woodlock+InterSystems+Healthcare+LinkedIn"
-                                    target="_blank">🔍 Don Woodlock (Head of Healthcare)</a>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Current Vendors</div>
-                            <div class="vendor-badges">
-                                <span class="vendor-badge">Google Cloud</span>
-                                <span class="vendor-badge">AWS</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Signals</div>
-                            <div class="signal-pills">
-                                <span class="signal-pill cloud">Platform Partnership</span>
-                            </div>
-                        </div>
-                        <div class="intel-item">
-                            <div class="intel-label">Source</div>
-                            <div class="intel-value">
-                                <a href="https://www.intersystems.com/news/intersystems-and-google-cloud-integrate-intersystems-healthshare-with-google-clouds-healthcare-api/"
-                                    target="_blank">✓ Oct 2025</a>
-                            </div>
-                        </div>
+                    <div
+                        style="background: white; border-radius: 12px; padding: 20px; border-left: 4px solid var(--lavender);">
+                        <h4 style="font-size: 0.85rem; color: var(--text-dark); margin-bottom: 6px;">🔄 Automation</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-medium);">Zero manual effort—new prospects
+                            appear automatically each week</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- PROSPECTS TAB (existing content) -->
+        <div id="prospects-tab">
+
+            <!-- TOOLBAR -->
+            <div class="toolbar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search prospects...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="high">High Priority</button>
+                    <button class="filter-btn" data-filter="ai">AI Opps</button>
+                    <button class="filter-btn" data-filter="medtech">MedTech</button>
+                </div>
+                <div class="export-buttons">
+                    <button class="export-btn" onclick="exportCSV()">📄 CSV</button>
+                    <button class="export-btn" onclick="window.print()">🖨️ Print</button>
+                </div>
+            </div>
+
+            <!-- USE CASE FILTER BAR -->
+            <div class="filter-bar">
+                <span style="font-weight: 600; color: var(--text-dark); margin-right: 8px;">Filter by Use Case:</span>
+                <label><input type="checkbox" class="use-case-filter" value="ai-analytics" checked> AI Analytics</label>
+                <label><input type="checkbox" class="use-case-filter" value="compliance" checked> Compliance</label>
+                <label><input type="checkbox" class="use-case-filter" value="hybrid-migration" checked> Hybrid
+                    Migration</label>
+                <label><input type="checkbox" class="use-case-filter" value="secure-hosting" checked> Secure
+                    Hosting</label>
+            </div>
+
+            <!-- INFO BANNER -->
+            <div class="info-banner">
+                <div class="info-banner-title">About This List</div>
+                <div class="info-banner-content">
+                    <p>This prospect list is <strong>auto-updated every Monday at 9:00 AM CST</strong> by an AI agent.
+                    </p>
+                    <p><strong>Data Sources:</strong> Fierce Healthcare, Healthcare IT News, Becker's Health IT, Modern
+                        Healthcare, MedCity News, Healthcare Dive, HIMSS News, Health IT Security, KLAS Research, CHIME,
+                        HIT
+                        Consultant</p>
+                    <p><strong>Qualification Criteria:</strong> Cloud migration signals, AI infrastructure needs,
+                        managed
+                        services gaps, HIPAA compliance complexity</p>
+                </div>
+            </div>
+
+            <!-- SCAN STATUS BANNER -->
+            <div id="scan-status-banner" class="info-banner"
+                style="background: linear-gradient(135deg, rgba(122,157,122,0.1), rgba(122,157,122,0.06)); border-color: var(--success); margin-bottom: 30px;">
+                <div class="info-banner-title" style="color: var(--success);">Pipeline Status</div>
+                <div class="info-banner-content">
+                    <p id="scan-timestamp">🕐 <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
+                    <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below threshold</p>
+                </div>
+            </div>
+
+            <!-- HEALTH SYSTEMS - TIER 1 -->
+            <section class="section tier-1">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="tier-dot"></div>
+                    <span class="section-title">Health Systems — High Priority</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+
+                    <!-- WellSpan -->
+                    <div class="prospect-card" data-use-cases="hybrid-migration,ai-analytics">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">WellSpan Health</div>
+                                <div class="company-type">250+ facilities • Pennsylvania</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag hybrid-migration">Hybrid Migration</span>
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">92</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    Migrating to AWS by April 2026. <strong>AWS Premier Partner opportunity</strong> —
+                                    they'll need managed services layer for compliance and AI optimization
+                                    on top of hyperscaler infra.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Patient flow optimization:</strong> Pre/post-op transport coordination
+                                    across 250+ facilities. Agent to predict bed availability and route patients.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">OpenStack Flex + AI Agents for Healthcare</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=David+Coleman+WellSpan+Health+CIO+LinkedIn"
+                                        target="_blank">🔍 David Coleman (SVP, CIO)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">AWS (target)</span>
+                                    <span class="vendor-badge">Epic EHR</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill cloud">Cloud Migration</span>
+                                    <span class="signal-pill digital">Digital Transformation</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.wellspan.org/articles/2026/01/web---aws-partnership"
+                                        target="_blank">✓ Jan 8, 2026</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jefferson Health -->
+                    <div class="prospect-card" data-use-cases="compliance,ai-analytics">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">Jefferson Health + Lehigh Valley</div>
+                                <div class="company-type">Post-Merger • Pennsylvania/New Jersey</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag compliance">Compliance</span>
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">79</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    Merger completed Aug 2024 — <strong>IT consolidation likely still underway.</strong>
+                                    Two
+                                    separate EHR systems, two data centers,
+                                    two compliance regimes. Need hybrid cloud unification while maintaining HIPAA
+                                    across merged data silos.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Data harmonization agent:</strong> Automated patient record matching
+                                    across legacy systems during merger integration.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">Private Cloud + Managed Compliance</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Luis+Taveras+Jefferson+Health+CIO+LinkedIn"
+                                        target="_blank">🔍 Luis Taveras (SVP, CIO)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Epic EHR</span>
+                                    <span class="vendor-badge">Mixed Cloud</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill ma">M&A</span>
+                                    <span class="signal-pill digital">Digital Transformation</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.jeffersonhealth.org/about-us/news/2025/09/jh-bold-ai-strategy-to-reclaim-time-empower-clinicians-and-transform-healthcare"
+                                        target="_blank">✓ Sept 18, 2025</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CHS -->
+                    <div class="prospect-card" data-use-cases="ai-analytics,secure-hosting">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">Community Health Systems</div>
+                                <div class="company-type">Large Hospital Chain • Tennessee HQ</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                    <span class="use-case-tag secure-hosting">Secure Hosting</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">68</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    Building <strong>cloud-native data foundation on Google Cloud for GenAI rollout by
+                                        2026.</strong>
+                                    Already migrated — now scaling AI infrastructure. Classic managed services + AI ops
+                                    play.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>GenAI infrastructure management:</strong> Operational support for LLM
+                                    workloads,
+                                    model deployment, and cost optimization across multi-facility GCP.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">Private Cloud + AI Agents</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Patrice+Bordron+Community+Health+Systems+CIO+LinkedIn"
+                                        target="_blank">🔍 Patrice Bordron (SVP, CDIO)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Google Cloud</span>
+                                    <span class="vendor-badge">Athenahealth</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill cloud">Cloud Migration</span>
+                                    <span class="signal-pill digital">GenAI</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.googlecloudpresscorner.com/2024-01-31-Community-Health-Systems-Completes-Data-Migration-and-Implements-New-Generative-AI-Innovations-with-Google-Cloud"
+                                        target="_blank">✓ Jan 31, 2024</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HEALTH SYSTEMS - TIER 2 -->
+            <section class="section tier-2">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="tier-dot"></div>
+                    <span class="section-title">Health Systems — Medium Priority</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+
+                    <!-- Novant -->
+                    <div class="prospect-card" data-use-cases="ai-analytics,compliance">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">Novant Health</div>
+                                <div class="company-type">Regional System • North Carolina</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                    <span class="use-case-tag compliance">Compliance</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">61</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    <strong>Greenfield AI infrastructure.</strong> CDIO "future-proofing" initiative
+                                    but no announced managed services partner. Open opportunity for AI infrastructure
+                                    layer.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Clinical documentation agent:</strong> Automated chart summarization
+                                    and coding assistance for provider efficiency.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">AI Agents + Managed Compliance</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Onyeka+Nchege+Novant+Health+CDIO+LinkedIn"
+                                        target="_blank">🔍 Onyeka Nchege (EVP, CDIO)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Epic EHR</span>
+                                    <span class="vendor-badge">Multi-Cloud</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill digital">Digital Transformation</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.metisstrategy.com/interview/onyeka-nchege/" target="_blank">✓
+                                        May
+                                        2025</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UPMC -->
+                    <div class="prospect-card" data-use-cases="secure-hosting,ai-analytics">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">UPMC Enterprises</div>
+                                <div class="company-type">Integrated System + Tech Arm • Pennsylvania</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag secure-hosting">Secure Hosting</span>
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">45</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    <strong>Caution: Sophisticated buyer.</strong> Has own tech arm, often builds
+                                    internally.
+                                    Epic rollout in new facilities is the wedge — need operational support during
+                                    transition.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Epic integration agent:</strong> Automated data validation and
+                                    workflow testing during new facility Epic deployments.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">Private Cloud (cautious approach)</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Chris+Carmody+UPMC+CTO+LinkedIn"
+                                        target="_blank">🔍 Chris Carmody (SVP, CTO)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Epic EHR</span>
+                                    <span class="vendor-badge">In-house Tech</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill digital">Digital Transformation</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://thisweekhealth.com/excited-for-our-future-chris-carmody-on-upmcs-epic-transformation/"
+                                        target="_blank">✓ Epic Wave 2026</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manipal -->
+                    <div class="prospect-card" data-use-cases="compliance,hybrid-migration">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">Manipal Hospitals</div>
+                                <div class="company-type">Global Expansion • India HQ</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag compliance">Compliance</span>
+                                    <span class="use-case-tag hybrid-migration">Hybrid Migration</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">55</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    <strong>Multi-region compliance complexity.</strong> Expanding globally means
+                                    navigating
+                                    HIPAA (US), GDPR (EU), and local regulations simultaneously. Multi-cloud governance
+                                    opportunity.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Compliance monitoring agent:</strong> Real-time audit across
+                                    multi-region deployments with different regulatory frameworks.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">OpenStack Flex + Managed Compliance</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Nandkishor+Dhomne+Manipal+Hospitals+CIO+LinkedIn"
+                                        target="_blank">🔍 Nandkishor Dhomne (Group CIO)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Google Cloud</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill cloud">Global Expansion</span>
+                                    <span class="signal-pill digital">Digital Transformation</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.googlecloudpresscorner.com/2025-04-09-Manipal-Hospitals-Partners-with-Google-Cloud-to-Advance-AI-Driven-Digital-Healthcare-Across-India"
+                                        target="_blank">✓ Apr 9, 2025</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEDTECH PARTNERS -->
+            <section class="section tier-partners">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="tier-dot"></div>
+                    <span class="section-title">MedTech Partners — Strategic / Longer Cycle</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+
+                    <p
+                        style="color: var(--text-medium); font-size: 0.85rem; margin-bottom: 20px; padding: 16px; background: rgba(196, 168, 122, 0.1); border-radius: 10px;">
+                        <strong>Note:</strong> These are technology vendors, not health systems. Different buyer motion
+                        —
+                        they're selling SaaS to hospitals. Rackspace opportunity: infrastructure partner for their
+                        platform.
+                    </p>
+
+                    <!-- Philips -->
+                    <div class="prospect-card" data-use-cases="secure-hosting,ai-analytics">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">Philips Healthcare</div>
+                                <div class="company-type">Medical Imaging SaaS • Global</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag secure-hosting">Secure Hosting</span>
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">72</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    Expanding enterprise imaging SaaS globally. Needs <strong>high-availability
+                                        multi-region
+                                        infrastructure</strong> for AI-powered diagnostics. Long sales cycle but large
+                                    deal
+                                    potential.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Image routing agent:</strong> Intelligent workload distribution
+                                    across global inference endpoints for radiology AI.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">Private Cloud + AI Agents</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Dale+Wiggins+Philips+Healthcare+LinkedIn"
+                                        target="_blank">🔍 Dale Wiggins (VP, GM HealthSuite)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Multi-Cloud</span>
+                                    <span class="vendor-badge">AWS</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill digital">SaaS Transformation</span>
+                                    <span class="signal-pill cloud">Global Expansion</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.philips.com/a-w/about/news/archive/standard/news/press/2025/philips-expands-cloud-based-enterprise-imaging-services-to-europe-for-better-access-to-ai-enabled-workflows-and-innovation.html"
+                                        target="_blank">✓ Feb 27, 2025</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GE -->
+                    <div class="prospect-card" data-use-cases="ai-analytics,secure-hosting">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">GE HealthCare</div>
+                                <div class="company-type">Medical Devices → SaaS Pivot • Global</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag ai-analytics">AI Analytics</span>
+                                    <span class="use-case-tag secure-hosting">Secure Hosting</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">75</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    "Genesis Cloud Suite" — pivoting from hardware to <strong>software-defined medical
+                                        devices</strong>.
+                                    Needs managed cloud partner for their SaaS transformation.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Device telemetry agent:</strong> Predictive maintenance for
+                                    connected medical devices based on usage patterns.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">AI Agents + Private Cloud</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Taha+Kass-Hout+GE+HealthCare+LinkedIn"
+                                        target="_blank">🔍 Taha Kass-Hout (Chief Science & Tech Officer)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Multi-Cloud</span>
+                                    <span class="vendor-badge">AWS</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill digital">SaaS Pivot</span>
+                                    <span class="signal-pill cloud">Cloud Strategy</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.gehealthcare.com/about/newsroom/press-releases/ge-healthcare-advances-its-cloud-strategy-by-unveiling-the-genesis-portfolio-to-improve-speed-of-digital-innovation-adoption"
+                                        target="_blank">✓ Mar 4, 2025</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- InterSystems -->
+                    <div class="prospect-card" data-use-cases="secure-hosting,compliance">
+                        <div class="card-header">
+                            <div>
+                                <div class="company-name">InterSystems</div>
+                                <div class="company-type">Health Data Platform • Massachusetts</div>
+                                <div class="use-case-tags">
+                                    <span class="use-case-tag secure-hosting">Secure Hosting</span>
+                                    <span class="use-case-tag compliance">Compliance</span>
+                                </div>
+                            </div>
+                            <div class="score-badge"><span class="score-number">58</span><span
+                                    class="score-label">score</span></div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <div class="label">Rackspace Wedge</div>
+                                <div class="info-text">
+                                    IRIS platform integrating deeper into public clouds. <strong>Ecosystem partner
+                                        opportunity</strong> —
+                                    hospitals using InterSystems need hybrid cloud management.
+                                </div>
+                            </div>
+                            <div class="info-box ai-use-case">
+                                <div class="label">AI Opportunity (Suggested)</div>
+                                <div class="info-text">
+                                    <strong>Data pipeline agent:</strong> Automated FHIR data transformation
+                                    and quality monitoring across hybrid deployments.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offer-recommendation">
+                            <div class="label">Recommended Rackspace Offer</div>
+                            <div class="offer-text">Private Cloud + Managed Compliance</div>
+                        </div>
+
+                        <div class="intelligence-section">
+                            <div class="intel-item">
+                                <div class="intel-label">Key Contact</div>
+                                <div class="intel-value">
+                                    <a href="https://www.google.com/search?q=Don+Woodlock+InterSystems+Healthcare+LinkedIn"
+                                        target="_blank">🔍 Don Woodlock (Head of Healthcare)</a>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Current Vendors</div>
+                                <div class="vendor-badges">
+                                    <span class="vendor-badge">Google Cloud</span>
+                                    <span class="vendor-badge">AWS</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Signals</div>
+                                <div class="signal-pills">
+                                    <span class="signal-pill cloud">Platform Partnership</span>
+                                </div>
+                            </div>
+                            <div class="intel-item">
+                                <div class="intel-label">Source</div>
+                                <div class="intel-value">
+                                    <a href="https://www.intersystems.com/news/intersystems-and-google-cloud-integrate-intersystems-healthshare-with-google-clouds-healthcare-api/"
+                                        target="_blank">✓ Oct 2025</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- End prospects-tab -->
 
         <footer>
-            <p><strong>Rackspace Value Prop:</strong> Private Cloud + Managed Services + AI Operations + Compliance</p>
+            <p><strong>Rackspace Value Prop:</strong> Private Cloud + Managed Services + AI Operations + Compliance
+            </p>
             <div style="margin-top: 12px; font-size: 0.85rem;">
-                <strong>Developed by Mia C.</strong> | Researcher III | Applied AI Innovation & Impact<br>
+                <strong>Developed by Mia C.</strong> | Researcher III<br>
                 📧 <a href="mailto:miahboubeh.cheraghian@rackspace.com"
                     style="color: var(--lavender);">miahboubeh.cheraghian@rackspace.com</a> |
                 <a href="https://www.linkedin.com/in/miacheraghian/" target="_blank"
@@ -1716,9 +1685,11 @@
             </div>
             <div
                 style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-light);">
-                <strong style="color: var(--text-medium);">Scoring Methodology:</strong> Each prospect is scored 0-100
+                <strong style="color: var(--text-medium);">Scoring Methodology:</strong> Each prospect is scored
+                0-100
                 based on weighted factors:
-                <span style="color: var(--rackspace-red);">Signal Recency (30%)</span> — fresher news = higher score •
+                <span style="color: var(--rackspace-red);">Signal Recency (30%)</span> — fresher news = higher score
+                •
                 <span style="color: var(--rackspace-red);">Strategic Fit (40%)</span> — cloud migration, HIPAA, AI
                 signals •
                 <span style="color: var(--rackspace-red);">Company Size (30%)</span> — larger systems = larger deals
@@ -1798,6 +1769,34 @@
         }
 
 
+        // ===== TAB SWITCHING =====
+        function showTab(tabName) {
+            const prospectsTab = document.getElementById('prospects-tab');
+            const howItWorksTab = document.getElementById('how-it-works-tab');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+
+            if (tabName === 'prospects') {
+                prospectsTab.style.display = 'block';
+                howItWorksTab.style.display = 'none';
+            } else {
+                prospectsTab.style.display = 'none';
+                howItWorksTab.style.display = 'block';
+            }
+
+            // Update tab button styles
+            tabBtns.forEach((btn, i) => {
+                if ((tabName === 'prospects' && i === 0) || (tabName === 'how-it-works' && i === 1)) {
+                    btn.style.color = 'var(--plum)';
+                    btn.style.borderBottom = '3px solid var(--plum)';
+                    btn.style.fontWeight = '600';
+                } else {
+                    btn.style.color = 'var(--text-medium)';
+                    btn.style.borderBottom = '3px solid transparent';
+                    btn.style.fontWeight = '500';
+                }
+            });
+        }
+
         // ===== CSV EXPORT =====
         function exportCSV() {
             const cards = document.querySelectorAll('.prospect-card');
@@ -1824,245 +1823,9 @@
             a.click();
             URL.revokeObjectURL(url);
         }
-
-        // ===== TOOLTIP SYSTEM =====
-
-        // Create global tooltip element
-        const tooltip = document.createElement('div');
-        tooltip.className = 'info-tooltip';
-        document.body.appendChild(tooltip);
-
-        function showTooltip(e, content) {
-            tooltip.innerHTML = content;
-            tooltip.classList.add('visible');
-
-            const x = e.clientX + 15;
-            const y = e.clientY - 10;
-
-            const maxX = window.innerWidth - 280;
-            const maxY = window.innerHeight - 200;
-
-            tooltip.style.left = Math.min(x, maxX) + 'px';
-            tooltip.style.top = Math.min(y, maxY) + 'px';
-        }
-
-        function hideTooltip() {
-            tooltip.classList.remove('visible');
-        }
-
-        // Score badge tooltips with REAL calculation breakdown
-        document.querySelectorAll('.score-badge').forEach(badge => {
-            const card = badge.closest('.prospect-card');
-            const score = badge.querySelector('.score-number')?.textContent || '?';
-            const companyName = card?.querySelector('.company-name')?.textContent || 'Organization';
-
-            // Get real data from card
-            const useCases = card?.querySelectorAll('.use-case-tag')?.length || 0;
-            const signals = card?.querySelectorAll('.signal-pill')?.length || 0;
-            const hasAI = card?.querySelector('.ai-use-case') ? 1 : 0;
-            const companyType = card?.querySelector('.company-type')?.textContent || '';
-            const sourceLink = card?.querySelector('.source-date')?.textContent || '';
-
-            // Parse source date from the card
-            const sourceDateMatch = sourceLink.match(/(\w+)\s+(\d+),?\s*(\d+)?/);
-            let signalRecency = 20; // Default
-            if (sourceDateMatch) {
-                const today = new Date('2026-01-23');
-                const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
-                const sourceDate = new Date(2026, months[sourceDateMatch[1]] || 0, parseInt(sourceDateMatch[2]) || 1);
-                const daysDiff = Math.floor((today - sourceDate) / (1000 * 60 * 60 * 24));
-
-                if (daysDiff <= 7) signalRecency = 30;
-                else if (daysDiff <= 14) signalRecency = 25;
-                else if (daysDiff <= 30) signalRecency = 20;
-                else signalRecency = 10;
-            }
-
-            // Strategic Fit: use cases + signals + AI opportunity (max 40)
-            const useCaseScore = Math.min(useCases * 6, 15);
-            const signalScore = Math.min(signals * 5, 12);
-            const aiScore = hasAI * 13;
-            const strategicFit = Math.min(useCaseScore + signalScore + aiScore, 40);
-
-            // Company Size: Based on segment type (max 30)
-            let companySize = 20;
-            if (companyType.includes('System') || companyType.includes('Network')) companySize = 30;
-            else if (companyType.includes('Payer') || companyType.includes('Health')) companySize = 25;
-            else if (companyType.includes('MedTech') || companyType.includes('SaaS')) companySize = 20;
-            else companySize = 15;
-
-            const calculatedScore = strategicFit + signalRecency + companySize;
-
-            // UPDATE THE DISPLAYED SCORE to match calculated
-            const scoreNumberEl = badge.querySelector('.score-number');
-            if (scoreNumberEl) scoreNumberEl.textContent = calculatedScore;
-
-            badge.addEventListener('mouseenter', (e) => {
-                showTooltip(e, `
-                    <span class="tooltip-title">Score: ${calculatedScore}/100</span>
-                    <div class="tooltip-desc">Lead score for ${companyName}</div>
-                    <div class="score-breakdown">
-                        <div class="score-row">
-                            <span class="label">Strategic Fit (40%)</span>
-                            <span class="value">${strategicFit}/40 pts</span>
-                        </div>
-                        <div class="score-row" style="font-size:0.6rem; color:#718096; margin-left:8px;">
-                            ${useCases} use cases + ${signals} signals + ${hasAI ? 'AI opp' : 'no AI'}
-                        </div>
-                        <div class="score-row">
-                            <span class="label">Signal Recency (30%)</span>
-                            <span class="value">${signalRecency}/30 pts</span>
-                        </div>
-                        <div class="score-row" style="font-size:0.6rem; color:#718096; margin-left:8px;">
-                            Source: ${sourceLink || 'Unknown date'}
-                        </div>
-                        <div class="score-row">
-                            <span class="label">Company Size (30%)</span>
-                            <span class="value">${companySize}/30 pts</span>
-                        </div>
-                        <div class="score-row" style="font-size:0.6rem; color:#718096; margin-left:8px;">
-                            ${companyType || 'Unknown segment'}
-                        </div>
-                    </div>
-                    <div class="tooltip-why">💡 Higher score = higher priority for outreach</div>
-                `);
-            });
-            badge.addEventListener('mousemove', (e) => {
-                tooltip.style.left = (e.clientX + 15) + 'px';
-                tooltip.style.top = (e.clientY - 10) + 'px';
-            });
-            badge.addEventListener('mouseleave', hideTooltip);
-        });
     </script>
 
-    <!-- MANAGER FEEDBACK ENHANCEMENTS: Dynamic card enrichment -->
-    <script>
-        // Prospect enhancement data (Madhavi feedback: website links, reach-out reasons, review status)
-        const enhancements = {
-            'WellSpan Health': {
-                website: 'https://www.wellspan.org',
-                signalType: 'Cloud Initiative',
-                reachOutReason: 'Active AWS migration creates immediate need for managed private cloud operations and HIPAA-compliant AI workload management.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 25/25 · AI: 15/20 · Compliance: 20/20 · Services: 15/20 · Timing: 17/15 → Total: 92'
-            },
-            'Jefferson Health + Lehigh Valley': {
-                website: 'https://www.jeffersonhealth.org',
-                signalType: 'Expansion / M&A',
-                reachOutReason: 'Post-merger IT consolidation creates dual-data-center hybrid cloud unification opportunity with compliance complexity.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 18/25 · AI: 10/20 · Compliance: 20/20 · Services: 16/20 · Timing: 15/15 → Total: 79'
-            },
-            'Community Health Systems': {
-                website: 'https://www.chs.net',
-                signalType: 'Compliance Pressure',
-                reachOutReason: 'Major cybersecurity incident and ongoing HIPAA remediation demands secure managed infrastructure and 24/7 monitoring.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 15/25 · AI: 10/20 · Compliance: 20/20 · Services: 20/20 · Timing: 10/15 → Total: 75'
-            },
-            'Novant Health': {
-                website: 'https://www.novanthealth.org',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Major AI investment in clinical analytics and patient throughput optimization requires GPU infrastructure and MLOps.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 12/25 · AI: 20/20 · Compliance: 15/20 · Services: 10/20 · Timing: 15/15 → Total: 72'
-            },
-            'UPMC Enterprises': {
-                website: 'https://enterprises.upmc.com',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Venture arm investing in health tech AI startups — potential for enterprise-scale AI infrastructure partnership.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 15/25 · AI: 20/20 · Compliance: 10/20 · Services: 10/20 · Timing: 13/15 → Total: 68'
-            },
-            'Manipal Hospitals': {
-                website: 'https://www.manipalhospitals.com',
-                signalType: 'Cloud Initiative',
-                reachOutReason: 'Rapid expansion across India with hybrid cloud needs for clinical data standardization across 30+ facilities.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 20/25 · AI: 15/20 · Compliance: 12/20 · Services: 15/20 · Timing: 8/15 → Total: 70'
-            },
-            'Philips Healthcare': {
-                website: 'https://www.philips.com/healthcare',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Major imaging AI and clinical informatics platform — partner opportunity for managed AI infrastructure at scale.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 18/25 · AI: 20/20 · Compliance: 10/20 · Services: 12/20 · Timing: 8/15 → Total: 68'
-            },
-            'GE HealthCare': {
-                website: 'https://www.gehealthcare.com',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Post-spinoff AI-first strategy requires dedicated infrastructure for medical imaging AI and precision care platforms.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 15/25 · AI: 20/20 · Compliance: 10/20 · Services: 15/20 · Timing: 10/15 → Total: 70'
-            },
-            'InterSystems': {
-                website: 'https://www.intersystems.com',
-                signalType: 'Cloud Initiative',
-                reachOutReason: 'HealthShare platform cloud modernization creates managed services opportunity for interoperability infrastructure.',
-                reviewStatus: 'pending',
-                reviewer: 'Healthcare Product Team',
-                scoreAudit: 'Cloud: 20/25 · AI: 12/20 · Compliance: 15/20 · Services: 10/20 · Timing: 8/15 → Total: 65'
-            }
-        };
 
-        // Inject enhancements into existing cards
-        document.querySelectorAll('.prospect-card').forEach(card => {
-            const nameEl = card.querySelector('.company-name');
-            if (!nameEl) return;
-            const name = nameEl.textContent.trim();
-            const data = enhancements[name];
-            if (!data) return;
-
-            // 1. Add review badge to company-type line
-            const typeEl = card.querySelector('.company-type');
-            if (typeEl) {
-                typeEl.innerHTML += ` <span class="review-badge ${data.reviewStatus}">⏳ Needs Review — ${data.reviewer}</span>`;
-            }
-
-            // 2. Add "Reason to Reach Out" box in info-grid
-            const infoGrid = card.querySelector('.info-grid');
-            if (infoGrid) {
-                const reachOutBox = document.createElement('div');
-                reachOutBox.className = 'reach-out-box';
-                reachOutBox.innerHTML = `
-                    <div class="label">💡 Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
-                    <div class="info-text"><strong>${data.reachOutReason}</strong></div>
-                `;
-                infoGrid.appendChild(reachOutBox);
-            }
-
-            // 3. Add website link + score breakdown to intelligence section
-            const intelSection = card.querySelector('.intelligence-section');
-            if (intelSection) {
-                // Website link
-                const websiteItem = document.createElement('div');
-                websiteItem.className = 'intel-item';
-                websiteItem.innerHTML = `
-                    <div class="intel-label">Company Website</div>
-                    <div class="intel-value"><a href="${data.website}" target="_blank" class="website-link">🔗 ${data.website.replace('https://', '')}</a></div>
-                `;
-                intelSection.insertBefore(websiteItem, intelSection.firstChild);
-
-                // Score breakdown
-                const scoreItem = document.createElement('div');
-                scoreItem.className = 'intel-item';
-                scoreItem.style.gridColumn = '1 / -1';
-                scoreItem.innerHTML = `
-                    <div class="intel-label">Score Breakdown</div>
-                    <div class="score-audit">${data.scoreAudit}</div>
-                `;
-                intelSection.appendChild(scoreItem);
-            }
-        });
-    </script>
 </body>
 
 </html>
