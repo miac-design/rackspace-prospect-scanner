@@ -255,10 +255,9 @@ if __name__ == '__main__':
     bfsi_prospects = run_scan('bfsi_agent_config.json', dry_run=args.dry_run)
     
     if not args.dry_run:
-        # Copy Healthcare source to dist (both index and healthcare page)
-        shutil.copy('Rackspace_Healthcare_Prospects.html', 'dist_prospects/index.html')
+        # Copy Healthcare source to dist (healthcare page only — index.html is a dedicated landing page)
         shutil.copy('Rackspace_Healthcare_Prospects.html', 'dist_prospects/healthcare.html')
-        print("\n✅ Copied Healthcare HTML → dist_prospects/index.html + healthcare.html")
+        print("\n✅ Copied Healthcare HTML → dist_prospects/healthcare.html")
     
     print(f"\n{'='*60}")
     print(f"  SCAN COMPLETE{'  [DRY RUN]' if args.dry_run else ''}")
