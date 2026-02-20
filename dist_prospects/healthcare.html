@@ -537,6 +537,35 @@
             margin-top: 2px;
         }
 
+        nav {
+            background: var(--white);
+            padding: 16px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--rackspace-red);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 24px;
+            text-decoration: none;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--rackspace-red);
+        }
+
         footer {
             text-align: center;
             margin-top: 60px;
@@ -791,6 +820,15 @@
 </head>
 
 <body>
+    <nav>
+        <a href="index.html" class="logo"><img src="rackspace-logo.png" alt="Rackspace"
+                style="height: 28px; margin-right: 8px; vertical-align: middle;">Rackspace AI Intelligence</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="healthcare.html" class="active">Healthcare</a>
+            <a href="bfsi.html">BFSI</a>
+        </div>
+    </nav>
     <div class="container">
         <header>
             <h1>Rackspace Healthcare Prospects</h1>
@@ -990,7 +1028,8 @@
                 <div class="info-banner-title" style="color: var(--success);">Pipeline Status</div>
                 <div class="info-banner-content">
                     <p id="scan-timestamp">🕐 <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
-                    <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below threshold</p>
+                    <p id="scan-result">✅ <strong>No new prospects this week</strong> — all scanned articles were below
+                        threshold</p>
                 </div>
             </div>
 
