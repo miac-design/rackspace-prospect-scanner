@@ -108,23 +108,22 @@
         }
 
         .summary {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
 
         .summary-item {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
         }
 
         .summary-number {
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--plum);
         }
 
@@ -133,11 +132,10 @@
             color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-top: 4px;
         }
 
         .section {
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         .section-header {
@@ -904,7 +902,6 @@
             <p class="subtitle">Private Cloud · Managed Services · AI Operations</p>
 
             <div class="meta">
-                <div class="meta-item">Developed by Mia C. | Researcher III</div>
                 <div class="meta-item strategic-focus">Focus: Managed Private Cloud & AI Agent Infrastructure</div>
             </div>
         </header>
@@ -972,42 +969,47 @@
                     Hosting</label>
             </div>
 
-            <!-- INFO BANNER -->
-            <div class="info-banner">
-                <div class="info-banner-title">About This List</div>
-                <div class="info-banner-content">
-                    <p>This prospect list is <strong>auto-updated every Monday at 9:00 AM CST</strong> by an AI agent.
-                    </p>
+            <!-- COMPACT INFO BAR -->
+            <details
+                style="margin-bottom: 16px; background:linear-gradient(135deg, rgba(168,164,196,0.08), rgba(107,91,122,0.05)); border:1px solid var(--lavender); border-radius:10px; padding:0;">
+                <summary
+                    style="padding:10px 16px; cursor:pointer; font-size:0.75rem; font-weight:600; color:var(--plum); text-transform:uppercase; letter-spacing:0.5px; list-style:none; display:flex; align-items:center; justify-content:space-between;">
+                    <span style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <span style="display:flex;align-items:center;gap:4px;color:var(--success);"><svg width="12"
+                                height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> Last scan: Feb 20, 2:37 PM</span>
+                        <span style="color:var(--text-medium);">·</span>
+                        <span style="color:var(--text-medium);">Auto-updated Mon 9 AM</span>
+                        <span style="color:var(--text-medium);">·</span>
+                        <span style="color:var(--text-medium);">9 feeds scanned</span>
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                </summary>
+                <div
+                    style="padding:0 16px 12px; font-size:0.78rem; color:var(--text-medium); line-height:1.6; border-top:1px solid var(--border);padding-top:10px;">
                     <p><strong>Data Sources:</strong> Fierce Healthcare, Healthcare IT News, Becker's Health IT, Modern
-                        Healthcare, MedCity News, Healthcare Dive, HIMSS News, Health IT Security, KLAS Research, CHIME,
-                        HIT
-                        Consultant</p>
-                    <p><strong>Qualification Criteria:</strong> Cloud migration signals, AI infrastructure needs,
-                        managed
-                        services gaps, HIPAA compliance complexity</p>
-                </div>
-            </div>
-
-            <!-- SCAN STATUS BANNER -->
-            <div id="scan-status-banner" class="info-banner"
-                style="background: linear-gradient(135deg, rgba(122,157,122,0.1), rgba(122,157,122,0.06)); border-color: var(--success); margin-bottom: 30px;">
-                <div class="info-banner-title" style="color: var(--success);">Pipeline Status</div>
-                <div class="info-banner-content">
-                    <p id="scan-timestamp" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg> <strong>Last scanned:</strong> February 20, 2026 at 2:37 PM CST</p>
-                    <p id="scan-result" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14"
-                            viewBox="0 0 24 24" fill="none" stroke="#7a9d7a" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
+                        Healthcare, MedCity News, Healthcare Dive, HIMSS News, Health IT Security, KLAS Research</p>
+                    <p style="margin-top:4px;"><strong>Qualification:</strong> Cloud migration signals, AI
+                        infrastructure needs, managed services gaps, HIPAA compliance</p>
+                    <p style="margin-top:4px; color:var(--success);"><svg width="12" height="12" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="vertical-align:middle;">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                             <polyline points="22 4 12 14.01 9 11.01" />
-                        </svg> <strong>No new prospects this week</strong> — all scanned articles were below
-                        threshold</p>
+                        </svg> <strong>No new prospects this week</strong> — all scanned articles were below threshold
+                    </p>
                 </div>
-            </div>
+            </details>
+
+            <!-- PROSPECT COUNT -->
+            <div style="font-size:0.75rem; color:var(--text-light); margin-bottom:12px;">Showing <strong
+                    style="color:var(--text-dark);">14</strong> prospects across all categories</div>
 
             <!-- HEALTH SYSTEMS - TIER 1 -->
             <section class="section tier-1">
