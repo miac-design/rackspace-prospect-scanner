@@ -351,9 +351,12 @@ class HTMLUpdater:
     
     def _update_timestamp(self, html: str, prospect_count: int = 0) -> str:
         """Update the Pipeline Status banner with scan results."""
-        now = datetime.now()
-        date_str = now.strftime('%B %d, %Y')
-        time_str = now.strftime('%I:%M %p').lstrip('0')
+        from datetime import timedelta
+        # GitHub Actions runs in UTC — convert to CST (UTC-6)
+        utc_now = datetime.utcnow()
+        cst_now = utc_now - timedelta(hours=6)
+        date_str = cst_now.strftime('%B %d, %Y')
+        time_str = cst_now.strftime('%I:%M %p').lstrip('0')
         full_timestamp = f"{date_str} at {time_str} CST"
         
         # Build the result message
