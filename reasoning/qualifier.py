@@ -121,29 +121,42 @@ class ProspectQualifier:
     
     def _detect_signal_type(self, text: str) -> tuple:
         """
-        Detect the primary signal type from article text.
-        Returns (signal_type_name, reach_out_reason) based on config signal_types.
+        Detect signal types from article text.
+        Returns (primary_signal_type, reach_out_reason) with compound signals.
         """
         if not self.signal_types:
             return ('general', 'Potential managed services opportunity detected')
         
-        best_type = None
-        best_count = 0
+        matched_signals = []
         
         for sig_name, sig_def in self.signal_types.items():
             trigger_keywords = sig_def.get('trigger_keywords', [])
             matches = sum(1 for kw in trigger_keywords if kw.lower() in text)
-            if matches > best_count:
-                best_count = matches
-                best_type = sig_name
+            if matches > 0:
+                matched_signals.append({
+                    'name': sig_name,
+                    'matches': matches,
+                    'reason': sig_def.get('reach_out_reason', 'Industry activity detected'),
+                })
         
-        if best_type and best_count > 0:
-            reason = self.signal_types[best_type].get(
-                'reach_out_reason', 'Potential managed services opportunity'
-            )
-            return (best_type, reason)
+        if not matched_signals:
+            return ('general', 'Industry activity detected — worth monitoring for sales opportunity')
         
-        return ('general', 'Industry activity detected — worth monitoring for sales opportunity')
+        # Sort by match count (strongest first)
+        matched_signals.sort(key=lambda s: s['matches'], reverse=True)
+        
+        # Primary signal is the strongest
+        primary = matched_signals[0]['name']
+        
+        # Compound signal: combine top 2 if multiple match
+        if len(matched_signals) >= 2:
+            signal_type = f"{matched_signals[0]['name']}+{matched_signals[1]['name']}"
+            reason = f"{matched_signals[0]['reason']}. Additionally: {matched_signals[1]['reason']}"
+        else:
+            signal_type = primary
+            reason = matched_signals[0]['reason']
+        
+        return (signal_type, reason)
     
     def _generate_score_audit(self, scores: dict, total: int) -> str:
         """
@@ -297,20 +310,55 @@ class ProspectQualifier:
         return None
     
     def _calculate_scores(self, text: str) -> Dict[str, int]:
-        """Calculate scores for each qualification criterion."""
+        """Calculate scores for each qualification criterion.
+        
+        Supports two keyword formats:
+        - List: ["cloud migration", "AWS"]  → each keyword counts as weight 1
+        - Dict: {"cloud migration": 3, "cloud": 0.5}  → per-keyword weights
+        
+        Also checks for negative context (negation words near keywords).
+        """
         scores = {}
+        negation_words = ['not', 'no ', 'never', 'abandons', 'exits', 'reduces',
+                          'delays', 'cancels', 'drops', 'rejects', 'halts',
+                          'suspends', 'without', 'lacks', "won't", "didn't"]
         
         for criterion_name, criterion_config in self.criteria.items():
             weight = criterion_config['weight']
-            keywords = criterion_config['keywords']
+            keywords_raw = criterion_config['keywords']
             
-            # Count keyword matches
-            match_count = sum(1 for kw in keywords if kw.lower() in text)
+            # Normalize to {keyword: kw_weight} format
+            if isinstance(keywords_raw, dict):
+                keywords = keywords_raw
+            else:
+                # Flat list: all keywords equal weight 1.0
+                keywords = {kw: 1.0 for kw in keywords_raw}
             
-            # Score is weighted by match density (more matches = higher score, capped)
+            # Score each keyword match
+            weighted_sum = 0
+            match_count = 0
+            
+            for kw, kw_weight in keywords.items():
+                kw_lower = kw.lower()
+                if kw_lower in text:
+                    # Check for negative context: is there a negation word
+                    # within 5 words (roughly 40 chars) before the keyword?
+                    kw_pos = text.find(kw_lower)
+                    context_start = max(0, kw_pos - 40)
+                    context_window = text[context_start:kw_pos]
+                    
+                    negated = any(neg in context_window for neg in negation_words)
+                    if negated:
+                        logger.debug(f"   Negated keyword '{kw}' in context: ...{context_window}...")
+                        continue  # Skip this match — it's negated
+                    
+                    weighted_sum += kw_weight
+                    match_count += 1
+            
+            # Score: weighted sum normalized against criterion weight
             if match_count > 0:
-                # Normalize: 1 match = 50% of weight, 3+ matches = 100%
-                score_pct = min(match_count / 3, 1.0) * 0.5 + 0.5
+                # Normalize: weighted_sum of 1.0 = 50% of criterion weight, 3.0+ = 100%
+                score_pct = min(weighted_sum / 3.0, 1.0) * 0.5 + 0.5
                 scores[criterion_name] = int(weight * score_pct)
             else:
                 scores[criterion_name] = 0

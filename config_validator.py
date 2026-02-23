@@ -91,8 +91,8 @@ def validate_config(config_path: str) -> list:
             errors.append(f"  ❌ criteria.{name}: Missing 'weight'")
         if 'keywords' not in criterion:
             errors.append(f"  ❌ criteria.{name}: Missing 'keywords'")
-        elif not isinstance(criterion['keywords'], list) or len(criterion['keywords']) == 0:
-            errors.append(f"  ❌ criteria.{name}.keywords: Must be non-empty list")
+        elif not isinstance(criterion['keywords'], (list, dict)) or len(criterion['keywords']) == 0:
+            errors.append(f"  ❌ criteria.{name}.keywords: Must be non-empty list or dict")
     
     # Validate categories have keywords
     categories = config.get('categories', {})
