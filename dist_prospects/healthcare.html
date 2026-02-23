@@ -1988,7 +1988,7 @@
     </style>
 
     <script>
-        // Tooltip infrastructure
+        // Tooltip infrastructure (for real pipeline-generated score badges)
         const tooltip = document.createElement('div');
         tooltip.className = 'info-tooltip';
         document.body.appendChild(tooltip);
@@ -2007,74 +2007,19 @@
         }
         function hideTooltip() { tooltip.classList.remove('visible'); }
 
-        // Score badge tooltips with Rackspace-specific 5-dimension scoring
+        // Score badge tooltips — only shows real data from pipeline
         document.querySelectorAll('.score-badge').forEach(badge => {
             const card = badge.closest('.prospect-card');
             const companyName = card?.querySelector('.company-name')?.textContent || 'Company';
-            const signals = card?.querySelectorAll('.signal-pill')?.length || 0;
-            const compliance = card?.querySelectorAll('.compliance-badge')?.length || 0;
-            const hasAI = card?.querySelector('.ai-use-case') ? 1 : 0;
-            const companyType = card?.querySelector('.company-type')?.textContent || '';
-            const sourceText = card?.textContent || '';
-            const sourceDateMatch = sourceText.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d+),?\s*(\d{4})?/);
-
-            const infraMax = 30, fitMax = 25, timingMax = 20, dealMax = 15, competeMax = 10;
-            const cardText = card?.textContent?.toLowerCase() || '';
-
-            let infraSignal = 15;
-            if (cardText.includes('migration') || cardText.includes('migrating')) infraSignal = 28;
-            else if (cardText.includes('cloud-native') || cardText.includes('moderniz')) infraSignal = 26;
-            else if (cardText.includes('scaling') || cardText.includes('infrastructure')) infraSignal = 22;
-            else if (cardText.includes('digital') || cardText.includes('transform')) infraSignal = 18;
-            if (signals >= 3) infraSignal = Math.min(infraSignal + 2, infraMax);
-
-            let rackspaceFit = 12;
-            if (cardText.includes('managed') && (cardText.includes('ai') || cardText.includes('ml'))) rackspaceFit = 23;
-            else if (cardText.includes('managed') || cardText.includes('compliance')) rackspaceFit = 20;
-            else if (cardText.includes('private cloud') || cardText.includes('hybrid')) rackspaceFit = 22;
-            else if (hasAI) rackspaceFit = 18;
-            else if (signals >= 2) rackspaceFit = 15;
-
-            let timing = 12;
-            if (sourceDateMatch) {
-                const today = new Date('2026-02-20');
-                const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
-                const sourceDate = new Date(2026, months[sourceDateMatch[1]] || 0, parseInt(sourceDateMatch[2]) || 1);
-                const daysDiff = Math.floor((today - sourceDate) / (1000 * 60 * 60 * 24));
-                if (daysDiff <= 14) timing = 20;
-                else if (daysDiff <= 30) timing = 16;
-                else if (daysDiff <= 60) timing = 12;
-                else timing = 6;
-            }
-
-            let dealPotential = 8;
-            if (companyType.includes('250+') || companyType.includes('Global') || companyType.includes('180+')) dealPotential = 15;
-            else if (companyType.includes('Post-Merger') || companyType.includes('70+') || companyType.includes('130+')) dealPotential = 14;
-            else if (companyType.includes('28+') || companyType.includes('MedTech') || companyType.includes('EHR')) dealPotential = 12;
-            else if (companyType.includes('Academic') || companyType.includes('Multi')) dealPotential = 13;
-
-            let competitive = 7;
-            if (cardText.includes('aws') || cardText.includes('azure')) competitive = 5;
-            if (cardText.includes('managed services') || cardText.includes('partner')) competitive = 8;
-            if (cardText.includes('gap') || cardText.includes('need')) competitive = Math.min(competitive + 1, competeMax);
-            if (compliance >= 1 || cardText.includes('hipaa')) competitive = Math.min(competitive + 1, competeMax);
-
-            const calculatedScore = infraSignal + rackspaceFit + timing + dealPotential + competitive;
-            const scoreNumberEl = badge.querySelector('.score-number');
-            if (scoreNumberEl) scoreNumberEl.textContent = calculatedScore;
+            const scoreNum = badge.querySelector('.score-number')?.textContent || '—';
+            const auditEl = card?.querySelector('.score-audit');
+            const auditText = auditEl ? auditEl.textContent : 'Score breakdown available for pipeline-generated prospects';
 
             badge.addEventListener('mouseenter', (e) => {
                 showTooltip(e, `
-                    <span class="tooltip-title">Score: ${calculatedScore}/100</span>
+                    <span class="tooltip-title">Score: ${scoreNum}/100</span>
                     <div class="tooltip-desc">Lead score for ${companyName}</div>
-                    <div class="score-breakdown">
-                        <div class="score-row"><span class="label">Infra Signal (30%)</span><span class="value">${infraSignal}/${infraMax} pts</span></div>
-                        <div class="score-row"><span class="label">Rackspace Fit (25%)</span><span class="value">${rackspaceFit}/${fitMax} pts</span></div>
-                        <div class="score-row"><span class="label">Timing & Urgency (20%)</span><span class="value">${timing}/${timingMax} pts</span></div>
-                        <div class="score-row"><span class="label">Deal Potential (15%)</span><span class="value">${dealPotential}/${dealMax} pts</span></div>
-                        <div class="score-row"><span class="label">Competitive Pos. (10%)</span><span class="value">${competitive}/${competeMax} pts</span></div>
-                    </div>
-                    <div class="tooltip-why">→ Higher score = higher priority for outreach</div>
+                    <div class="tooltip-why">${auditText}</div>
                 `);
             });
             badge.addEventListener('mousemove', (e) => {
@@ -2082,107 +2027,6 @@
                 tooltip.style.top = (e.clientY - 10) + 'px';
             });
             badge.addEventListener('mouseleave', hideTooltip);
-        });
-    </script>
-
-    <!-- HEALTHCARE ENHANCEMENTS: Dynamic card enrichment -->
-    <script>
-        const enhancements = {
-            'WellSpan Health': {
-                website: 'https://www.wellspan.org',
-                signalType: 'Cloud Migration',
-                reachOutReason: 'Migrating 250+ facilities to AWS by April 2026 — needs managed services layer for HIPAA compliance and AI optimization on hyperscaler infra.',
-                scoreAudit: 'Infra: 28/30 · Fit: 23/25 · Timing: 12/20 · Deal: 15/15 · Compete: 6/10'
-            },
-            'Jefferson Health + Lehigh Valley': {
-                website: 'https://www.jeffersonhealth.org',
-                signalType: 'Data Consolidation',
-                reachOutReason: 'Post-merger system integration across 30+ hospitals — needs unified data platform with HIPAA compliance for merged EHR systems.',
-                scoreAudit: 'Infra: 26/30 · Fit: 22/25 · Timing: 12/20 · Deal: 14/15 · Compete: 8/10'
-            },
-            'Community Health Systems': {
-                website: 'https://www.chs.net',
-                signalType: 'AI Adoption',
-                reachOutReason: '70+ hospitals deploying clinical analytics — needs managed AI ops infrastructure with strict HIPAA controls across distributed facilities.',
-                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 12/20 · Deal: 14/15 · Compete: 8/10'
-            },
-            'Novant Health': {
-                website: 'https://www.novanthealth.org',
-                signalType: 'Digital Transformation',
-                reachOutReason: 'Building digital-first patient experience across 800+ locations — needs scalable cloud infrastructure for real-time clinical data.',
-                scoreAudit: 'Infra: 22/30 · Fit: 18/25 · Timing: 12/20 · Deal: 13/15 · Compete: 7/10'
-            },
-            'UPMC Enterprises': {
-                website: 'https://enterprises.upmc.com',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Academic health system building proprietary AI for clinical decision support — needs GPU compute and managed MLOps at scale.',
-                scoreAudit: 'Infra: 22/30 · Fit: 23/25 · Timing: 12/20 · Deal: 13/15 · Compete: 5/10'
-            },
-            'Manipal Hospitals': {
-                website: 'https://www.manipalhospitals.com',
-                signalType: 'Cloud Migration',
-                reachOutReason: 'Expanding from 28+ hospitals across India — greenfield cloud opportunity for managed private cloud with data sovereignty requirements.',
-                scoreAudit: 'Infra: 28/30 · Fit: 22/25 · Timing: 12/20 · Deal: 12/15 · Compete: 9/10'
-            },
-            'Philips Healthcare': {
-                website: 'https://www.philips.com/healthcare',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Global MedTech deploying AI-powered imaging and patient monitoring — needs managed GPU infrastructure for inference at edge and cloud.',
-                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 12/20 · Deal: 12/15 · Compete: 5/10'
-            },
-            'GE HealthCare': {
-                website: 'https://www.gehealthcare.com',
-                signalType: 'AI Adoption',
-                reachOutReason: 'Post-spinoff from GE building independent cloud infrastructure for medical imaging AI — partner opportunity for managed AI ops.',
-                scoreAudit: 'Infra: 26/30 · Fit: 20/25 · Timing: 6/20 · Deal: 12/15 · Compete: 5/10'
-            },
-            'InterSystems': {
-                website: 'https://www.intersystems.com',
-                signalType: 'Cloud Initiative',
-                reachOutReason: 'EHR interoperability platform expanding cloud footprint — needs managed hosting infrastructure for health data exchange at scale.',
-                scoreAudit: 'Infra: 22/30 · Fit: 20/25 · Timing: 6/20 · Deal: 12/15 · Compete: 8/10'
-            }
-        };
-
-        document.querySelectorAll('.prospect-card').forEach(card => {
-            const nameEl = card.querySelector('.company-name');
-            if (!nameEl) return;
-            const name = nameEl.textContent.trim();
-            const data = enhancements[name];
-            if (!data) return;
-
-            // Add Reason to Reach Out box
-            const infoGrid = card.querySelector('.info-grid');
-            if (infoGrid) {
-                const reachOutBox = document.createElement('div');
-                reachOutBox.className = 'reach-out-box';
-                reachOutBox.innerHTML = `
-                    <div class="label">→ Reason to Reach Out <span class="signal-type-badge">${data.signalType}</span></div>
-                    <div class="info-text"><strong>${data.reachOutReason}</strong></div>
-                `;
-                infoGrid.appendChild(reachOutBox);
-            }
-
-            // Add Website link + Score Breakdown to intelligence section
-            const intelSection = card.querySelector('.intelligence-section');
-            if (intelSection) {
-                const websiteItem = document.createElement('div');
-                websiteItem.className = 'intel-item';
-                websiteItem.innerHTML = `
-                    <div class="intel-label">Company Website</div>
-                    <div class="intel-value"><a href="${data.website}" target="_blank" class="website-link">🔗 ${data.website.replace('https://', '')}</a></div>
-                `;
-                intelSection.insertBefore(websiteItem, intelSection.firstChild);
-
-                const scoreItem = document.createElement('div');
-                scoreItem.className = 'intel-item';
-                scoreItem.style.gridColumn = '1 / -1';
-                scoreItem.innerHTML = `
-                    <div class="intel-label">Score Breakdown</div>
-                    <div class="score-audit">${data.scoreAudit}</div>
-                `;
-                intelSection.appendChild(scoreItem);
-            }
         });
     </script>
 

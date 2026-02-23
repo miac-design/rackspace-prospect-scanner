@@ -29,3 +29,4 @@ volunteer-onboarding/
 # IDE
 .vscode/
 .idea/
+.venv/
