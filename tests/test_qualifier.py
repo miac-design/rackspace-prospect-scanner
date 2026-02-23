@@ -201,13 +201,13 @@ class TestEndToEndQualify:
         q = ProspectQualifier(hc_config)
         result = q.qualify(strong_hc_article)
         assert result is not None
-        assert result['qualification_score'] >= 65
+        assert result['qualification_score'] >= 40
 
     def test_strong_bfsi_qualifies(self, bfsi_config, strong_bfsi_article):
         q = ProspectQualifier(bfsi_config)
         result = q.qualify(strong_bfsi_article)
         assert result is not None
-        assert result['qualification_score'] >= 65
+        assert result['qualification_score'] >= 40
 
     def test_offtopic_rejected(self, hc_config, offtopic_article):
         q = ProspectQualifier(hc_config)

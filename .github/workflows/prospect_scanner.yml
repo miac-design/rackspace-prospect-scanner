@@ -54,6 +54,9 @@ jobs:
       - name: Validate configs
         run: python config_validator.py
 
+      - name: Check feed health
+        run: python feed_health.py --auto-fix
+
       - name: Run scan
         run: python run_scan.py
 

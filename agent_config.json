@@ -226,7 +226,7 @@
             ]
         }
     },
-    "qualification_threshold": 65,
+    "qualification_threshold": 40,
     "rackspace_value_propositions": [
         "Managed private cloud for regulated workloads",
         "Post-migration optimization and operations",

@@ -29,58 +29,130 @@ ssl_ctx.check_hostname = False
 ssl_ctx.verify_mode = ssl.CERT_NONE
 
 
+def _fallback_parse_rss(raw: bytes, url: str) -> list:
+    """Regex-based fallback parser for malformed RSS/XML feeds.
+    Extracts articles even when xml.etree fails on invalid tokens."""
+    articles = []
+    text = raw.decode('utf-8', errors='replace')
+    source = url.split('/')[2]
+    
+    # Extract <item>...</item> blocks
+    items = re.findall(r'<item[^>]*>(.*?)</item>', text, re.DOTALL | re.IGNORECASE)
+    if not items:
+        # Try Atom <entry>...</entry>
+        items = re.findall(r'<entry[^>]*>(.*?)</entry>', text, re.DOTALL | re.IGNORECASE)
+    
+    for item_text in items:
+        title = ''
+        desc = ''
+        link = ''
+        pub_date = ''
+        
+        # Extract title
+        t_match = re.search(r'<title[^>]*>(.*?)</title>', item_text, re.DOTALL | re.IGNORECASE)
+        if t_match:
+            title = re.sub(r'<!\[CDATA\[(.*?)\]\]>', r'\1', t_match.group(1)).strip()
+            title = re.sub(r'<[^>]+>', '', title).strip()
+        
+        # Extract description/summary
+        d_match = re.search(r'<(?:description|summary|content)[^>]*>(.*?)</(?:description|summary|content)>', 
+                           item_text, re.DOTALL | re.IGNORECASE)
+        if d_match:
+            desc = re.sub(r'<!\[CDATA\[(.*?)\]\]>', r'\1', d_match.group(1)).strip()
+            desc = re.sub(r'<[^>]+>', '', desc).strip()
+        
+        # Extract link
+        l_match = re.search(r'<link[^>]*>([^<]+)</link>', item_text, re.IGNORECASE)
+        if l_match:
+            link = l_match.group(1).strip()
+        else:
+            # Atom-style href attribute
+            l_match = re.search(r'<link[^>]+href=["\']([^"\']+)["\']', item_text, re.IGNORECASE)
+            if l_match:
+                link = l_match.group(1).strip()
+        
+        # Extract date
+        dt_match = re.search(r'<(?:pubDate|published|updated|dc:date)[^>]*>([^<]+)</(?:pubDate|published|updated|dc:date)>',
+                            item_text, re.IGNORECASE)
+        if dt_match:
+            pub_date = dt_match.group(1).strip()
+        
+        if title:
+            articles.append({
+                'title': title,
+                'summary': desc[:500],
+                'content': desc,
+                'url': link,
+                'source': source,
+                'published_date': pub_date,
+            })
+    
+    return articles
+
+
 def fetch_rss(url: str, timeout: int = 10) -> list:
-    """Fetch and parse an RSS feed using built-in libraries."""
+    """Fetch and parse an RSS feed. Uses strict XML first, falls back to regex."""
     articles = []
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Rackspace Prospect Scanner)'})
         with urllib.request.urlopen(req, timeout=timeout, context=ssl_ctx) as resp:
             raw = resp.read()
-        root = ET.fromstring(raw)
         
-        # Handle both RSS and Atom feeds
-        # RSS: channel/item
-        for item in root.findall('.//item'):
-            title = item.findtext('title', '').strip()
-            desc = item.findtext('description', '').strip()
-            link = item.findtext('link', '').strip()
-            pub_date = item.findtext('pubDate', '')
-            source = url.split('/')[2]  # domain as source name
+        # Try strict XML parse first
+        try:
+            root = ET.fromstring(raw)
             
-            # Clean HTML from description
-            desc = re.sub(r'<[^>]+>', '', desc)
+            # RSS: channel/item
+            for item in root.findall('.//item'):
+                title = item.findtext('title', '').strip()
+                desc = item.findtext('description', '').strip()
+                link = item.findtext('link', '').strip()
+                pub_date = item.findtext('pubDate', '')
+                source = url.split('/')[2]
+                
+                desc = re.sub(r'<[^>]+>', '', desc)
+                
+                if title:
+                    articles.append({
+                        'title': title,
+                        'summary': desc[:500],
+                        'content': desc,
+                        'url': link,
+                        'source': source,
+                        'published_date': pub_date,
+                    })
             
-            if title:
-                articles.append({
-                    'title': title,
-                    'summary': desc[:500],
-                    'content': desc,
-                    'url': link,
-                    'source': source,
-                    'published_date': pub_date,
-                })
+            # Atom: entry
+            ns = {'atom': 'http://www.w3.org/2005/Atom'}
+            for entry in root.findall('.//atom:entry', ns):
+                title = entry.findtext('atom:title', '', ns).strip()
+                summary = entry.findtext('atom:summary', '', ns).strip()
+                link_el = entry.find('atom:link', ns)
+                link = link_el.get('href', '') if link_el is not None else ''
+                pub_date = entry.findtext('atom:published', '', ns) or entry.findtext('atom:updated', '', ns)
+                source = url.split('/')[2]
+                
+                summary = re.sub(r'<[^>]+>', '', summary)
+                
+                if title:
+                    articles.append({
+                        'title': title,
+                        'summary': summary[:500],
+                        'content': summary,
+                        'url': link,
+                        'source': source,
+                        'published_date': pub_date,
+                    })
         
-        # Atom: entry
-        ns = {'atom': 'http://www.w3.org/2005/Atom'}
-        for entry in root.findall('.//atom:entry', ns):
-            title = entry.findtext('atom:title', '', ns).strip()
-            summary = entry.findtext('atom:summary', '', ns).strip()
-            link_el = entry.find('atom:link', ns)
-            link = link_el.get('href', '') if link_el is not None else ''
-            pub_date = entry.findtext('atom:published', '', ns) or entry.findtext('atom:updated', '', ns)
-            source = url.split('/')[2]
-            
-            summary = re.sub(r'<[^>]+>', '', summary)
-            
-            if title:
-                articles.append({
-                    'title': title,
-                    'summary': summary[:500],
-                    'content': summary,
-                    'url': link,
-                    'source': source,
-                    'published_date': pub_date,
-                })
+        except ET.ParseError as xml_err:
+            # Fallback: regex-based parser for malformed XML
+            logger.info(f"   XML parse failed ({xml_err}), using regex fallback for {url}")
+            articles = _fallback_parse_rss(raw, url)
+            if articles:
+                logger.info(f"   Regex fallback recovered {len(articles)} articles")
+            else:
+                logger.warning(f"   Regex fallback also found 0 articles from {url}")
+    
     except Exception as e:
         logger.warning(f"   Failed to fetch {url}: {e}")
     

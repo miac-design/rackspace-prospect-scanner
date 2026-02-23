@@ -53,8 +53,14 @@ class ProspectQualifier:
         
         # If no organization found but strong signals, use a fallback
         if not organization:
-            if total_score >= 50:  # Raised from 40 — require stronger signals for fallback
+            if total_score >= 30:  # Lowered: recover more prospects with decent signals
                 organization = self._extract_fallback_org(article['title'])
+            if not organization and total_score >= 40:
+                # Last resort: use source domain as industry signal
+                source = article.get('source', '')
+                if source:
+                    clean_source = source.replace('www.', '').split('.')[0].title()
+                    organization = f"{clean_source} (Industry Signal)"
             if not organization:
                 return None
         
@@ -195,9 +201,9 @@ class ProspectQualifier:
             # Fallback: check both (for unknown configs)
             domain_terms = healthcare_terms + bfsi_terms
         
-        # Require at least 2 domain-relevant terms to pass
+        # Require at least 1 domain-relevant term to pass
         match_count = sum(1 for term in domain_terms if term in text)
-        if match_count >= 2:
+        if match_count >= 1:
             return True
         
         logger.debug("   Article rejected: insufficient domain relevance")
