@@ -30,11 +30,12 @@ class ProspectQualifier:
         """
         Qualify an article as a potential prospect.
         
-        Args:
-            article: Article dictionary with title, summary, content, url, etc.
-            
-        Returns:
-            Prospect dictionary if qualified, None otherwise
+        Pipeline:
+        1. Domain relevance gate (keyword)
+        2. Org extraction (regex → Gemini fallback)
+        3. Score calculation (weighted keywords + negation)
+        4. Borderline LLM judge (Gemini for score 25-39)
+        5. Threshold gate
         """
         # Combine all text for analysis
         full_text = f"{article['title']} {article['summary']} {article.get('content', '')}"
@@ -46,7 +47,7 @@ class ProspectQualifier:
             logger.info(f"REJECTED [{title_short}] → Gate: DOMAIN (no domain terms found)")
             return None
         
-        # Step 1: Extract organization name (with fallback)
+        # Step 1: Extract organization name (regex first)
         organization = self._extract_organization(article['title'], article['summary'])
         
         # Step 1b: Calculate score first to decide if we should keep articles without org names
@@ -54,21 +55,31 @@ class ProspectQualifier:
         total_score = sum(scores.values())
         score_detail = ' | '.join(f"{k}:{v}" for k, v in scores.items() if v > 0) or 'no matches'
         
-        # If no organization found but strong signals, use a fallback
+        # If no organization found, try fallbacks in order
         if not organization:
-            if total_score >= 30:  # Lowered: recover more prospects with decent signals
+            if total_score >= 30:
                 organization = self._extract_fallback_org(article['title'])
+            
+            # Gemini NER fallback — if regex fails and article has some signal
+            if not organization and total_score >= 15:
+                from reasoning.gemini_judge import extract_organization as gemini_extract
+                gemini_org = gemini_extract(article['title'], article['summary'])
+                if gemini_org:
+                    organization = gemini_org
+                    logger.info(f"GEMINI ORG [{title_short}] → {gemini_org}")
+            
             if not organization and total_score >= 40:
-                # Last resort: use source domain as industry signal
+                # Last resort: use source domain
                 source = article.get('source', '')
                 if source:
                     clean_source = source.replace('www.', '').split('.')[0].title()
                     organization = f"{clean_source} (Industry Signal)"
+            
             if not organization:
                 logger.info(f"REJECTED [{title_short}] → Gate: ORG (no company found, score={total_score}, {score_detail})")
                 return None
         
-        # Step 2: Use scores already calculated above (line 49)
+        # Step 2: Use scores already calculated above
         
         # Step 3: Check for negative signals (disqualifiers)
         if self._has_negative_signals(full_text_lower):
@@ -79,10 +90,37 @@ class ProspectQualifier:
         if category:
             total_score += self.categories[category].get('priority_boost', 0)
         
-        # Step 5: Skip if below threshold
-        if total_score < self.config['qualification_threshold']:
-            logger.info(f"REJECTED [{title_short}] → Gate: SCORE ({total_score}/{self.config['qualification_threshold']}, org={organization}, {score_detail})")
-            return None
+        # Step 5: Threshold gate — with Gemini judge for borderline cases
+        threshold = self.config['qualification_threshold']
+        borderline_floor = max(threshold - 15, 15)  # e.g., 25 when threshold is 40
+        
+        if total_score < threshold:
+            # Borderline: close to threshold → ask Gemini
+            if total_score >= borderline_floor:
+                from reasoning.gemini_judge import judge_article
+                domain = 'bfsi' if 'bfsi' in self.config.get('agent_name', '').lower() else 'healthcare'
+                judgment = judge_article(
+                    title=article['title'],
+                    summary=article['summary'],
+                    source=article.get('source', ''),
+                    domain=domain,
+                    current_score=total_score,
+                    score_breakdown=scores,
+                )
+                
+                if judgment and judgment.get('is_relevant') and judgment.get('confidence', 0) >= 0.6:
+                    # Gemini says it's relevant — promote it
+                    total_score = judgment['adjusted_score']
+                    if judgment.get('organization'):
+                        organization = judgment['organization']
+                    logger.info(f"LLM PROMOTED [{title_short}] → score {total_score}, org={organization}")
+                else:
+                    reason = "LLM rejected" if judgment else "LLM unavailable"
+                    logger.info(f"REJECTED [{title_short}] → Gate: SCORE+LLM ({total_score}/{threshold}, {reason}, {score_detail})")
+                    return None
+            else:
+                logger.info(f"REJECTED [{title_short}] → Gate: SCORE ({total_score}/{threshold}, org={organization}, {score_detail})")
+                return None
         
         # Step 6: Generate Rackspace-specific fields
         rackspace_wedge = self._generate_wedge(scores, full_text_lower)

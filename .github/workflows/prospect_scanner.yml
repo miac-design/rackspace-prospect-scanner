@@ -59,6 +59,9 @@ jobs:
 
       - name: Run scan
         run: python run_scan.py
+        env:
+          CI: true
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Commit changes
         run: |
