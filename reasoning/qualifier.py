@@ -39,9 +39,11 @@ class ProspectQualifier:
         # Combine all text for analysis
         full_text = f"{article['title']} {article['summary']} {article.get('content', '')}"
         full_text_lower = full_text.lower()
+        title_short = article['title'][:80]
         
         # Step 0: Domain relevance gate — reject off-topic articles early
         if not self._is_domain_relevant(full_text_lower):
+            logger.info(f"REJECTED [{title_short}] → Gate: DOMAIN (no domain terms found)")
             return None
         
         # Step 1: Extract organization name (with fallback)
@@ -50,6 +52,7 @@ class ProspectQualifier:
         # Step 1b: Calculate score first to decide if we should keep articles without org names
         scores = self._calculate_scores(full_text_lower)
         total_score = sum(scores.values())
+        score_detail = ' | '.join(f"{k}:{v}" for k, v in scores.items() if v > 0) or 'no matches'
         
         # If no organization found but strong signals, use a fallback
         if not organization:
@@ -62,6 +65,7 @@ class ProspectQualifier:
                     clean_source = source.replace('www.', '').split('.')[0].title()
                     organization = f"{clean_source} (Industry Signal)"
             if not organization:
+                logger.info(f"REJECTED [{title_short}] → Gate: ORG (no company found, score={total_score}, {score_detail})")
                 return None
         
         # Step 2: Use scores already calculated above (line 49)
@@ -77,6 +81,7 @@ class ProspectQualifier:
         
         # Step 5: Skip if below threshold
         if total_score < self.config['qualification_threshold']:
+            logger.info(f"REJECTED [{title_short}] → Gate: SCORE ({total_score}/{self.config['qualification_threshold']}, org={organization}, {score_detail})")
             return None
         
         # Step 6: Generate Rackspace-specific fields
@@ -223,14 +228,14 @@ class ProspectQualifier:
             r'(GE\s+HealthCare|Philips|Siemens\s+Healthineers|Epic|Cerner|Oracle\s+Health)',
             # BFSI organization patterns (banks, insurers, financial institutions)
             r'([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*\s+(?:Bank|Insurance|Financial|Capital|Securities|Bancorp|Credit Union)s?)',
-            # Generic "Company announces" pattern
-            r'([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*)\s+(?:announces|launches|partners|expands|selects)',
+            # "Company announces/launches" pattern — strict: 2-4 capitalized words before verb
+            r'([A-Z][a-zA-Z]{2,}(?:\s+[A-Z][a-zA-Z]{2,}){0,3})\s+(?:announces|launches|partners|expands|selects|deploys|unveils|raises|secures|hires)',
         ]
         
         text = f"{title} {summary}"
         
         for pattern in patterns:
-            matches = re.findall(pattern, text, re.IGNORECASE)
+            matches = re.findall(pattern, text)
             if matches:
                 # Return the longest match (usually most specific)
                 org = max(matches, key=len).strip()
@@ -240,28 +245,32 @@ class ProspectQualifier:
                 false_positives = [
                     'The', 'This', 'That', 'How', 'What', 'Why', 'New', 'More',
                     'According', 'Breaking', 'Report', 'Study', 'Update',
-                    'Stage', 'Practice', 'Virtual', 'Digital',
+                    'Stage', 'Practice', 'Virtual', 'Digital', 'Here', 'Most',
+                    'Several', 'Many', 'Some', 'Every', 'Next', 'Five', 'Top',
+                    'Also', 'Just', 'Only', 'Even', 'Already', 'Nearly',
                 ]
                 # Quality gates:
                 # 1. Must be > 5 chars
                 # 2. Must not be a single common word
                 # 3. Must be < 60 chars (reject sentence fragments)
                 # 4. Must contain at least 2 words for non-known-company patterns
+                # 5. First word must not be a common word
                 if (len(org) > 5 
                     and org not in false_positives
+                    and org.split()[0] not in false_positives
                     and len(org) <= 60
                     and (' ' in org or pattern == patterns[3])):
                     return org
         
         return None
-    
+
     def _extract_fallback_org(self, title: str) -> Optional[str]:
         """Extract a fallback organization identifier from article title."""
         # For articles with strong signals but no clear org, create a descriptive identifier.
         # Quality checks to avoid garbage like 'the system', 'st India Proposes', etc.
         
         # Try to extract proper nouns at start of title
-        match = re.match(r'^([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3})', title)
+        match = re.match(r'^([A-Z][a-zA-Z]{2,}(?:\s+[A-Z][a-zA-Z]{2,}){0,3})', title)
         if match:
             potential_org = match.group(1).strip()
             
@@ -272,16 +281,18 @@ class ProspectQualifier:
                 r'^(report|study|survey|analysis|update|breaking)\s', # generic headers
                 r'^(google|apple|meta|microsoft|amazon)\s',  # big tech (not prospects)
                 r'^(according|practice|stage|virtual|digital|why)\s',  # more garbage
-                r'^(appeared|next|every|overall)\s',  # RSS fragments
+                r'^(appeared|next|every|overall|here|just|also)\s',  # RSS fragments
+                r'^(five|three|ten|seven|most|several|many|some)\s',  # quantifiers
+                r'^(for|from|with|into|over|under|about|after|before)\s',  # prepositions
             ]
             for gp in garbage_patterns:
                 if re.match(gp, potential_org, re.IGNORECASE):
                     return None
             
             # Must be at least 6 chars, contain at least one space (2+ words),
-            # and be under 50 chars to avoid sentence fragments
-            if len(potential_org) >= 6 and ' ' in potential_org and len(potential_org) <= 50:
-                return f"{potential_org} (Industry Signal)"
+            # and be under 40 chars to avoid sentence fragments
+            if len(potential_org) >= 6 and ' ' in potential_org and len(potential_org) <= 40:
+                return potential_org
         
         return None
     

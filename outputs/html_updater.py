@@ -351,13 +351,18 @@ class HTMLUpdater:
     
     def _update_timestamp(self, html: str, prospect_count: int = 0) -> str:
         """Update the Pipeline Status banner with scan results."""
-        from datetime import timedelta
-        # GitHub Actions runs in UTC — convert to CST (UTC-6)
-        utc_now = datetime.utcnow()
-        cst_now = utc_now - timedelta(hours=6)
-        date_str = cst_now.strftime('%B %d, %Y')
-        time_str = cst_now.strftime('%I:%M %p').lstrip('0')
-        full_timestamp = f"{date_str} at {time_str} CST"
+        try:
+            from zoneinfo import ZoneInfo
+            now = datetime.now(ZoneInfo('America/Chicago'))
+            tz_label = 'CST' if now.strftime('%Z') == 'CST' else 'CDT'
+        except ImportError:
+            # Fallback for older Python without zoneinfo
+            from datetime import timedelta
+            now = datetime.utcnow() - timedelta(hours=6)
+            tz_label = 'CST'
+        date_str = now.strftime('%B %d, %Y')
+        time_str = now.strftime('%I:%M %p').lstrip('0')
+        full_timestamp = f"{date_str} at {time_str} {tz_label}"
         
         # Build the result message
         if prospect_count > 0:

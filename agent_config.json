@@ -144,15 +144,22 @@
             "keywords": [
                 "cloud migration",
                 "migrating to cloud",
-                "AWS migration",
-                "Azure migration",
+                "moves to cloud",
+                "cloud platform",
+                "AWS",
+                "Azure",
                 "Google Cloud",
                 "digital transformation",
                 "IT modernization",
                 "data center",
-                "infrastructure upgrade",
+                "infrastructure",
                 "cloud strategy",
-                "hybrid cloud"
+                "hybrid cloud",
+                "cloud-native",
+                "multi-cloud",
+                "digital platform",
+                "technology overhaul",
+                "IT upgrade"
             ]
         },
         "managed_services_gap": {
@@ -165,7 +172,15 @@
                 "IT outsourcing",
                 "operational support",
                 "24/7 support",
-                "SLA"
+                "SLA",
+                "contracts",
+                "partnership",
+                "technology partner",
+                "selects",
+                "partners with",
+                "taps",
+                "hires",
+                "engages"
             ],
             "negative_signals": [
                 "Accenture partnership",
@@ -183,12 +198,20 @@
                 "machine learning",
                 "artificial intelligence",
                 "scaling AI",
-                "operationalizing AI",
                 "AI operations",
                 "MLOps",
                 "generative AI",
                 "large language model",
-                "LLM deployment"
+                "LLM",
+                "AI agent",
+                "AI-powered",
+                "AI tool",
+                "deep learning",
+                "neural network",
+                "automation",
+                "predictive analytics",
+                "computer vision",
+                "natural language processing"
             ]
         },
         "compliance_sensitivity": {
@@ -199,11 +222,16 @@
                 "patient data",
                 "healthcare compliance",
                 "security",
+                "cybersecurity",
+                "data breach",
                 "data privacy",
                 "regulatory",
                 "audit",
                 "SOC 2",
-                "HITRUST"
+                "HITRUST",
+                "ransomware",
+                "vulnerability",
+                "zero trust"
             ]
         },
         "timing_urgency": {
@@ -211,6 +239,11 @@
             "keywords": [
                 "announced",
                 "planning",
+                "launches",
+                "deploys",
+                "rolls out",
+                "unveils",
+                "introduces",
                 "by 2026",
                 "by 2027",
                 "this year",
@@ -218,11 +251,12 @@
                 "Q2",
                 "Q3",
                 "Q4",
-                "timeline",
-                "deadline",
-                "urgent",
+                "raises",
+                "secures funding",
+                "investment",
                 "accelerating",
-                "fast-tracking"
+                "fast-tracking",
+                "expands"
             ]
         }
     },

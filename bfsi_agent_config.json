@@ -178,17 +178,24 @@
                 "cloud migration",
                 "core banking modernization",
                 "legacy transformation",
-                "AWS migration",
-                "Azure migration",
+                "moves to cloud",
+                "cloud platform",
+                "AWS",
+                "Azure",
                 "Google Cloud",
                 "digital transformation",
                 "IT modernization",
                 "data center",
-                "infrastructure upgrade",
+                "infrastructure",
                 "cloud strategy",
                 "hybrid cloud",
                 "mainframe migration",
-                "cloud-native"
+                "cloud-native",
+                "multi-cloud",
+                "digital banking",
+                "digital platform",
+                "open banking",
+                "technology overhaul"
             ]
         },
         "compliance_pressure": {
@@ -203,11 +210,19 @@
                 "GLBA",
                 "CCPA",
                 "OCC examination",
-                "compliance automation",
+                "compliance",
                 "RegTech",
                 "data privacy",
                 "security breach",
-                "cyber incident"
+                "cyber incident",
+                "cybersecurity",
+                "data breach",
+                "ransomware",
+                "vulnerability",
+                "fraud",
+                "anti-money laundering",
+                "AML",
+                "KYC"
             ]
         },
         "ai_infrastructure": {
@@ -224,9 +239,16 @@
                 "GenAI",
                 "generative AI",
                 "large language model",
-                "LLM deployment",
+                "LLM",
                 "MLOps",
-                "AI operations"
+                "AI operations",
+                "AI agent",
+                "AI-powered",
+                "AI tool",
+                "automation",
+                "predictive analytics",
+                "robo-advisor",
+                "algorithmic"
             ]
         },
         "managed_services_gap": {
@@ -240,7 +262,14 @@
                 "operational support",
                 "24/7 support",
                 "SLA",
-                "technology partner"
+                "technology partner",
+                "contracts",
+                "partnership",
+                "selects",
+                "partners with",
+                "taps",
+                "hires",
+                "engages"
             ],
             "negative_signals": [
                 "Accenture partnership",
@@ -257,6 +286,11 @@
             "keywords": [
                 "announced",
                 "planning",
+                "launches",
+                "deploys",
+                "rolls out",
+                "unveils",
+                "introduces",
                 "by 2026",
                 "by 2027",
                 "this year",
@@ -264,11 +298,12 @@
                 "Q2",
                 "Q3",
                 "Q4",
-                "timeline",
-                "deadline",
-                "urgent",
+                "raises",
+                "secures funding",
+                "investment",
                 "accelerating",
-                "fast-tracking"
+                "fast-tracking",
+                "expands"
             ]
         }
     },
