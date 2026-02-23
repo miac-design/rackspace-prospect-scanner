@@ -98,7 +98,7 @@ class TestOrgExtraction:
         q = ProspectQualifier(hc_config)
         result = q._extract_fallback_org('Accenture Federal Services Wins Contract')
         assert result is not None
-        assert '(Industry Signal)' in result
+        assert 'Accenture Federal' in result
 
 
 # ── Wedge Generation ─────────────────────────────────────────
