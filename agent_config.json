@@ -281,7 +281,7 @@
     ],
     "output": {
         "prospects_json": "prospects_data.json",
-        "html_file": "Rackspace_Healthcare_Prospects.html",
+        "html_file": "dist_prospects/healthcare.html",
         "log_file": "agent_activity.log"
     },
     "categories": {
