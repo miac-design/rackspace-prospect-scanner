@@ -169,3 +169,99 @@
 2026-02-23 09:00:05,714 - LinkValidator - INFO - Validation complete: 0 valid, 0 broken
 2026-02-23 09:00:05,714 - ProspectAgent - INFO -    All links valid!
 2026-02-23 09:00:05,721 - ProspectAgent - INFO -    ℹ️  npx not found — skipping local deploy (GitHub Actions handles production deploys)
+2026-03-02 09:00:03,958 - ProspectAgent - INFO - 🚀 Starting Healthcare Prospect Scanner Agent
+2026-03-02 09:00:03,958 - ProspectAgent - INFO -    Looking back 7 days
+2026-03-02 09:00:04,230 - NewsScanner - INFO -      Found 15 recent articles
+2026-03-02 09:00:04,230 - NewsScanner - INFO -    ✓ HIT Consultant: 15 articles
+2026-03-02 09:00:04,240 - NewsScanner - INFO -      Found 10 recent articles
+2026-03-02 09:00:04,240 - NewsScanner - INFO -    ✓ Healthcare Dive: 10 articles
+2026-03-02 09:00:04,269 - NewsScanner - INFO -      Found 30 recent articles
+2026-03-02 09:00:04,269 - NewsScanner - INFO -    ✓ MedCity News: 30 articles
+2026-03-02 09:00:04,331 - NewsScanner - INFO -      Found 25 recent articles
+2026-03-02 09:00:04,331 - NewsScanner - INFO -    ✓ Fierce Healthcare: 25 articles
+2026-03-02 09:00:05,173 - NewsScanner - INFO -      Found 2 recent articles
+2026-03-02 09:00:05,173 - NewsScanner - INFO -    ✓ Healthcare IT News: 2 articles
+2026-03-02 09:00:05,174 - NewsScanner - INFO -    Total unique articles: 82
+2026-03-02 09:00:05,174 - ProspectAgent - INFO -    Found 82 articles
+2026-03-02 09:00:05,181 - ProspectQualifier - INFO - REJECTED [AI in Healthcare Revenue Cycle Management: Moving from Automation to Prediction] → Gate: ORG (no company found, score=28, ai_infrastructure:20 | timing_urgency:8)
+2026-03-02 09:00:05,187 - ProspectQualifier - INFO - REJECTED [Managing Migraines and Diabetes? Theranica Proves Migraine Wearable is Safe to U] → Gate: ORG (no company found, score=10, timing_urgency:10)
+2026-03-02 09:00:05,188 - ProspectQualifier - INFO - REJECTED [Handl Health Raises $14.2M to Optimize Employer-Sponsored Health Plans] → Gate: SCORE (16/40, org=Sponsored Health, timing_urgency:11)
+2026-03-02 09:00:05,192 - ProspectQualifier - INFO - REJECTED [61% of Nurses Are Burned Out. What to Do as a Nursing Worker to Protect Yourself] → Gate: ORG (no company found, score=24, ai_infrastructure:16 | timing_urgency:8)
+2026-03-02 09:00:05,195 - ProspectQualifier - INFO - REJECTED [Walgreens Launches Virtual Weight Management Platform for Self-Pay GLP-1 Patient] → Gate: ORG (no company found, score=12, timing_urgency:12)
+2026-03-02 09:00:05,196 - ProspectQualifier - INFO - REJECTED [Eko Health Deploys SENSORA AI Cardiac Detection Platform at Wayne General Hospit] → Gate: SCORE+LLM (35/40, LLM unavailable, ai_infrastructure:13 | timing_urgency:12)
+2026-03-02 09:00:05,199 - ProspectQualifier - INFO - REJECTED [GLP-1s are changing benefits decisions. Here’s how health care decision-makers c] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [6 ways AI is finally tackling healthcare’s paper problem] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [UHS eyes rising admissions targets this year despite headwinds] → Gate: ORG (no company found, score=10, timing_urgency:10)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [Elevance shuffles C-suite as top Carelon exec departs] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [Teladoc projects lower integrated care membership amid ACA subsidy lapse] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [Trump administration halts over $259M in Medicaid funds to Minnesota] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [Medicare Advantage forced disenrollments rise as insurers exit markets: study] → Gate: ORG (no company found, score=26, ai_infrastructure:16 | timing_urgency:10)
+2026-03-02 09:00:05,200 - ProspectQualifier - INFO - REJECTED [Trump’s State of the Union trumpets healthcare greatest hits, but no new policie] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,201 - ProspectQualifier - INFO - REJECTED [Veradigm avoids enforcement action in SEC probe] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,201 - ProspectQualifier - INFO - REJECTED [15 states sue HHS over changes to childhood vaccine schedule] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,201 - ProspectQualifier - INFO - REJECTED [Can AI Help Cure America’s Healthcare Pricing Problem?] → Gate: ORG (no company found, score=11, ai_infrastructure:11)
+2026-03-02 09:00:05,201 - ProspectQualifier - INFO - REJECTED [Health Gorilla Calls Epic Lawsuit ‘Attack on Interoperability’ in Motion to Dism] → Gate: SCORE+LLM (30/40, LLM unavailable, cloud_migration:20)
+2026-03-02 09:00:05,201 - ProspectQualifier - INFO - REJECTED [MedCity FemFwd: Inside Build Health International’s New Maternal Center of Excel] → Gate: SCORE (10/40, org=Inside Build Health, no matches)
+2026-03-02 09:00:05,202 - ProspectQualifier - INFO - REJECTED [GoodRx Launches Employer Program to Help Subsidize High-Cost Brand Drugs] → Gate: ORG (no company found, score=12, timing_urgency:12)
+2026-03-02 09:00:05,202 - ProspectQualifier - INFO - REJECTED [Atrium Therapeutics Launches With $270M for RNA Therapies Addressing Rare Cardio] → Gate: ORG (no company found, score=12, timing_urgency:12)
+2026-03-02 09:00:05,202 - ProspectQualifier - INFO - REJECTED [The U.S. Keeps Failing the March of Dimes Report Card. Here’s One Gap We Can Clo] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,203 - ProspectQualifier - INFO - REJECTED [Solving the Psychological Safety Problem in Healthcare] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,203 - ProspectQualifier - INFO - REJECTED [Healthcare Moves: A Monthly Summary of Hires, Exits and Layoffs] → Gate: ORG (no company found, score=14, managed_services_gap:14)
+2026-03-02 09:00:05,203 - ProspectQualifier - INFO - REJECTED [Walgreens Introduces Virtual Weight Management Offering] → Gate: ORG (no company found, score=11, timing_urgency:11)
+2026-03-02 09:00:05,204 - ProspectQualifier - INFO - REJECTED [Generate Biomedicines’ IPO Brings In $400M for Pivotal Tests of Severe Asthma Dr] → Gate: ORG (no company found, score=16, ai_infrastructure:16)
+2026-03-02 09:00:05,204 - ProspectQualifier - INFO - REJECTED [Where the Patient Experience Is Heading – And 3 Ways Healthcare Providers Can Me] → Gate: SCORE (10/40, org=Ways Healthcare Providers Can Meet That Moment Healthcare, no matches)
+2026-03-02 09:00:05,204 - ProspectQualifier - INFO - REJECTED [Regulating Healthcare AI? Look To E-Prescribing] → Gate: SCORE (10/40, org=Regulating Healthcare, no matches)
+2026-03-02 09:00:05,204 - ProspectQualifier - INFO - REJECTED [How Elevance Health Is — and Isn’t — Using AI] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,205 - ProspectQualifier - INFO - REJECTED [FDA Voucher Leads to Speedy Approval of Boehringer Drug for First-Line Use in Lu] → Gate: ORG (no company found, score=8, compliance_sensitivity:8)
+2026-03-02 09:00:05,205 - ProspectQualifier - INFO - REJECTED [Where to Buy Laboratory Freeze Dryers for Sample Preservation] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,205 - ProspectQualifier - INFO - REJECTED [Boehringer Boosts Pipeline, Adding Oral Small Molecules With Broad Immunology & ] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,205 - ProspectQualifier - INFO - REJECTED [Compliance: Why Your Vendor’s Vendor is a Growth Risk] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,206 - ProspectQualifier - INFO - REJECTED [Rare Disease Day 2026: From Awareness to Access in a Volatile Year for Patients ] → Gate: ORG (no company found, score=14, cloud_migration:14)
+2026-03-02 09:00:05,206 - ProspectQualifier - INFO - REJECTED [HR1 Is Stress Testing Medicaid Performance Metrics and Exposing a Failure in Eng] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,206 - ProspectQualifier - INFO - REJECTED [After 4-Week Strike, Kaiser Permanente Workers Score Tentative Win on Staffing &] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,206 - ProspectQualifier - INFO - REJECTED [How Healthcare Leaders Responded to Trump’s State of the Union] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,207 - ProspectQualifier - INFO - REJECTED [Novo Nordisk Commits Up to $2B to Drug Delivery Startup Vivtex for R&D of Oral M] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,207 - ProspectQualifier - INFO - REJECTED [Top-Rated Health Insurance Plans for Companies With Remote Employees] → Gate: SCORE (5/40, org=Rated Health, no matches)
+2026-03-02 09:00:05,207 - ProspectQualifier - INFO - REJECTED [AI-Driven Coding is Driving Costs Up. How Can Payers Adapt?] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,207 - ProspectQualifier - INFO - REJECTED [Making Quality a Daily Habit] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,207 - ProspectQualifier - INFO - REJECTED [Valo Health CEO: We Don’t Want Investors To Drive the Science] → Gate: SCORE (10/40, org=Valo Health, no matches)
+2026-03-02 09:00:05,207 - ProspectQualifier - INFO - REJECTED [4 Health Tech Trends Startups Can’t Ignore, Per an Oak HC/FT Partner] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,208 - ProspectQualifier - INFO - REJECTED [Coral Care Raises $13M to Scale In-Home Pediatric Therapy] → Gate: SCORE (21/40, org=Jefferson River Capital, timing_urgency:11)
+2026-03-02 09:00:05,208 - ProspectQualifier - INFO - REJECTED [Headache Startup Slate Medicines Lands $130M to Bring Novel Migraine Drug Into t] → Gate: ORG (no company found, score=16, managed_services_gap:16)
+2026-03-02 09:00:05,208 - ProspectQualifier - INFO - REJECTED [Tennr takes aim at phone call bottlenecks as it builds out automation for patien] → Gate: ORG (no company found, score=18, ai_infrastructure:18)
+2026-03-02 09:00:05,208 - ProspectQualifier - INFO - REJECTED [Quest Diagnostics launches Google-powered AI chatbot to help patients understand] → Gate: SCORE (12/40, org=Quest Diagnostics, timing_urgency:12)
+2026-03-02 09:00:05,208 - ProspectQualifier - INFO - REJECTED [DoseSpot, Arrive Health merge to combine prescribing tools with pharmacy, medica] → Gate: SCORE (10/40, org=Arrive Health, no matches)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Add-Only Retro Programs Are Now a Federal Red Flag. Here's the Evidence.] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Clover Health CEO said company sees opportunity in complex MA environment] → Gate: SCORE (5/40, org=Clover Health, no matches)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Walgreens debuts virtual weight management clinic with access to GLP-1 meds] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Cigna's Evernorth quietly acquires hospital pharmacy CarepathRx] → Gate: SCORE (20/40, org=Fierce Healthcare, timing_urgency:10)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Patrick Kennedy: Collab with MAHA is essential to address mental health crisis] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Op-ed: Our patients deserve better safety reporting. AI could be the answer] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Alignment CEO John Kao offers measured response to proposed 2027 MA rates] → Gate: SCORE (5/40, org=Alignment Healthcare, no matches)
+2026-03-02 09:00:05,209 - ProspectQualifier - INFO - REJECTED [Lake Nona Impact Forum: There can't be longevity without tech] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [CFO Mark Kaye to take the helm at Carelon in leadership shake-up at Elevance Hea] → Gate: SCORE (20/40, org=Elevance Health Elevance Health, timing_urgency:10)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [Teladoc Health reports slower growth, offers cautious 2026 outlook as it shifts ] → Gate: SCORE (10/40, org=Teladoc Health, no matches)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [Insurance groups say proposed flat Medicare Advantage rates fail to meet the mom] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [Health Gorilla urges court to toss lawsuit filed by Epic, health systems] → Gate: ORG (no company found, score=20, cloud_migration:20)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [After delay, CDC vaccine panel sets new dates to discuss long COVID and mRNA sho] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [After 2025's volumes shortfall, Universal Health Services says capacity, headcou] → Gate: SCORE (20/40, org=Universal Health, timing_urgency:10)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [Altman-backed startup Verifiable rolls out AI agent to automate credentialing] → Gate: DOMAIN (no domain terms found)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [OpenEvidence releases AI-integrated dialer feature to expand its reach with clin] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,210 - ProspectQualifier - INFO - REJECTED [CMS unveils new initiatives aimed at cracking down on healthcare fraud] → Gate: ORG (no company found, score=12, timing_urgency:12)
+2026-03-02 09:00:05,211 - ProspectQualifier - INFO - REJECTED [Surgeon general nominee Casey Means faces Senate grilling on vaccines, conflicts] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,211 - ProspectQualifier - INFO - REJECTED [Hims &amp; Hers bullish on growth prospects even as it faces increasing regulato] → Gate: ORG (no company found, score=8, compliance_sensitivity:8)
+2026-03-02 09:00:05,211 - ProspectQualifier - INFO - REJECTED [Survey: Many rare disease patients struggle to navigate care] → Gate: ORG (no company found, score=0, no matches)
+2026-03-02 09:00:05,211 - ProspectQualifier - INFO - REJECTED [Inside Advocate Health’s ‘hospital room of the future’] → Gate: SCORE (10/40, org=Inside Advocate Health, no matches)
+2026-03-02 09:00:05,211 - ProspectQualifier - INFO - REJECTED [Massive Kaiser Permanente strike ends, though contracts are still being finalize] → Gate: ORG (no company found, score=14, managed_services_gap:14)
+2026-03-02 09:00:05,211 - ProspectQualifier - INFO - REJECTED [To succeed with AI, leaders must prioritize safety when driving transformation] → Gate: ORG (no company found, score=20, ai_infrastructure:20)
+2026-03-02 09:00:05,212 - ProspectQualifier - INFO - REJECTED [AI works, but can healthcare run it safely, sustainably and at scale?] → Gate: SCORE (11/40, org=HIMSS Global Health, ai_infrastructure:11)
+2026-03-02 09:00:05,212 - ProspectAgent - INFO -    Qualified 10 prospects
+2026-03-02 09:00:05,214 - ProspectAgent - INFO -    Saved 11 total prospects to prospects_data.json
+2026-03-02 09:00:05,232 - HTMLUpdater - INFO -    Updated scan banner: March 02, 2026 at 9:00 AM CST | 10 prospects
+2026-03-02 09:00:05,233 - HTMLUpdater - INFO -    Recorded scan result: 10 prospects
+2026-03-02 09:00:05,235 - HTMLUpdater - INFO -    Added 10 prospects to HTML
+2026-03-02 09:00:05,235 - ProspectAgent - INFO -    HTML file updated
+2026-03-02 09:00:05,236 - LinkValidator - INFO - Found 0 source links to validate
+2026-03-02 09:00:05,236 - LinkValidator - INFO - Validation complete: 0 valid, 0 broken
+2026-03-02 09:00:05,237 - ProspectAgent - INFO -    All links valid!
+2026-03-02 09:00:05,304 - ProspectAgent - INFO -    ℹ️  npx not found — skipping local deploy (GitHub Actions handles production deploys)
