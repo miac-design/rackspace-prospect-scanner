@@ -327,13 +327,9 @@ if __name__ == '__main__':
     bfsi_prospects = run_scan('bfsi_agent_config.json', dry_run=args.dry_run)
     
     if not args.dry_run:
-        # Copy source HTML → dist_prospects for Vercel deployment
-        shutil.copy('Rackspace_Healthcare_Prospects.html', 'dist_prospects/healthcare.html')
-        shutil.copy('Rackspace_Healthcare_Prospects.html', 'dist_prospects/index.html')
-        shutil.copy('Rackspace_BFSI_Prospects.html', 'dist_prospects/bfsi.html')
-        print("\n✅ Copied Healthcare HTML → dist_prospects/healthcare.html")
-        print("✅ Copied Healthcare HTML → dist_prospects/index.html")
-        print("✅ Copied BFSI HTML → dist_prospects/bfsi.html")
+        # Mirror healthcare page as the default index
+        shutil.copy('dist_prospects/healthcare.html', 'dist_prospects/index.html')
+        print("\n✅ Mirrored healthcare.html → dist_prospects/index.html")
     
     print(f"\n{'='*60}")
     print(f"  SCAN COMPLETE{'  [DRY RUN]' if args.dry_run else ''}")
