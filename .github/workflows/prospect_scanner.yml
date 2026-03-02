@@ -69,6 +69,7 @@ jobs:
           git config user.email "bot@rackspaceprospects.vercel.app"
           git add -A
           git diff --staged --quiet || git commit -m "🤖 Auto-scan: $(date '+%Y-%m-%d %H:%M')"
+          git pull --rebase || true
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
