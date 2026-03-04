@@ -79,21 +79,36 @@ class IdempotencyManifest:
         Filter a list of prospects, returning only ones not in the manifest.
         Also marks the returned prospects as seen.
         
+        Deduplicates by BOTH (org+url) hash AND org name alone,
+        preventing the same company from being added via different articles.
+        
         Args:
             prospects: List of prospect dicts with 'organization' and 'source_url'
             
         Returns:
             List of prospects that are genuinely new
         """
+        # Build set of already-seen org names for fast lookup
+        seen_orgs = {
+            v['org'].strip().lower()
+            for v in self.data['prospects'].values()
+            if 'org' in v
+        }
+        
         new_prospects = []
         for p in prospects:
             org = p.get('organization', '')
             url = p.get('source_url', '')
-            if self.is_new(org, url):
+            org_key = org.strip().lower()
+            
+            if not self.is_new(org, url):
+                logger.info(f"   Skipped duplicate (exact match): {org}")
+            elif org_key in seen_orgs:
+                logger.info(f"   Skipped duplicate (same org, different article): {org}")
+            else:
                 new_prospects.append(p)
                 self.mark_seen(org, url, score=p.get('qualification_score', 0))
-            else:
-                logger.info(f"   Skipped duplicate: {org}")
+                seen_orgs.add(org_key)
         return new_prospects
     
     @property
