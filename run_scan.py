@@ -268,19 +268,26 @@ def run_scan(config_path: str, dry_run: bool = False):
     if deduped_count > 0:
         print(f"   🔁 Skipped {deduped_count} already-seen prospect(s)")
     
-    # Step 3: Update HTML
+    # Step 3: Update HTML — insert cards FIRST, then record the actual
+    # outcome in the banner so it never claims prospects that weren't added.
     updater = HTMLUpdater(config)
-    
-    # Always record scan time
-    updater.record_scan(prospect_count=len(new_prospects))
-    print(f"   📝 Updated Pipeline Status banner")
-    
-    # Insert cards if any new
+
+    inserted_count = 0
     if new_prospects:
-        updater.update(new_prospects)
-        print(f"   📝 Inserted {len(new_prospects)} new prospect cards")
+        if updater.update(new_prospects):
+            inserted_count = len(new_prospects)
+            print(f"   📝 Inserted {inserted_count} new prospect cards")
+        else:
+            print(f"   ❌ INSERTION FAILED — {len(new_prospects)} prospects "
+                  f"qualified but could not be added to the HTML")
+            updater.record_scan(prospect_count=0)
+            sys.exit(1)  # Fail the CI run loudly instead of committing a lying banner
     else:
         print(f"   ✅ No new prospects — banner timestamp updated")
+
+    # Record scan time + true inserted count
+    updater.record_scan(prospect_count=inserted_count)
+    print(f"   📝 Updated Pipeline Status banner")
     
     # Save to JSON (append new prospects)
     output_json = config['output']['prospects_json']

@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "prospects": {
+    "2b382887e0506447": {
+      "org": "WellSpan Health",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.678308"
+    },
+    "9cffde643837d39c": {
+      "org": "Jefferson Health + Lehigh Valley",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.678477"
+    },
+    "21b8871e4812486e": {
+      "org": "Community Health Systems",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.678667"
+    },
+    "6af616873d79bd77": {
+      "org": "CharmHealth",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.679102"
+    },
+    "922b006ddefe88cb": {
+      "org": "Ways Clinic",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.679319"
+    },
+    "df31c146ee435c54": {
+      "org": "Federal Health",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.679530"
+    },
+    "046cf4a78a3dec07": {
+      "org": "FDB Vela",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.679757"
+    },
+    "9408f5d996b49168": {
+      "org": "NewSpring Healthcare",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.680085"
+    },
+    "d2b7f552dd814ed2": {
+      "org": "UCSF Health",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.680286"
+    },
+    "63d9f21b476d0eae": {
+      "org": "Third Way Health",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.680618"
+    },
+    "0070c684d1d24822": {
+      "org": "Sheba Medical Center",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.680909"
+    },
+    "aca8c25ce9fa25fa": {
+      "org": "Qventus",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.681129"
+    },
+    "37d774d6d6961eaa": {
+      "org": "Collective Health",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.681455"
+    },
+    "3f110ba1ee8f96e5": {
+      "org": "Capital One",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.682444"
+    },
+    "2ac67b111b3bae50": {
+      "org": "JPMorgan Chase",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.682694"
+    },
+    "680952b8fdbfbe22": {
+      "org": "USAA",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.683090"
+    },
+    "e979c4aad026fba8": {
+      "org": "National Securities",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.683405"
+    },
+    "757ce0617c061350": {
+      "org": "Standard Chartered",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.683715"
+    },
+    "c357addb7e76d34f": {
+      "org": "Egypt Network",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.684045"
+    },
+    "c339ecd0dd7de216": {
+      "org": "Nexi Group",
+      "domain": "",
+      "url": "",
+      "score": 0,
+      "first_seen": "2026-06-11T22:31:39.684368"
+    }
+  }
+}

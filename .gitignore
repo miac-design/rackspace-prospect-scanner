@@ -6,7 +6,9 @@ __pycache__/
 .pytest_cache/
 
 # Runtime data files
-prospect_manifest.json
+# NOTE: prospect_manifest.json is intentionally COMMITTED — it is the
+# cross-run dedup store. If ignored, every CI run starts with an empty
+# manifest and re-inserts the same prospects daily.
 scan_history.json
 feed_health.json
 prospects_data.json
