@@ -194,11 +194,12 @@ class HTMLUpdater:
         else:
             primary_color = 'var(--plum)'
         
-        # Build reach-out reason box (only if available)
+        # Build reach-out reason box (only if available). Spans the full grid
+        # width so the card never renders a half-empty row.
         reach_out_html = ''
         if reach_out_reason:
             reach_out_html = f'''
-                    <div class="info-box" style="border-left: 3px solid {primary_color}; background: rgba(139, 92, 246, 0.05);">
+                    <div class="info-box" style="grid-column: 1 / -1; border-left: 3px solid {primary_color}; background: rgba(139, 92, 246, 0.05);">
                         <div class="label">💡 Reason to Reach Out <span style="font-size: 0.6rem; background: {primary_color}; color: white; padding: 1px 6px; border-radius: 3px; margin-left: 6px;">{signal_type}</span></div>
                         <div class="info-text"><strong>{reach_out_reason}</strong></div>
                     </div>'''
@@ -219,6 +220,19 @@ class HTMLUpdater:
                         <div class="intel-item">
                             <div class="intel-label">Website Intel</div>
                             <div class="intel-value">{website_note}</div>
+                        </div>'''
+
+        # Build Current Vendors chips from website enrichment (same markup as
+        # the hand-curated cards) so auto-cards match the original design.
+        vendors_html = ''
+        vendor_badges = self._generate_vendor_badges(prospect)
+        if vendor_badges:
+            vendors_html = f'''
+                        <div class="intel-item">
+                            <div class="intel-label">Current Vendors</div>
+                            <div class="vendor-badges">
+                                {vendor_badges}
+                            </div>
                         </div>'''
         
         card_html = f'''
@@ -263,7 +277,7 @@ class HTMLUpdater:
                             <div class="signal-pills">
                                 {signal_pills}
                             </div>
-                        </div>{score_audit_html}{website_html}
+                        </div>{vendors_html}{score_audit_html}{website_html}
                         <div class="intel-item">
                             <div class="intel-label">Source</div>
                             <div class="intel-value">
@@ -282,6 +296,37 @@ class HTMLUpdater:
                 </div>'''
         return card_html
     
+    def _generate_vendor_badges(self, prospect: Dict) -> str:
+        """Build vendor-badge chips from website-enrichment tech hints.
+
+        Maps raw keyword hits (e.g. 'aws', 'google cloud') to display names
+        and renders the same `vendor-badge` markup as the curated cards.
+        Returns '' when no enrichment data exists — the section is omitted
+        rather than shown empty.
+        """
+        website_data = prospect.get('website_data')
+        if not isinstance(website_data, dict):
+            return ''
+
+        display_names = {
+            'aws': 'AWS',
+            'amazon web services': 'AWS',
+            'azure': 'Azure',
+            'google cloud': 'Google Cloud',
+            'gcp': 'Google Cloud',
+            'openstack': 'OpenStack',
+            'kubernetes': 'Kubernetes',
+        }
+
+        vendors = []
+        for hint in website_data.get('tech_stack_hints', []):
+            name = display_names.get(str(hint).lower())
+            if name and name not in vendors:
+                vendors.append(name)
+
+        badges = [f'<span class="vendor-badge">{v}</span>' for v in vendors[:4]]
+        return '\n                                '.join(badges)
+
     def _generate_use_case_tags(self, prospect: Dict) -> str:
         """Generate use-case tag HTML based on prospect data."""
         tags = []

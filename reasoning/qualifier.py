@@ -502,14 +502,19 @@ class ProspectQualifier:
         return False
     
     def _determine_category(self, text: str) -> Optional[str]:
-        """Determine prospect category."""
+        """Determine prospect category.
+
+        Returns None when no category keywords match — the card is then
+        labeled with the generic domain ('Healthcare'/'BFSI') instead of
+        falsely claiming the first config category (e.g. a software vendor
+        being tagged 'Health System'). No match also means no unearned
+        priority_boost.
+        """
         for category_name, category_config in self.categories.items():
             keywords = category_config['keywords']
             if any(kw.lower() in text for kw in keywords):
                 return category_name
-        # Default to first category in config (works for both Healthcare and BFSI)
-        default = next(iter(self.categories), None)
-        return default
+        return None
     
     def _format_category(self, category: Optional[str]) -> str:
         """Format category for display."""
