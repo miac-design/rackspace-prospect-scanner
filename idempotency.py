@@ -62,11 +62,13 @@ class IdempotencyManifest:
         prospect_id = self._hash(org_name, source_url)
         return prospect_id not in self.data['prospects']
     
-    def mark_seen(self, org_name: str, source_url: str, score: int = 0):
+    def mark_seen(self, org_name: str, source_url: str, score: int = 0,
+                  domain: str = ''):
         """Record a prospect as seen."""
         prospect_id = self._hash(org_name, source_url)
         self.data['prospects'][prospect_id] = {
             'org': org_name,
+            'domain': (domain or '').strip().lower(),
             'url': source_url,
             'score': score,
             'first_seen': datetime.now().isoformat(),
@@ -79,36 +81,49 @@ class IdempotencyManifest:
         Filter a list of prospects, returning only ones not in the manifest.
         Also marks the returned prospects as seen.
         
-        Deduplicates by BOTH (org+url) hash AND org name alone,
-        preventing the same company from being added via different articles.
-        
+        Deduplicates by domain (preferred), then by (org+url) hash, then by
+        org name alone — preventing the same company from being added via
+        different articles or slightly different name spellings.
+
         Args:
-            prospects: List of prospect dicts with 'organization' and 'source_url'
-            
+            prospects: List of prospect dicts with 'organization', 'source_url',
+                       and optionally 'domain'
+
         Returns:
             List of prospects that are genuinely new
         """
-        # Build set of already-seen org names for fast lookup
+        # Build sets of already-seen domains and org names for fast lookup
         seen_orgs = {
             v['org'].strip().lower()
             for v in self.data['prospects'].values()
             if 'org' in v
         }
-        
+        seen_domains = {
+            v['domain'].strip().lower()
+            for v in self.data['prospects'].values()
+            if v.get('domain')
+        }
+
         new_prospects = []
         for p in prospects:
             org = p.get('organization', '')
             url = p.get('source_url', '')
             org_key = org.strip().lower()
-            
-            if not self.is_new(org, url):
+            domain_key = (p.get('domain') or '').strip().lower()
+
+            if domain_key and domain_key in seen_domains:
+                logger.info(f"   Skipped duplicate (same domain): {org} ({domain_key})")
+            elif not self.is_new(org, url):
                 logger.info(f"   Skipped duplicate (exact match): {org}")
             elif org_key in seen_orgs:
                 logger.info(f"   Skipped duplicate (same org, different article): {org}")
             else:
                 new_prospects.append(p)
-                self.mark_seen(org, url, score=p.get('qualification_score', 0))
+                self.mark_seen(org, url, score=p.get('qualification_score', 0),
+                               domain=domain_key)
                 seen_orgs.add(org_key)
+                if domain_key:
+                    seen_domains.add(domain_key)
         return new_prospects
     
     @property
