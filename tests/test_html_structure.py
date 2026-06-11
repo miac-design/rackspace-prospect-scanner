@@ -61,3 +61,23 @@ class TestJavaScriptHandlers:
         if 'id="searchInput"' in html:
             assert "getElementById('searchInput')" in html, \
                 "search box exists but no JS wires it"
+
+
+class TestFilterWiring:
+    """The filter buttons regressed once (section-based logic that did
+    nothing on BFSI). Lock the unified per-card engine in place."""
+
+    def test_unified_filter_engine_present(self, html):
+        assert 'MiraFilter' in html, "unified filter engine missing"
+        assert 'MiraFilter.apply' in html
+
+    def test_no_stale_section_based_filter(self, html):
+        # The old broken implementation toggled section display and defined
+        # filterByUseCase; neither should remain.
+        assert 'function filterByUseCase' not in html
+        assert "s.style.display = s.classList.contains('tier-partners')" not in html
+
+    def test_filter_buttons_have_data_filter(self, html):
+        buttons = re.findall(r'<button class="filter-btn[^"]*"[^>]*data-filter="([^"]+)"', html)
+        assert len(buttons) >= 2, "expected filter buttons with data-filter"
+        assert 'all' in buttons

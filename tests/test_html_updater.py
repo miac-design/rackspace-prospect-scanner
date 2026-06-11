@@ -308,3 +308,28 @@ class TestAnchorInsertion:
         u, path = self._updater(hc_config, tmp_path, content)
         assert u.update([self._prospect()]) is False
         assert path.read_text() == content
+
+
+class TestCategorySlug:
+    """data-category drives the category filter buttons."""
+
+    def test_banking_categories_bucket_to_banking(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        for cat in ['Banking', 'Asset Management', 'National Securities']:
+            assert u._category_slug(cat) == 'banking', cat
+
+    def test_insurance_and_fintech(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        assert u._category_slug('Insurance') == 'insurance'
+        assert u._category_slug('Payer/Insurance') == 'insurance'
+        assert u._category_slug('FinTech') == 'fintech'
+
+    def test_card_includes_data_category(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        card = u._generate_single_card({
+            'organization': 'Test Bank', 'signal': 's',
+            'source_url': 'https://x.com', 'qualification_score': 70,
+            'rackspace_wedge': 'w', 'ai_agent_use_case': 'a',
+            'category': 'Banking', 'priority': 'High',
+        })
+        assert 'data-category="banking"' in card
