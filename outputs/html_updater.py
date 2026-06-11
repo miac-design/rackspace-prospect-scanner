@@ -249,7 +249,7 @@ class HTMLUpdater:
         
         card_html = f'''
                 <!-- NEW PROSPECT: {prospect['organization']} (Auto-added {datetime.now().strftime('%Y-%m-%d')}) -->
-                <div class="prospect-card" data-use-cases="{prospect.get('data_use_cases', 'ai-analytics')}">
+                <div class="prospect-card" data-use-cases="{prospect.get('data_use_cases', 'ai-analytics')}" data-category="{self._category_slug(prospect.get('category', ''))}">
                     <div class="card-header">
                         <div>
                             <div class="company-name">{prospect['organization']} <span style="font-size: 0.65rem; background: {primary_color}; color: white; padding: 2px 6px; border-radius: 4px; margin-left: 8px; vertical-align: middle;">NEW</span></div>
@@ -308,6 +308,23 @@ class HTMLUpdater:
                 </div>'''
         return card_html
     
+    def _category_slug(self, category: str) -> str:
+        """Slug used in data-category for the filter buttons.
+
+        Maps the display category to a coarse filter bucket so the matching
+        category button (Banking/Insurance/FinTech/MedTech) selects the card.
+        """
+        c = (category or '').lower()
+        if any(k in c for k in ('bank', 'asset management', 'securities', 'capital')):
+            return 'banking'
+        if any(k in c for k in ('insurance', 'insurer', 'payer')):
+            return 'insurance'
+        if 'fintech' in c or 'payment' in c:
+            return 'fintech'
+        if 'medtech' in c or 'device' in c:
+            return 'medtech'
+        return re.sub(r'[^a-z0-9]+', '-', c).strip('-')
+
     def _generate_vendor_badges(self, prospect: Dict) -> str:
         """Build vendor-badge chips from website-enrichment tech hints.
 

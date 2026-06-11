@@ -2447,45 +2447,71 @@
     </div>
 
     <script>
-        // ===== SEARCH FUNCTIONALITY =====
+        // ===== UNIFIED FILTERING (search + priority/category buttons + use-case) =====
+        const MiraFilter = {
+            search: '',
+            button: 'all',
+            KEYWORDS: {
+                banking:   ['bank', 'banking', 'bancorp', 'credit union', 'securities'],
+                insurance: ['insurance', 'insurer', 'payer', 'underwriting', 'actuarial'],
+                fintech:   ['fintech', 'payment', 'lending', 'nexi', 'digital bank', 'neobank'],
+                medtech:   ['medtech', 'medical device', 'device', 'biotech', 'pharma', 'diagnostics'],
+            },
+            matchesSearch(card) {
+                return !this.search || card.textContent.toLowerCase().includes(this.search);
+            },
+            matchesButton(card) {
+                const f = this.button;
+                if (f === 'all') return true;
+                if (f === 'high') {
+                    const type = (card.querySelector('.company-type')?.textContent || '').toLowerCase();
+                    const score = parseInt(card.querySelector('.score-number')?.textContent || '0', 10);
+                    return type.includes('high priority') || score >= 75;
+                }
+                if (f === 'ai') {
+                    return !!card.querySelector('.ai-use-case') ||
+                           (card.dataset.useCases || '').includes('ai-analytics');
+                }
+                const hay = [
+                    card.dataset.category || '',
+                    card.querySelector('.company-name')?.textContent || '',
+                    card.querySelector('.company-type')?.textContent || '',
+                ].join(' ').toLowerCase();
+                return (this.KEYWORDS[f] || [f]).some(kw => hay.includes(kw));
+            },
+            matchesUseCase(card) {
+                const boxes = document.querySelectorAll('.use-case-filter');
+                if (!boxes.length) return true;
+                const active = Array.from(boxes).filter(b => b.checked).map(b => b.value);
+                if (active.length === 0) return true;          // none checked -> show all
+                const ucs = card.dataset.useCases ? card.dataset.useCases.split(',') : [];
+                if (ucs.length === 0) return true;             // untagged card -> never hide
+                return ucs.some(uc => active.includes(uc));
+            },
+            apply() {
+                document.querySelectorAll('.prospect-card').forEach(card => {
+                    const show = this.matchesSearch(card) && this.matchesButton(card) && this.matchesUseCase(card);
+                    card.classList.toggle('hidden', !show);
+                });
+            },
+        };
+
         const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', function () {
-            const query = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.prospect-card');
-
-            cards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                card.classList.toggle('hidden', !text.includes(query));
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                MiraFilter.search = this.value.toLowerCase();
+                MiraFilter.apply();
             });
-        });
+        }
 
-        // ===== FILTER FUNCTIONALITY =====
+        // ===== PRIORITY / CATEGORY FILTER BUTTONS =====
         const filterButtons = document.querySelectorAll('.filter-btn');
         filterButtons.forEach(btn => {
             btn.addEventListener('click', function () {
                 filterButtons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-
-                const filter = this.dataset.filter;
-                const sections = document.querySelectorAll('.section');
-
-                if (filter === 'all') {
-                    sections.forEach(s => s.style.display = 'block');
-                } else if (filter === 'high') {
-                    sections.forEach(s => {
-                        s.style.display = s.classList.contains('tier-1') ? 'block' : 'none';
-                    });
-                } else if (filter === 'ai') {
-                    sections.forEach(s => s.style.display = 'block');
-                    document.querySelectorAll('.prospect-card').forEach(card => {
-                        const hasAI = card.querySelector('.ai-use-case');
-                        card.classList.toggle('hidden', !hasAI);
-                    });
-                } else if (filter === 'medtech') {
-                    sections.forEach(s => {
-                        s.style.display = s.classList.contains('tier-partners') ? 'block' : 'none';
-                    });
-                }
+                MiraFilter.button = this.dataset.filter || 'all';
+                MiraFilter.apply();
             });
         });
 
@@ -2499,24 +2525,9 @@
         }
 
         // ===== USE CASE FILTER =====
-        const useCaseCheckboxes = document.querySelectorAll('.use-case-filter');
-        useCaseCheckboxes.forEach(cb => {
-            cb.addEventListener('change', filterByUseCase);
+        document.querySelectorAll('.use-case-filter').forEach(cb => {
+            cb.addEventListener('change', () => MiraFilter.apply());
         });
-
-        function filterByUseCase() {
-            const activeFilters = Array.from(useCaseCheckboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.value);
-
-            const cards = document.querySelectorAll('.prospect-card');
-            cards.forEach(card => {
-                const useCases = card.dataset.useCases ? card.dataset.useCases.split(',') : [];
-                const matches = useCases.some(uc => activeFilters.includes(uc));
-                card.style.display = matches || activeFilters.length === 0 ? 'block' : 'none';
-            });
-        }
-
 
         // ===== TAB SWITCHING =====
         function showTab(tabName) {
