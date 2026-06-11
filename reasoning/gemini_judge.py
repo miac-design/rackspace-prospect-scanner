@@ -13,6 +13,7 @@ Falls back gracefully to regex if API is unavailable.
 import json
 import logging
 import os
+import re
 import urllib.request
 import ssl
 
@@ -93,33 +94,96 @@ Respond in this exact JSON format (no markdown, no backticks):
     return None
 
 
-def extract_organization(title: str, summary: str) -> str:
+def resolve_entity(title: str, summary: str) -> dict:
     """
-    Use Gemini to extract the real company name from an article.
-    Faster, simpler prompt for org extraction only.
+    Resolve the primary company in an article to a canonical name + domain.
+
+    Single structured LLM call that does NER + canonicalization + domain
+    lookup at once. This is the PRIMARY org-resolution path (regex is the
+    offline fallback). Returns clean account names a seller recognizes
+    instead of headline fragments.
+
+    Returns:
+        {
+            'name': str,                 # canonical company name (no headline verbs)
+            'domain': str or None,       # primary website domain, e.g. 'wellspan.org'
+            'is_specific_company': bool, # False for industry groups / govt / generic
+            'confidence': float,         # 0.0 - 1.0
+        }
+        or None if the API is unavailable or the response can't be parsed.
     """
     if not is_available():
         return None
-    
-    prompt = f"""Extract the PRIMARY COMPANY or ORGANIZATION name from this article.
-Return ONLY the company name, nothing else. If no specific company is mentioned, return "null".
-Do not return media outlet names, industry groups, or government acronyms unless they ARE the subject.
+
+    prompt = f"""You are a B2B sales-intelligence entity resolver.
+Identify the PRIMARY company or organization that is the SUBJECT of this article —
+the specific entity a managed-cloud vendor (Rackspace) would sell TO.
+
+Rules:
+- Ignore media outlets, news wires, industry associations, government agencies,
+  and generic groups ("the industry", "hospitals") UNLESS one of them is clearly
+  the subject being sold to.
+- Return the CANONICAL company name as commonly known — no headline verbs
+  ("Launches", "Announces"), no trailing descriptors, no duplicated words.
+- Return the company's PRIMARY website domain (e.g. "wellspan.org"), or null if unsure.
 
 Title: {title}
-Summary: {summary[:300]}
+Summary: {summary[:400]}
 
-Company name:"""
+Respond ONLY as JSON (no markdown, no backticks):
+{{"name": "Canonical Company Name or null", "domain": "example.com or null", "is_specific_company": true/false, "confidence": 0.0-1.0}}"""
 
     try:
         result = _call_gemini(prompt)
         if result:
-            org = result.strip().strip('"').strip("'")
-            # Quality check
-            if org and org.lower() != 'null' and len(org) > 2 and len(org) < 60:
-                return org
+            parsed = _parse_entity(result)
+            if parsed:
+                logger.info(f"ENTITY RESOLVED [{title[:60]}] → "
+                            f"name={parsed.get('name')}, domain={parsed.get('domain')}, "
+                            f"specific={parsed.get('is_specific_company')}, "
+                            f"confidence={parsed.get('confidence')}")
+                return parsed
     except Exception as e:
-        logger.debug(f"Gemini org extraction failed: {e}")
-    
+        logger.warning(f"Entity resolution failed for [{title[:60]}]: {e}")
+
+    return None
+
+
+def _clean_domain(domain) -> str:
+    """Normalize an LLM-proposed domain to a bare host, or None if unusable."""
+    if not domain or not isinstance(domain, str):
+        return None
+    d = domain.strip().lower()
+    if not d or d == 'null':
+        return None
+    d = re.sub(r'^https?://', '', d)   # strip protocol if a full URL came back
+    d = d.split('/')[0]                # drop any path
+    if d.startswith('www.'):
+        d = d[4:]
+    # Must look like a real domain: a dot, no spaces
+    if '.' not in d or ' ' in d:
+        return None
+    return d
+
+
+def _parse_entity(text: str) -> dict:
+    """Parse the resolve_entity JSON response, clamping/cleaning fields."""
+    text = _clean_json_text(text)
+    if not text:
+        return None
+    try:
+        result = json.loads(text)
+        name = result.get('name')
+        if not name or not isinstance(name, str) or name.strip().lower() == 'null':
+            return None
+        return {
+            'name': name.strip().strip('"').strip("'"),
+            'domain': _clean_domain(result.get('domain')),
+            'is_specific_company': bool(result.get('is_specific_company', True)),
+            'confidence': max(0.0, min(1.0, float(result.get('confidence', 0.5)))),
+        }
+    except (json.JSONDecodeError, ValueError, TypeError) as e:
+        logger.debug(f"Failed to parse entity response: {e}\nRaw: {text[:200]}")
     return None
 
 
@@ -160,23 +224,27 @@ def _call_gemini(prompt: str, max_tokens: int = 300) -> str:
     return None
 
 
-def _parse_response(text: str) -> dict:
-    """Parse Gemini's JSON response, handling common formatting issues."""
+def _clean_json_text(text: str) -> str:
+    """Strip markdown code fences and language tags from an LLM JSON response."""
     if not text:
-        return None
-    
-    # Strip markdown code fences if present
+        return ''
     text = text.strip()
     if text.startswith('```'):
         text = text.split('\n', 1)[1] if '\n' in text else text[3:]
     if text.endswith('```'):
         text = text[:-3]
     text = text.strip()
-    
-    # Remove 'json' language tag
     if text.startswith('json'):
         text = text[4:].strip()
-    
+    return text
+
+
+def _parse_response(text: str) -> dict:
+    """Parse Gemini's JSON response, handling common formatting issues."""
+    text = _clean_json_text(text)
+    if not text:
+        return None
+
     try:
         result = json.loads(text)
         

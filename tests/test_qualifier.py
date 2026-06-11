@@ -101,6 +101,69 @@ class TestOrgExtraction:
         assert 'Accenture Federal' in result
 
 
+# ── Org Normalization ─────────────────────────────────────────
+
+class TestOrgNormalization:
+    """Tests for _normalize_org — cleans headline fragments into account names."""
+
+    def test_strips_industry_signal_suffix(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._normalize_org('CharmHealth (Industry Signal)') == 'CharmHealth'
+
+    def test_collapses_duplicated_phrase(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._normalize_org('Elevance Health Elevance Health') == 'Elevance Health'
+
+    def test_strips_leading_filler(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._normalize_org('Inside Advocate Health') == 'Advocate Health'
+        assert q._normalize_org('Powered System Collective Health') == 'Collective Health'
+
+    def test_truncates_at_headline_verb(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._normalize_org('CharmHealth Launches MCP Server') == 'CharmHealth'
+        assert q._normalize_org('WellSpan Health Announces Cloud Plan') == 'WellSpan Health'
+
+    def test_preserves_legitimate_new_prefix(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        # 'new' must NOT be stripped — real names start with it
+        assert q._normalize_org('New York Presbyterian') == 'New York Presbyterian'
+
+    def test_collapses_whitespace(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._normalize_org('WellSpan   Health') == 'WellSpan Health'
+
+    def test_rejects_empty_and_none(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._normalize_org(None) is None
+        assert q._normalize_org('') is None
+        assert q._normalize_org('  ') is None
+
+
+# ── Identity Resolution (offline / fallback path) ─────────────
+
+class TestResolveIdentity:
+    """Tests for _resolve_identity without an LLM (regex+normalize fallback)."""
+
+    def test_fallback_resolves_clean_name(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        article = {'title': 'WellSpan Health Announces Cloud Migration', 'summary': '',
+                   'source': 'fiercehealthcare.com'}
+        org, domain = q._resolve_identity(article, total_score=50,
+                                          borderline_floor=25, title_short='t')
+        assert org is not None and 'WellSpan' in org
+        # No LLM key in CI → domain is unknown via the fallback path
+        assert domain is None
+
+    def test_low_score_no_org_returns_none(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        article = {'title': 'cloud migration trends are rising', 'summary': '',
+                   'source': 'fiercehealthcare.com'}
+        org, domain = q._resolve_identity(article, total_score=5,
+                                          borderline_floor=25, title_short='t')
+        assert org is None
+
+
 # ── Wedge Generation ─────────────────────────────────────────
 
 class TestWedgeGeneration:
@@ -217,7 +280,7 @@ class TestEndToEndQualify:
         q = ProspectQualifier(hc_config)
         result = q.qualify(strong_hc_article)
         assert result is not None
-        required = ['organization', 'signal', 'source_url', 'qualification_score',
+        required = ['organization', 'domain', 'signal', 'source_url', 'qualification_score',
                     'rackspace_wedge', 'ai_agent_use_case', 'category', 'priority']
         for key in required:
             assert key in result, f"Missing key: {key}"

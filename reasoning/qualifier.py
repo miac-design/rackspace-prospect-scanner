@@ -47,40 +47,26 @@ class ProspectQualifier:
             logger.info(f"REJECTED [{title_short}] → Gate: DOMAIN (no domain terms found)")
             return None
         
-        # Step 1: Extract organization name (regex first)
-        organization = self._extract_organization(article['title'], article['summary'])
-        
-        # Step 1b: Calculate score first to decide if we should keep articles without org names
+        # Step 1: Calculate score first — it gates both qualification AND how
+        # hard we try to resolve a company name.
         scores = self._calculate_scores(full_text_lower)
         total_score = sum(scores.values())
         score_detail = ' | '.join(f"{k}:{v}" for k, v in scores.items() if v > 0) or 'no matches'
-        
-        # If no organization found, try fallbacks in order
+
+        threshold = self.config['qualification_threshold']
+        borderline_floor = max(threshold - 15, 15)  # e.g., 25 when threshold is 40
+
+        # Step 2: Resolve the prospect's identity (canonical name + domain).
+        # LLM entity resolution is the PRIMARY path for survivable articles;
+        # regex + normalization is the offline/fallback path.
+        organization, domain = self._resolve_identity(
+            article, total_score, borderline_floor, title_short
+        )
+
         if not organization:
-            if total_score >= 30:
-                organization = self._extract_fallback_org(article['title'])
-            
-            # Gemini NER fallback — if regex fails and article has some signal
-            if not organization and total_score >= 15:
-                from reasoning.gemini_judge import extract_organization as gemini_extract
-                gemini_org = gemini_extract(article['title'], article['summary'])
-                if gemini_org:
-                    organization = gemini_org
-                    logger.info(f"GEMINI ORG [{title_short}] → {gemini_org}")
-            
-            if not organization and total_score >= 40:
-                # Last resort: use source domain
-                source = article.get('source', '')
-                if source:
-                    clean_source = source.replace('www.', '').split('.')[0].title()
-                    organization = f"{clean_source} (Industry Signal)"
-            
-            if not organization:
-                logger.info(f"REJECTED [{title_short}] → Gate: ORG (no company found, score={total_score}, {score_detail})")
-                return None
-        
-        # Step 2: Use scores already calculated above
-        
+            logger.info(f"REJECTED [{title_short}] → Gate: ORG (no company found, score={total_score}, {score_detail})")
+            return None
+
         # Step 3: Check for negative signals (disqualifiers)
         if self._has_negative_signals(full_text_lower):
             total_score -= 20  # Penalty for existing partnerships
@@ -91,9 +77,7 @@ class ProspectQualifier:
             total_score += self.categories[category].get('priority_boost', 0)
         
         # Step 5: Threshold gate — with Gemini judge for borderline cases
-        threshold = self.config['qualification_threshold']
-        borderline_floor = max(threshold - 15, 15)  # e.g., 25 when threshold is 40
-        
+        # (threshold / borderline_floor computed above in Step 1)
         if total_score < threshold:
             # Borderline: close to threshold → ask Gemini
             if total_score >= borderline_floor:
@@ -139,6 +123,7 @@ class ProspectQualifier:
         
         return {
             'organization': organization,
+            'domain': domain,
             'signal': signal,
             'signal_type': signal_type,
             'reach_out_reason': reach_out_reason,
@@ -157,6 +142,108 @@ class ProspectQualifier:
             'verified': False  # To be verified by user
         }
     
+    def _resolve_identity(self, article: dict, total_score: int,
+                          borderline_floor: int, title_short: str) -> tuple:
+        """
+        Resolve (canonical_name, domain) for a prospect.
+
+        Primary path: LLM entity resolution (clean name + domain), invoked
+        only for articles that can survive qualification to control API cost.
+        Fallback path: regex extraction + deterministic normalization, used
+        offline (no GEMINI_API_KEY) or when the LLM abstains.
+
+        Returns (organization or None, domain or None).
+        """
+        organization = None
+        domain = None
+
+        # Primary: LLM resolution for survivable articles
+        if total_score >= borderline_floor:
+            try:
+                from reasoning.gemini_judge import resolve_entity
+                entity = resolve_entity(article['title'], article['summary'])
+            except Exception as e:
+                logger.debug(f"   Entity resolution unavailable: {e}")
+                entity = None
+
+            if entity:
+                # Trust the LLM when it confidently says this isn't a real account
+                if not entity['is_specific_company'] and entity['confidence'] >= 0.6:
+                    logger.info(f"REJECTED [{title_short}] → Gate: ORG (LLM: not a specific company)")
+                    return (None, None)
+                if entity.get('name'):
+                    organization = self._normalize_org(entity['name'])
+                    domain = entity.get('domain')
+
+        # Fallback: regex extraction + normalization
+        if not organization:
+            organization = self._normalize_org(
+                self._extract_organization(article['title'], article['summary'])
+            )
+        if not organization and total_score >= 30:
+            organization = self._normalize_org(self._extract_fallback_org(article['title']))
+        if not organization and total_score >= 40:
+            # Last resort: use source domain as an industry-signal label
+            source = article.get('source', '')
+            if source:
+                clean_source = source.replace('www.', '').split('.')[0].title()
+                organization = f"{clean_source} (Industry Signal)"
+
+        return (organization, domain)
+
+    def _normalize_org(self, org: Optional[str]) -> Optional[str]:
+        """
+        Clean a raw org string into a canonical-ish account name.
+
+        Strips headline noise from regex/LLM output: '(Industry Signal)'
+        suffixes, leading filler words ('Inside Advocate Health' → 'Advocate
+        Health'), and fully duplicated phrases ('Elevance Health Elevance
+        Health' → 'Elevance Health').
+        """
+        if not org or not isinstance(org, str):
+            return None
+
+        org = re.sub(r'\s*\(industry signal\)\s*$', '', org, flags=re.IGNORECASE)
+        org = re.sub(r'\s+', ' ', org).strip()
+
+        # Strip leading filler/headline words that leak in from titles.
+        # (Note: 'new' is intentionally excluded — e.g. "New York Presbyterian".)
+        leading_junk = {
+            'inside', 'breaking', 'exclusive', 'report', 'reports',
+            'powered', 'system', 'how', 'why', 'meet', 'introducing',
+        }
+        words = org.split()
+        while len(words) > 1 and words[0].lower().strip(':') in leading_junk:
+            words = words[1:]
+
+        # Truncate at the first headline verb: "CharmHealth Launches MCP Server"
+        # → "CharmHealth". Keeps the proper-noun subject, drops the predicate.
+        headline_verbs = {
+            'announces', 'launches', 'unveils', 'names', 'appoints', 'hires',
+            'raises', 'secures', 'expands', 'selects', 'deploys', 'partners',
+            'wins', 'taps', 'picks', 'integrates', 'rolls', 'acquires',
+        }
+        kept = []
+        for w in words:
+            wl = w.lower()
+            if wl.endswith("'s"):
+                wl = wl[:-2]
+            wl = wl.strip(":,.;")
+            if kept and wl in headline_verbs:
+                break
+            kept.append(w)
+        words = kept or words
+
+        # Collapse a fully duplicated phrase: "Elevance Health Elevance Health"
+        n = len(words)
+        if n >= 2 and n % 2 == 0 and words[:n // 2] == words[n // 2:]:
+            words = words[:n // 2]
+
+        org = ' '.join(words).strip()
+        if len(org) < 3:
+            return None
+        return org
+
     def _detect_signal_type(self, text: str) -> tuple:
         """
         Detect signal types from article text.
