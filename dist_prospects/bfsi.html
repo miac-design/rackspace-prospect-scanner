@@ -1619,3 +1619,165 @@
                 <!-- New Prospects Added 2026-03-04T16:12:03.557778 -->
 
 <!-- New Prospects Added 2026-03-04T16:52:39.481354 -->
+
+                    <!-- MIRA:INSERT-NEW-PROSPECTS -->
+                </div>
+            </section>
+
+<footer>
+            <p><strong>Rackspace Value Prop:</strong> Private Cloud + Managed Services + AI Operations + Compliance
+            </p>
+            <div style="margin-top: 12px; font-size: 0.85rem;">
+                <strong>Developed by Mia C.</strong> | Researcher III<br>
+                📧 <a href="mailto:miahboubeh.cheraghian@rackspace.com"
+                    style="color: var(--lavender);">miahboubeh.cheraghian@rackspace.com</a> |
+                <a href="https://www.linkedin.com/in/miacheraghian/" target="_blank"
+                    style="color: var(--lavender);">LinkedIn</a><br>
+                <span style="color: var(--text-light);">Jan 2026</span>
+            </div>
+            <div
+                style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-light);">
+                <strong style="color: var(--text-medium);">Scoring Methodology:</strong> Each prospect is scored
+                0-100
+                based on weighted factors:
+                <span style="color: var(--rackspace-red);">Signal Recency (30%)</span> — fresher news = higher score
+                •
+                <span style="color: var(--rackspace-red);">Strategic Fit (40%)</span> — cloud migration, PCI/SOX, AI
+                signals •
+                <span style="color: var(--rackspace-red);">Company Size (30%)</span> — larger institutions = larger deals
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ===== SEARCH FUNCTIONALITY =====
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.prospect-card');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.classList.toggle('hidden', !text.includes(query));
+            });
+        });
+
+        // ===== FILTER FUNCTIONALITY =====
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.dataset.filter;
+                const sections = document.querySelectorAll('.section');
+
+                if (filter === 'all') {
+                    sections.forEach(s => s.style.display = 'block');
+                } else if (filter === 'high') {
+                    sections.forEach(s => {
+                        s.style.display = s.classList.contains('tier-1') ? 'block' : 'none';
+                    });
+                } else if (filter === 'ai') {
+                    sections.forEach(s => s.style.display = 'block');
+                    document.querySelectorAll('.prospect-card').forEach(card => {
+                        const hasAI = card.querySelector('.ai-use-case');
+                        card.classList.toggle('hidden', !hasAI);
+                    });
+                } else if (filter === 'medtech') {
+                    sections.forEach(s => {
+                        s.style.display = s.classList.contains('tier-partners') ? 'block' : 'none';
+                    });
+                }
+            });
+        });
+
+        // ===== COLLAPSIBLE SECTIONS =====
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+
+            content.classList.toggle('collapsed');
+            icon.classList.toggle('collapsed');
+        }
+
+        // ===== USE CASE FILTER =====
+        const useCaseCheckboxes = document.querySelectorAll('.use-case-filter');
+        useCaseCheckboxes.forEach(cb => {
+            cb.addEventListener('change', filterByUseCase);
+        });
+
+        function filterByUseCase() {
+            const activeFilters = Array.from(useCaseCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+
+            const cards = document.querySelectorAll('.prospect-card');
+            cards.forEach(card => {
+                const useCases = card.dataset.useCases ? card.dataset.useCases.split(',') : [];
+                const matches = useCases.some(uc => activeFilters.includes(uc));
+                card.style.display = matches || activeFilters.length === 0 ? 'block' : 'none';
+            });
+        }
+
+
+        // ===== TAB SWITCHING =====
+        function showTab(tabName) {
+            const prospectsTab = document.getElementById('prospects-tab');
+            if (!prospectsTab) return;
+            const howItWorksTab = document.getElementById('how-it-works-tab');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+
+            if (tabName === 'prospects') {
+                prospectsTab.style.display = 'block';
+                howItWorksTab.style.display = 'none';
+            } else {
+                prospectsTab.style.display = 'none';
+                howItWorksTab.style.display = 'block';
+            }
+
+            // Update tab button styles
+            tabBtns.forEach((btn, i) => {
+                if ((tabName === 'prospects' && i === 0) || (tabName === 'how-it-works' && i === 1)) {
+                    btn.style.color = 'var(--plum)';
+                    btn.style.borderBottom = '3px solid var(--plum)';
+                    btn.style.fontWeight = '600';
+                } else {
+                    btn.style.color = 'var(--text-medium)';
+                    btn.style.borderBottom = '3px solid transparent';
+                    btn.style.fontWeight = '500';
+                }
+            });
+        }
+
+        // ===== CSV EXPORT =====
+        function exportCSV() {
+            const cards = document.querySelectorAll('.prospect-card');
+            let csv = 'Organization,Type,Use Cases,Rackspace Offer,Key Contact,Current Vendors,Signals,AI Use Case\n';
+
+            cards.forEach(card => {
+                const name = card.querySelector('.company-name')?.textContent || '';
+                const type = card.querySelector('.company-type')?.textContent || '';
+                const useCases = Array.from(card.querySelectorAll('.use-case-tag')).map(t => t.textContent).join('; ') || '';
+                const offer = card.querySelector('.offer-text')?.textContent || '';
+                const contact = card.querySelector('.intel-value a')?.textContent || '';
+                const vendors = Array.from(card.querySelectorAll('.vendor-badge')).map(v => v.textContent).join('; ') || '';
+                const signals = Array.from(card.querySelectorAll('.signal-pill')).map(s => s.textContent).join('; ') || '';
+                const ai = card.querySelector('.ai-use-case .info-text')?.textContent.trim().replace(/\n/g, ' ') || '';
+
+                csv += `"${name}","${type}","${useCases}","${offer}","${contact}","${vendors}","${signals}","${ai}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rackspace_bfsi_prospects.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+
+</body>
+
+</html>

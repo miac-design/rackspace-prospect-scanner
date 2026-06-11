@@ -251,3 +251,60 @@ class TestReachOutLayout:
         }
         card = u._generate_single_card(prospect)
         assert 'grid-column: 1 / -1' in card
+
+
+class TestAnchorInsertion:
+    """Cards must insert at the stable anchor; updater must fail loudly
+    (return False) on malformed documents instead of silently succeeding."""
+
+    def _prospect(self):
+        return {
+            'organization': 'Anchor Test Org',
+            'signal': 'sig', 'source_url': 'https://example.com',
+            'qualification_score': 70, 'rackspace_wedge': 'w',
+            'ai_agent_use_case': 'a', 'category': 'Health System',
+            'priority': 'Medium',
+        }
+
+    def _updater(self, hc_config, tmp_path, content):
+        import copy
+        path = tmp_path / 'page.html'
+        path.write_text(content)
+        cfg = copy.deepcopy(hc_config)
+        cfg['output']['html_file'] = str(path)
+        return HTMLUpdater(cfg), path
+
+    def test_inserts_before_anchor(self, hc_config, tmp_path):
+        from outputs.html_updater import INSERT_ANCHOR
+        content = f'<html><body><div>{INSERT_ANCHOR}</div></body></html>'
+        u, path = self._updater(hc_config, tmp_path, content)
+        assert u.update([self._prospect()]) is True
+        out = path.read_text()
+        assert 'Anchor Test Org' in out
+        assert INSERT_ANCHOR in out  # anchor survives for next insertion
+        assert out.index('Anchor Test Org') < out.index(INSERT_ANCHOR)
+
+    def test_repeated_insertions_accumulate(self, hc_config, tmp_path):
+        from outputs.html_updater import INSERT_ANCHOR
+        content = f'<html><body><div>{INSERT_ANCHOR}</div></body></html>'
+        u, path = self._updater(hc_config, tmp_path, content)
+        p1 = self._prospect()
+        p2 = dict(self._prospect(), organization='Second Org')
+        assert u.update([p1]) is True
+        assert u.update([p2]) is True
+        out = path.read_text()
+        assert 'Anchor Test Org' in out and 'Second Org' in out
+        assert out.count(INSERT_ANCHOR) == 1
+
+    def test_falls_back_to_body_without_anchor(self, hc_config, tmp_path):
+        u, path = self._updater(hc_config, tmp_path, '<html><body><p>x</p></body></html>')
+        assert u.update([self._prospect()]) is True
+        assert 'Anchor Test Org' in path.read_text()
+
+    def test_truncated_document_fails_loudly(self, hc_config, tmp_path):
+        """The regression that bit us: no anchor, no </body> — update() must
+        return False and leave the file untouched."""
+        content = '<html><body><div class="prospect-card">old</div>'
+        u, path = self._updater(hc_config, tmp_path, content)
+        assert u.update([self._prospect()]) is False
+        assert path.read_text() == content

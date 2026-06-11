@@ -13,6 +13,11 @@ from pathlib import Path
 
 logger = logging.getLogger('HTMLUpdater')
 
+# Stable insertion anchor present in the dist HTML files. New prospect cards
+# are inserted immediately before this comment, so it always marks the next
+# insertion point. Far more robust than inferring document structure.
+INSERT_ANCHOR = '<!-- MIRA:INSERT-NEW-PROSPECTS -->'
+
 
 class HTMLUpdater:
     """Updates HTML prospect document with new entries."""
@@ -80,50 +85,57 @@ class HTMLUpdater:
             timestamp = datetime.now().isoformat()
             batch_html = f'\n<!-- New Prospects Added {timestamp} -->\n{new_cards_html}'
             
-            # Strategy: Insert new cards inside the last <section> before its closing </div>
-            # We look for the last "section-content" div in a tier-2 or medium priority section
-            # This places new cards in the "Medium Priority" section where they belong
-            
-            # Try to find a medium/standard priority section to insert into
-            # Pattern: find the last </div> before </section> in a tier-2 section
-            insertion_patterns = [
-                # Pattern 1: Inside a tier-2 section's content div (Medium Priority)
-                r'(</div>\s*</section>\s*(?:<!--.*?-->)?\s*(?:<section class="section tier-partners|<div class="removed-section|<footer|</div>\s*</div>\s*<script))',
-                # Pattern 2: Before the removed section
-                r'(<div class="removed-section")',
-                # Pattern 3: Before footer
-                r'(<footer)',
-                # Pattern 4: Before the closing script tag
-                r'(</div>\s*<script)',
-            ]
-            
+            # Primary strategy: insert immediately before the stable anchor
+            # comment, which lives inside the prospect list container. The
+            # anchor stays in place, marking the next insertion point.
             inserted = False
-            for pattern in insertion_patterns:
-                match = re.search(pattern, html_content, re.DOTALL)
-                if match:
-                    insert_pos = match.start()
-                    new_html = (
-                        html_content[:insert_pos] + 
-                        batch_html + '\n' +
-                        html_content[insert_pos:]
-                    )
-                    inserted = True
-                    break
-            
-            if not inserted:
-                # Final fallback: insert before closing body tag
+            if INSERT_ANCHOR in html_content:
                 new_html = html_content.replace(
-                    '</body>',
-                    f'{batch_html}\n</body>'
+                    INSERT_ANCHOR,
+                    f'{batch_html}\n                    {INSERT_ANCHOR}',
+                    1,
                 )
-                logger.warning("   Used fallback insertion (before </body>)")
-            
-            
+                inserted = True
+            else:
+                # Legacy fallbacks for documents without the anchor
+                logger.warning("   Insertion anchor missing — trying legacy patterns")
+                insertion_patterns = [
+                    r'(<div class="removed-section")',
+                    r'(<footer)',
+                    r'(</div>\s*<script)',
+                ]
+                for pattern in insertion_patterns:
+                    match = re.search(pattern, html_content, re.DOTALL)
+                    if match:
+                        insert_pos = match.start()
+                        new_html = (
+                            html_content[:insert_pos] +
+                            batch_html + '\n' +
+                            html_content[insert_pos:]
+                        )
+                        inserted = True
+                        break
+
+                if not inserted and '</body>' in html_content:
+                    new_html = html_content.replace(
+                        '</body>', f'{batch_html}\n</body>', 1)
+                    inserted = True
+                    logger.warning("   Used fallback insertion (before </body>)")
+
+            if not inserted:
+                # Document is malformed (no anchor, no known landmarks, no
+                # </body>). Fail loudly instead of silently writing the file
+                # unchanged and letting the banner claim prospects were added.
+                logger.error(
+                    f"   INSERTION FAILED: no anchor or landmark found in "
+                    f"{self.html_path} — cards NOT added")
+                return False
+
             # Note: timestamp is updated by record_scan() — no need to call _update_timestamp again
-            
+
             with open(self.html_path, 'w', encoding='utf-8') as f:
                 f.write(new_html)
-            
+
             logger.info(f"   Added {len(new_prospects)} prospects to HTML")
             return True
             
