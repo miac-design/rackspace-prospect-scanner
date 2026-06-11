@@ -463,7 +463,27 @@ class HTMLUpdater:
             html,
             flags=re.DOTALL
         )
-        
+
+        # Update the collapsed status-pill summary (BFSI page). These spans are
+        # the always-visible bit users see before expanding; keeping them in
+        # sync with scan-timestamp prevents a stale date showing up top.
+        if 'id="scan-summary-date"' in html:
+            summary_date = f"{now.strftime('%b %d')}, {time_str} {tz_label}"
+            html = re.sub(
+                r'<span id="scan-summary-date">.*?</span>',
+                f'<span id="scan-summary-date">{summary_date}</span>',
+                html, flags=re.DOTALL,
+            )
+        if 'id="scan-summary-feeds"' in html:
+            feeds = sum(1 for feed in self.config.get('data_sources', {}).get('rss_feeds', [])
+                        if feed.get('enabled', True))
+            if feeds:
+                html = re.sub(
+                    r'<span id="scan-summary-feeds">.*?</span>',
+                    f'<span id="scan-summary-feeds">{feeds}</span>',
+                    html, flags=re.DOTALL,
+                )
+
         logger.info(f"   Updated scan banner: {full_timestamp} | {prospect_count} prospects")
         return html
 

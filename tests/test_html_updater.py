@@ -333,3 +333,29 @@ class TestCategorySlug:
             'category': 'Banking', 'priority': 'High',
         })
         assert 'data-category="banking"' in card
+
+
+class TestStatusPillSummary:
+    """The collapsed status-pill summary (BFSI) must stay in sync with the
+    scan-timestamp, not show a stale hardcoded date."""
+
+    def test_summary_date_and_feeds_updated(self, bfsi_config):
+        u = HTMLUpdater(bfsi_config)
+        html = (
+            '<details><summary>Last scan: '
+            '<span id="scan-summary-date">Feb 20, 2:37 PM</span> · '
+            '<span id="scan-summary-feeds">15</span> feeds scanned</summary>'
+            '<p id="scan-timestamp">old</p><p id="scan-result">old</p></details>'
+        )
+        out = u._update_timestamp(html, prospect_count=3)
+        assert 'Feb 20, 2:37 PM' not in out          # stale date replaced
+        feeds = sum(1 for f in bfsi_config['data_sources']['rss_feeds']
+                    if f.get('enabled', True))
+        assert f'<span id="scan-summary-feeds">{feeds}</span>' in out
+
+    def test_no_summary_spans_is_noop(self, hc_config):
+        """Healthcare page has no summary pill — updater must not choke."""
+        u = HTMLUpdater(hc_config)
+        html = '<p id="scan-timestamp">x</p><p id="scan-result">y</p>'
+        out = u._update_timestamp(html, prospect_count=0)
+        assert 'scan-summary' not in out
