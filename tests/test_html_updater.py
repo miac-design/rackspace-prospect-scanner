@@ -179,3 +179,75 @@ class TestOfferSuggestion:
         u = HTMLUpdater(hc_config)
         p = {'rackspace_wedge': '', 'ai_agent_use_case': 'AI fraud detection'}
         assert 'AI' in u._suggest_offer(p)
+
+
+class TestVendorBadges:
+    """Tests for Current Vendors chips sourced from website enrichment."""
+
+    def _make_prospect(self, **overrides):
+        base = {
+            'organization': 'TestOrg',
+            'signal': 'Test signal',
+            'source_url': 'https://example.com',
+            'source_date': '2026-02-01',
+            'source_name': 'Test Source',
+            'qualification_score': 80,
+            'rackspace_wedge': 'HIPAA-compliant hosting',
+            'ai_agent_use_case': 'Patient flow optimization',
+            'category': 'Health System',
+            'priority': 'High',
+        }
+        base.update(overrides)
+        return base
+
+    def test_vendor_badges_rendered_from_website_data(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        prospect = self._make_prospect(website_data={
+            'tech_stack_hints': ['aws', 'google cloud', 'kubernetes'],
+        })
+        card = u._generate_single_card(prospect)
+        assert 'Current Vendors' in card
+        assert '<span class="vendor-badge">AWS</span>' in card
+        assert '<span class="vendor-badge">Google Cloud</span>' in card
+        assert '<span class="vendor-badge">Kubernetes</span>' in card
+
+    def test_vendor_badges_deduped_and_mapped(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        prospect = self._make_prospect(website_data={
+            'tech_stack_hints': ['aws', 'amazon web services', 'gcp', 'google cloud'],
+        })
+        badges = u._generate_vendor_badges(prospect)
+        assert badges.count('AWS') == 1
+        assert badges.count('Google Cloud') == 1
+
+    def test_no_website_data_omits_vendor_section(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        card = u._generate_single_card(self._make_prospect())
+        assert 'Current Vendors' not in card
+
+    def test_non_vendor_hints_ignored(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        prospect = self._make_prospect(website_data={
+            'tech_stack_hints': ['hybrid cloud', 'data center', 'cloud-native'],
+        })
+        assert u._generate_vendor_badges(prospect) == ''
+
+
+class TestReachOutLayout:
+    """Reach-out box must span the full info-grid (no half-empty row)."""
+
+    def test_reach_out_box_spans_full_width(self, hc_config):
+        u = HTMLUpdater(hc_config)
+        prospect = {
+            'organization': 'TestOrg',
+            'signal': 'Test signal',
+            'source_url': 'https://example.com',
+            'qualification_score': 80,
+            'rackspace_wedge': 'HIPAA-compliant hosting',
+            'ai_agent_use_case': 'Patient flow optimization',
+            'category': 'Health System',
+            'priority': 'High',
+            'reach_out_reason': 'Needs compliant hosting',
+        }
+        card = u._generate_single_card(prospect)
+        assert 'grid-column: 1 / -1' in card

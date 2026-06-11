@@ -284,3 +284,21 @@ class TestEndToEndQualify:
                     'rackspace_wedge', 'ai_agent_use_case', 'category', 'priority']
         for key in required:
             assert key in result, f"Missing key: {key}"
+
+
+class TestCategoryNoFalseDefault:
+    """_determine_category must not claim the first config category when
+    nothing matched (e.g. a software vendor tagged 'Health System')."""
+
+    def test_no_match_returns_none(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._determine_category('generic software product launch text') is None
+
+    def test_none_formats_to_generic_domain(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        assert q._format_category(None) == 'Healthcare'
+
+    def test_real_match_still_detected(self, hc_config):
+        q = ProspectQualifier(hc_config)
+        cat = q._determine_category('the hospital health system announced a plan')
+        assert cat is not None
