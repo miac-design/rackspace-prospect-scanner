@@ -154,6 +154,27 @@
       "url": "https://www.pymnts.com/cybersecurity/2026/softbank-offers-openai-cybersecurity-tech-to-defend-japans-critical-infrastructure/",
       "score": 68,
       "first_seen": "2026-06-16T18:25:17.372162"
+    },
+    "5d9cf230e008fecc": {
+      "org": "First American Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110174/first-american-bank-and-trust-signs-for-jack-henry-digital-platform?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 40,
+      "first_seen": "2026-06-17T16:52:54.594762"
+    },
+    "9cd926081a699a7d": {
+      "org": "PayCaptain The Citation Group",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110163/the-citation-group-acquires-paycaptain?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 41,
+      "first_seen": "2026-06-17T16:52:54.595122"
+    },
+    "20c28bf9887b7687": {
+      "org": "Citi Exec Alleges She",
+      "domain": "",
+      "url": "https://www.insurancejournal.com/news/east/2026/06/17/874081.htm",
+      "score": 41,
+      "first_seen": "2026-06-17T16:52:54.595632"
     }
   }
 }
