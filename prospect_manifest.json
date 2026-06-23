@@ -182,6 +182,20 @@
       "url": "https://www.finextra.com/pressarticle/110184/tru-cooperative-bank-selects-datavisor-for-fraud-prevention?utm_medium=rssfinextra&utm_source=finextrafeed",
       "score": 73,
       "first_seen": "2026-06-18T16:53:08.559092"
+    },
+    "fb7b8c6c364e83cc": {
+      "org": "DUOS",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/06/23/duos-acquires-linkwell-health/",
+      "score": 42,
+      "first_seen": "2026-06-23T16:24:37.664459"
+    },
+    "23098ad20fb81b72": {
+      "org": "Finextra (Industry Signal)",
+      "domain": "",
+      "url": "https://www.finextra.com/newsarticle/47972/nab-rolls-out-conversational-ai-creates-ai-cybercrime-hub?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 50,
+      "first_seen": "2026-06-23T16:24:41.010171"
     }
   }
 }
