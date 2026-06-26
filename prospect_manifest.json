@@ -203,6 +203,27 @@
       "url": "https://hitconsultant.net/2026/06/24/oracle-health-partners-with-theator-surgical-ai/",
       "score": 44,
       "first_seen": "2026-06-25T16:19:18.056894"
+    },
+    "9fa651d4efac5f9f": {
+      "org": "Healthcare What You Should Know Healthcare",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/06/25/innovaccer-aws-strategic-collaboration-healthcare-ai/",
+      "score": 52,
+      "first_seen": "2026-06-26T16:11:17.836239"
+    },
+    "6c03b47618bf219e": {
+      "org": "US Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110255/us-bank-and-gigsafe-team-on-payment-infrastructure-for-logistics-industry?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 45,
+      "first_seen": "2026-06-26T16:11:30.073680"
+    },
+    "a21e166c9b69bd1e": {
+      "org": "Jack Henry",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110254/jack-henry-partner-google-cloud-for-ai-driven-security?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 40,
+      "first_seen": "2026-06-26T16:11:30.074127"
     }
   }
 }
