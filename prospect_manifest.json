@@ -245,6 +245,27 @@
       "url": "https://www.finextra.com/pressarticle/110336/thought-machine-hits-revenue-milestone?utm_medium=rssfinextra&utm_source=finextrafeed",
       "score": 40,
       "first_seen": "2026-07-06T16:49:22.402487"
+    },
+    "92f56092a883c409": {
+      "org": "Open Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110354/open-banking-fraud-rates-remain-below-wider-uk-payments-industry-benchmarks?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 43,
+      "first_seen": "2026-07-07T16:25:18.369401"
+    },
+    "cf7ef37ce2b9e657": {
+      "org": "RBC Capital",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/nscale-lands-900-million-credit-facility-for-global-ai-infrastructure-push/",
+      "score": 55,
+      "first_seen": "2026-07-07T16:25:18.369965"
+    },
+    "06369a375cb57ffd": {
+      "org": "Banking Regulators Warn That",
+      "domain": "",
+      "url": "https://www.pymnts.com/cybersecurity/2026/banking-regulators-warn-that-ai-could-threaten-financial-system/",
+      "score": 42,
+      "first_seen": "2026-07-07T16:25:18.370537"
     }
   }
 }
