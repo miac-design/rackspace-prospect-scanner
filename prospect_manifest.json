@@ -266,6 +266,20 @@
       "url": "https://www.pymnts.com/cybersecurity/2026/banking-regulators-warn-that-ai-could-threaten-financial-system/",
       "score": 42,
       "first_seen": "2026-07-07T16:25:18.370537"
+    },
+    "e778e681abb38e56": {
+      "org": "IPC Systems",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110389/ipc-connects-with-luwares-cloud-based-compliance-recording-tool?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 44,
+      "first_seen": "2026-07-09T16:24:12.229300"
+    },
+    "310329bf256ba9e1": {
+      "org": "Health Insurance",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/states-expand-guardrails-on-ai-use-in-health-insurance-decisions/",
+      "score": 50,
+      "first_seen": "2026-07-09T16:24:12.229770"
     }
   }
 }
