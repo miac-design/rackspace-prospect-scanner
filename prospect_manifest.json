@@ -280,6 +280,20 @@
       "url": "https://www.pymnts.com/news/artificial-intelligence/2026/states-expand-guardrails-on-ai-use-in-health-insurance-decisions/",
       "score": 50,
       "first_seen": "2026-07-09T16:24:12.229770"
+    },
+    "6a44395b174b12dd": {
+      "org": "Health Payers Have Invested",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/07/10/health-payers-have-invested-in-modern-data-infrastructure-access-control-hasnt-kept-up/",
+      "score": 45,
+      "first_seen": "2026-07-10T16:21:32.617372"
+    },
+    "4dd8080447e872c1": {
+      "org": "Complete AML System",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110393/nepals-mbl-selects-zigram-for-aml?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 43,
+      "first_seen": "2026-07-10T16:21:39.906415"
     }
   }
 }
