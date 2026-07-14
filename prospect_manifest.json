@@ -301,6 +301,13 @@
       "url": "https://www.pymnts.com/news/artificial-intelligence/2026/ai-cracked-mortgage-verification-system/",
       "score": 41,
       "first_seen": "2026-07-11T14:47:43.204239"
+    },
+    "292ef2d6d06fc8d7": {
+      "org": "BCB Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110411/bcb-bank-selects-vikar-technologies-to-streamline-consumer-and-business-account-opening?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 51,
+      "first_seen": "2026-07-14T15:19:44.503558"
     }
   }
 }
