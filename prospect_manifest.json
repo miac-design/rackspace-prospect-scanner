@@ -462,6 +462,20 @@
       "url": "https://www.finextra.com/pressarticle/110651/flagstar-bank-selects-fixact-from-fiserv-for-core-upgrade?utm_medium=rssfinextra&utm_source=finextrafeed",
       "score": 53,
       "first_seen": "2026-08-17T14:20:55.857851"
+    },
+    "d779eba7c686eeed": {
+      "org": "Change Healthcare",
+      "domain": "",
+      "url": "https://www.healthcaredive.com/news/investor-lawsuit-unitedhealth-ignored-governance-cybersecurity-gaps-change/828016/",
+      "score": 40,
+      "first_seen": "2026-08-18T14:26:28.108839"
+    },
+    "5abef6ebc34c8ff9": {
+      "org": "Texas Windstorm Insurance",
+      "domain": "",
+      "url": "https://www.insurancejournal.com/news/southcentral/2026/08/17/881889.htm",
+      "score": 40,
+      "first_seen": "2026-08-18T14:26:31.656573"
     }
   }
 }
