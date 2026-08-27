@@ -497,6 +497,34 @@
       "url": "https://www.finextra.com/newsarticle/48299/google-cloud-launches-ai-platform-for-financial-professionals?utm_medium=rssfinextra&utm_source=finextrafeed",
       "score": 42,
       "first_seen": "2026-08-26T14:37:59.411250"
+    },
+    "6ebead7e6ab2cd9e": {
+      "org": "Psynergy Health",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/08/27/upmc-expands-andor-health-ai-native-clinical-services-18-hospitals-transitional-care/",
+      "score": 54,
+      "first_seen": "2026-08-27T23:29:13.270545"
+    },
+    "009d2d5fdb126b97": {
+      "org": "GE HealthCare",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/08/27/intermountain-medical-center-ge-healthcare-signa-sprint-elite-ai-mri-cardiac-oncology/",
+      "score": 42,
+      "first_seen": "2026-08-27T23:29:13.271130"
+    },
+    "f8a8cdafdbd04680": {
+      "org": "Payer Operations What You Should Know Healthcare",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/08/27/imagenet-acquires-analytica-consulting/",
+      "score": 54,
+      "first_seen": "2026-08-27T23:29:13.271949"
+    },
+    "a6d6a3dadc109fa8": {
+      "org": "Nasdaq Verafin",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110744/nasdaq-verafin-partners-q6-cyber-for-dark-web-fraud-intelligence?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 46,
+      "first_seen": "2026-08-27T23:29:17.249243"
     }
   }
 }
