@@ -616,6 +616,20 @@
       "url": "https://www.pymnts.com/news/artificial-intelligence/2026/ai-agents-are-getting-their-own-bank-accounts/",
       "score": 41,
       "first_seen": "2026-09-18T17:26:16.721543"
+    },
+    "39871f948bcb04ce": {
+      "org": "Moov Financial",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/110973/moov-launches-p2p-payments?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 43,
+      "first_seen": "2026-09-22T17:52:54.713806"
+    },
+    "380aa4037156330d": {
+      "org": "London Insurance",
+      "domain": "",
+      "url": "https://www.insurancejournal.com/news/international/2026/09/22/886374.htm",
+      "score": 49,
+      "first_seen": "2026-09-22T17:52:54.714581"
     }
   }
 }
