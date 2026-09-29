@@ -672,6 +672,27 @@
       "url": "https://www.pymnts.com/news/acquiring/2026/valley-bank-courts-small-businesses-with-bluevine-acquisition/",
       "score": 44,
       "first_seen": "2026-09-28T20:21:06.801388"
+    },
+    "cac690760d58646f": {
+      "org": "Throught Machine",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111074/throught-machine-and-aws-to-drive-ai-powered-core-migrations?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 58,
+      "first_seen": "2026-09-29T19:04:30.649969"
+    },
+    "52afa194d3a34237": {
+      "org": "BankPro",
+      "domain": "",
+      "url": "https://www.pymnts.com/partnerships/2026/bankpro-taps-thredd-to-power-physical-and-virtual-cards/",
+      "score": 47,
+      "first_seen": "2026-09-29T19:04:30.650875"
+    },
+    "7ce1bf2457bba879": {
+      "org": "Help Banks",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/finastra-deploys-ai-help-banks-tackle-payment-processing-issues/",
+      "score": 78,
+      "first_seen": "2026-09-29T19:04:30.651964"
     }
   }
 }
