@@ -735,6 +735,27 @@
       "url": "https://www.healthcaredive.com/news/suki-raises-90m-in-series-e-round-to-create-ai-agents/832862/",
       "score": 47,
       "first_seen": "2026-10-13T20:00:51.958673"
+    },
+    "129461f97d4ed461": {
+      "org": "Emprise Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111263/ai-native-core-banking-startup-maximum-signs-emprise-bank?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 45,
+      "first_seen": "2026-10-15T17:57:19.556440"
+    },
+    "9fcf04ad7389fac8": {
+      "org": "Skandinaviska Enskilda Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111296/seb-pays-33m-to-nydfs-over-aml-failures?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 40,
+      "first_seen": "2026-10-15T17:57:19.564066"
+    },
+    "bbb82811deb5c53e": {
+      "org": "Frontier AI Bank",
+      "domain": "",
+      "url": "https://www.pymnts.com/cybersecurity/2026/bank-of-america-deploys-4000-workers-to-patch-vulnerabilities-found-by-frontier-ai/",
+      "score": 58,
+      "first_seen": "2026-10-15T17:57:19.565240"
     }
   }
 }
