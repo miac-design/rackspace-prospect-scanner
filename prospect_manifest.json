@@ -756,6 +756,13 @@
       "url": "https://www.pymnts.com/cybersecurity/2026/bank-of-america-deploys-4000-workers-to-patch-vulnerabilities-found-by-frontier-ai/",
       "score": 58,
       "first_seen": "2026-10-15T17:57:19.565240"
+    },
+    "aa19c991d3777a69": {
+      "org": "Mythos Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/newsarticle/48600/bofa-called-in-1000-contractors-to-patch-flaws-found-by-mythos?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 40,
+      "first_seen": "2026-10-16T17:46:30.044352"
     }
   }
 }
