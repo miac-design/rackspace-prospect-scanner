@@ -763,6 +763,13 @@
       "url": "https://www.finextra.com/newsarticle/48600/bofa-called-in-1000-contractors-to-patch-flaws-found-by-mythos?utm_medium=rssfinextra&utm_source=finextrafeed",
       "score": 40,
       "first_seen": "2026-10-16T17:46:30.044352"
+    },
+    "b5ddb13e41c8dbb0": {
+      "org": "Regions Financial",
+      "domain": "",
+      "url": "https://www.pymnts.com/earnings/2026/regions-bank-says-ai-cybersecurity-drives-up-costs-1-5percent-to-3-5percent/",
+      "score": 50,
+      "first_seen": "2026-10-17T16:48:06.579380"
     }
   }
 }
