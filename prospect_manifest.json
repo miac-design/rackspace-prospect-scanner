@@ -770,6 +770,20 @@
       "url": "https://www.pymnts.com/earnings/2026/regions-bank-says-ai-cybersecurity-drives-up-costs-1-5percent-to-3-5percent/",
       "score": 50,
       "first_seen": "2026-10-17T16:48:06.579380"
+    },
+    "ef6ad481108fa041": {
+      "org": "Huntington Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/newsarticle/48601/huntington-bank-partners-google-cloud-for-ai-powered-small-business-operating-system?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 43,
+      "first_seen": "2026-10-19T19:36:25.708943"
+    },
+    "afd21e4cd30ee00d": {
+      "org": "Affordable American Insurance",
+      "domain": "",
+      "url": "https://www.insurancejournal.com/services/newswire/2026/10/19/889259.htm",
+      "score": 40,
+      "first_seen": "2026-10-19T19:36:25.821302"
     }
   }
 }
