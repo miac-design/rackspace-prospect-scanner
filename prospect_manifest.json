@@ -805,6 +805,34 @@
       "url": "https://www.insurancejournal.com/news/national/2026/10/20/889680.htm",
       "score": 49,
       "first_seen": "2026-10-20T18:15:39.955456"
+    },
+    "b24a90f5385027e2": {
+      "org": "MEDITECH",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/10/20/meditech-lifemed-ai-partner-revenue-cycle-automation-deepclaim-denial-prevention/",
+      "score": 58,
+      "first_seen": "2026-10-21T18:19:50.185154"
+    },
+    "4b2d557597228a95": {
+      "org": "Consolidate Healthcare",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/10/19/ma-tegria-acquires-cloudwave/",
+      "score": 50,
+      "first_seen": "2026-10-21T18:19:50.186129"
+    },
+    "607092a180f4a0ed": {
+      "org": "Attack LatAm Banks",
+      "domain": "",
+      "url": "https://www.pymnts.com/cybersecurity/2026/hackers-employ-grok-and-claude-to-attack-latam-banks/",
+      "score": 42,
+      "first_seen": "2026-10-21T18:20:14.160904"
+    },
+    "0e84316f06ea4147": {
+      "org": "LexisNexis Risk Solutions",
+      "domain": "",
+      "url": "https://www.carriermanagement.com/news/2026/10/20/292826.htm",
+      "score": 40,
+      "first_seen": "2026-10-21T18:20:14.162041"
     }
   }
 }
