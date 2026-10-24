@@ -847,6 +847,20 @@
       "url": "https://www.pymnts.com/legal/2026/rhode-island-lawsuit-claims-meta-knowingly-profits-from-financial-scam-ads/",
       "score": 53,
       "first_seen": "2026-10-23T18:03:12.683097"
+    },
+    "5f42cab2804b3c47": {
+      "org": "TEN Credit Union",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111431/ten-credit-union-selects-bankjoy-for-its-corelation-keystone-conversion?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 51,
+      "first_seen": "2026-10-24T17:08:57.605195"
+    },
+    "2d96338e82007224": {
+      "org": "Cognitive Credit Lands",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/investment-tracker/fintech-investments/2026/cognitive-credit-lands-40-million-dollar-investment-expand-united-states-operations/",
+      "score": 49,
+      "first_seen": "2026-10-24T17:08:57.606301"
     }
   }
 }
