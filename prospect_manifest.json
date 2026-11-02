@@ -896,6 +896,20 @@
       "url": "https://www.pymnts.com/news/artificial-intelligence/2026/samsung-warns-ai-memory-shortage-will-worsen-through-2027/",
       "score": 40,
       "first_seen": "2026-10-31T18:06:32.260601"
+    },
+    "becad321eb479d06": {
+      "org": "Medcitynews (Industry Signal)",
+      "domain": "",
+      "url": "https://medcitynews.com/2026/11/7-potential-problems-with-medicares-ai-prior-authorization-experiment/",
+      "score": 52,
+      "first_seen": "2026-11-02T22:33:03.458707"
+    },
+    "4b8a462801cd265c": {
+      "org": "Agentic AI Financial",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/casap-raises-56-million-for-agentic-ai-financial-services/",
+      "score": 44,
+      "first_seen": "2026-11-02T22:33:07.242462"
     }
   }
 }
