@@ -931,6 +931,20 @@
       "url": "https://www.pymnts.com/cybersecurity/fraud-prevention/2026/verifone-turns-to-visas-featurespace-to-combat-fraud/",
       "score": 41,
       "first_seen": "2026-11-04T20:38:37.301090"
+    },
+    "e3ac7a3cc4fdbda6": {
+      "org": "Wells Fargo",
+      "domain": "",
+      "url": "https://www.bankingdive.com/news/wells-fargo-corporate-investment-banking-deals-2028/873881/",
+      "score": 54,
+      "first_seen": "2026-11-05T20:54:41.776847"
+    },
+    "5d89e8214a198c56": {
+      "org": "Barclays Bank",
+      "domain": "",
+      "url": "https://www.carriermanagement.com/news/2026/11/05/293252.htm",
+      "score": 51,
+      "first_seen": "2026-11-05T20:54:41.778212"
     }
   }
 }
