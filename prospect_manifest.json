@@ -945,6 +945,27 @@
       "url": "https://www.carriermanagement.com/news/2026/11/05/293252.htm",
       "score": 51,
       "first_seen": "2026-11-05T20:54:41.778212"
+    },
+    "22fdb8e61775f5b2": {
+      "org": "Oracle FLEXCUBE Core Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111602/abay-bank-strengthens-financial-crime-compliance-with-jmr-infotech?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 51,
+      "first_seen": "2026-11-06T20:12:25.270145"
+    },
+    "4218861b2c7519c3": {
+      "org": "Anthropic",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-launches-claude-personal-finance-ahead-of-nasdaq-listing/",
+      "score": 42,
+      "first_seen": "2026-11-06T20:12:25.271336"
+    },
+    "6cfd71cff05aaaf5": {
+      "org": "Intelligent Insurance Systems",
+      "domain": "",
+      "url": "https://www.carriermanagement.com/features/2026/11/06/293278.htm",
+      "score": 40,
+      "first_seen": "2026-11-06T20:12:25.272592"
     }
   }
 }
