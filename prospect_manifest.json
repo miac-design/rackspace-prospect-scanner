@@ -973,6 +973,13 @@
       "url": "https://www.pymnts.com/news/artificial-intelligence/2026/bmo-turns-to-agentic-ai-to-resolve-card-issues/",
       "score": 40,
       "first_seen": "2026-11-07T18:26:29.014128"
+    },
+    "0120808717d0be95": {
+      "org": "GoodRx",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/11/10/goodrx-google-cloud-gemini-mcp-integration-prescription-affordability/",
+      "score": 46,
+      "first_seen": "2026-11-10T20:40:50.360058"
     }
   }
 }
