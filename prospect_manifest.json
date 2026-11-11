@@ -980,6 +980,20 @@
       "url": "https://hitconsultant.net/2026/11/10/goodrx-google-cloud-gemini-mcp-integration-prescription-affordability/",
       "score": 46,
       "first_seen": "2026-11-10T20:40:50.360058"
+    },
+    "b384064920399803": {
+      "org": "Ohio State Wexner Medical Center",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/11/10/ohio-state-wexner-microsoft-5-year-strategic-partnership-smart-hospital-azure-ai/",
+      "score": 44,
+      "first_seen": "2026-11-11T21:01:29.042265"
+    },
+    "33307a479a0db6fd": {
+      "org": "Kingdom Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111641/kingdom-bank-goes-live-with-sandstone-technology?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 54,
+      "first_seen": "2026-11-11T21:01:31.861419"
     }
   }
 }
