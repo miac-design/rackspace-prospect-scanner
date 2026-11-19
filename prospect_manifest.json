@@ -1008,6 +1008,34 @@
       "url": "https://www.pymnts.com/cybersecurity/fraud-prevention/2026/jpmorgan-builds-one-ai-model-to-catch-85-more-fraud/",
       "score": 45,
       "first_seen": "2026-11-17T21:59:05.684392"
+    },
+    "90a1a4ee0794db04": {
+      "org": "Philips",
+      "domain": "",
+      "url": "https://hitconsultant.net/2026/11/19/royal-philips-launches-advanced-image-insights-healthsuite-rsna-2026/",
+      "score": 48,
+      "first_seen": "2026-11-19T21:57:14.703746"
+    },
+    "bbce901bbaec03e1": {
+      "org": "SME Bank",
+      "domain": "",
+      "url": "https://www.finextra.com/pressarticle/111738/lithuanian-sme-bank-modernises-core-with-saascada-ahead-of-european-expansion?utm_medium=rssfinextra&utm_source=finextrafeed",
+      "score": 40,
+      "first_seen": "2026-11-19T21:57:51.584594"
+    },
+    "8fb640ee6e11da1e": {
+      "org": "Panel Weighs Who Pays",
+      "domain": "",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/panel-weighs-who-pays-when-ai-agents-exceed-consumers-instructions/",
+      "score": 50,
+      "first_seen": "2026-11-19T21:57:51.590462"
+    },
+    "b3e2da90b391b7b3": {
+      "org": "Ascend",
+      "domain": "",
+      "url": "https://www.insurancejournal.com/services/newswire/2026/11/19/893070.htm",
+      "score": 46,
+      "first_seen": "2026-11-19T21:57:51.591991"
     }
   }
 }
